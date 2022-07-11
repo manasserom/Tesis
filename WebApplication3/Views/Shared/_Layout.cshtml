@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="es-ar">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" type="text/css" href="~/Content/estilos/Estilos.css" media="screen" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Version 3.1", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("DashBoard", "DashBoard", "Home")</li>
+                    <li>@Html.ActionLink("DashBoard_Treemap", "DashBoard_Treemap", "Home")</li>
+                    <li>@Html.ActionLink("What If", "Index", "InversionTemporal")</li>
+                    @*<li>@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
+                    <li>@Html.ActionLink("Criptomoneda", "Index", "Criptomoneda")</li>
+                    <li>@*@Html.ActionLink("Tenencia", "Index", "Tenencia")*@</li>
+                    <li>@Html.ActionLink("Instrumento", "Index", "Instrumento")</li>
+                    <li>@Html.ActionLink("Inversion", "Index", "Inversion")</li>
+                    <li>@Html.ActionLink("Wallet", "Index", "Wallet")</li>
+                    <li>@Html.ActionLink("Exchange", "Index", "Exchange")</li>
+                    <li>@Html.ActionLink("Tenencia", "Index", "vwTenencias")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="body-content container-fluid fondo-principal">
+        @RenderBody()
+        @*<hr />*@
+        @*<footer>
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        </footer>*@
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

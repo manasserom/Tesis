@@ -1,0 +1,121 @@
+﻿@model IEnumerable<WebApplication3.Models.Inversion>
+
+@{
+    ViewBag.Title = "Index";
+    string Estado;
+    string EstadoClase;
+    string Capital;
+}
+
+<h2 >Inversiones</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="container-panel" style="background-color:white;">
+
+    <br />
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Criptomoneda1.Ticker)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Instrumento1.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lugar)
+            </th>
+            <th>
+                <strong>Estado</strong>
+            </th>
+            <th>
+                <strong>T. Estimada</strong>
+            </th>
+            <th>
+                <strong>T. Real</strong>
+            </th>
+            <th>
+                <strong>F. Inicio</strong>
+            </th>
+            <th>
+                <strong>F. Fin</strong>
+            </th>
+            <th>
+                <strong>Cantidad</strong>
+            </th>
+            <th><strong>Capital</strong></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (DateTime.Now.Date >= item.FechaFin)
+            {
+                Estado = "Vencido";
+                EstadoClase = "alert alert-danger";
+            }
+            else
+            {
+                Estado = "Vigente";
+                EstadoClase = "alert alert-success";
+
+            }
+            
+            //Armado de formato de moneda
+            Capital = (item.Criptomoneda1.Precio * item.CantidadInvertida).ToString("C");
+            //Capital = Capital.ToString("C");
+
+            <tr class="">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Criptomoneda1.Ticker)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Instrumento1.Nombre)
+                </td>
+                <td>
+                    @if (item.NuevaTenencia.Wallet is null)
+                    {
+                        @Html.DisplayFor(modelItem => item.NuevaTenencia.Exchange)
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.NuevaTenencia.Wallet)
+
+                    }
+                </td>
+                <td class="@EstadoClase">
+                    <strong>@Estado</strong>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TasaEstimada) %
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TasaReal) %
+                </td>
+                <td>
+                    @(item.FechaInicio.ToShortDateString())
+                </td>
+                <td>
+                    @(item.FechaFin.HasValue ?  item.FechaFin.Value.ToShortDateString() : "")
+                </td>
+                <td>
+                    @(item.CantidadInvertida.ToString("n"))
+                </td>
+                <td>
+                    @Capital
+                </td>
+                <td>
+                    <a href="~/Inversion/Edit/@item.IdInversion"><i class="glyphicon glyphicon-pencil" style="color:#000000 "></i></a> |
+                    <a href="~/Inversion/Details/@item.IdInversion"><i class="glyphicon glyphicon-list" style="color:#000000 "></i></a> |
+                    <a href="~/Inversion/Finalizar/@item.IdInversion"><i class="glyphicon glyphicon-check" style="color:#000000 "></i></a>
+                    
+                    @*@Html.ActionLink("Details", "Details", new { id = item.IdInversion }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.IdInversion }) |
+        @Html.ActionLink("Finalizar", "Finalizar", new { id = item.IdInversion })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

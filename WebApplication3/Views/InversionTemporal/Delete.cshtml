@@ -1,0 +1,112 @@
+﻿@model WebApplication3.Models.InversionTemporal
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>InversionTemporal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lugar1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lugar1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CriptomonedaGanada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CriptomonedaGanada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TasaEstimada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TasaEstimada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TasaReal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TasaReal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantidadInvertida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantidadInvertida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantidadGanada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantidadGanada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Criptomoneda1.Ticker)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Criptomoneda1.Ticker)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Instrumento1.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Instrumento1.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NuevaTenencia.Exchange)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NuevaTenencia.Exchange)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,216 @@
+﻿@model IEnumerable<WebApplication3.Models.vwInversionesReales_Simuladas>
+@using WebApplication3.Models
+
+@{
+    ViewBag.Title = "Index";
+    string donutchartData = ViewBag.CapTipDataWI;
+    string donutchartCate = ViewBag.CapTipCateWI;
+    string piechartData = ViewBag.ListaCripDataWI;
+    string piechartCate = ViewBag.ListaCripCateWI;
+    string gaugechartDataBloq = "" + ViewBag.ListaBloq;
+    string gaugechartDataDisp = "" + ViewBag.ListaDisp;
+
+    IEnumerable<TipoCriptomoneda> tipoCriptomoneda = ViewBag.FiltroTipo;
+    IEnumerable<Capital_Cripto_ResumenWI> Inversiones = ViewBag.FiltroTicker;
+    IEnumerable<string> tipoCriptomonedaB = ViewBag.FiltroTipoB;
+    IEnumerable<string> InversionesB = ViewBag.FiltroTickerB;
+}
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class=" row">
+            <div class="col-md-4">
+                <h3>Capital segun el tipo</h3>
+                <div id="donutchart" style="width: 100%; height: auto;"></div>
+            </div>
+            <div class="col-md-4">
+                <h3>Capital por criptomoneda</h3>
+                @*<div id="piechart" style="width: 100%; height: auto;"></div>*@
+                <div id="columnchart" style="width: 100%; height: auto;"></div>
+                <br />
+            </div>
+            <div class="col-md-4">
+                <div id="gaugechart" style="width: 100%; height: auto;"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Filtros
+        </div>
+        <div class="panel-body">
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Tipo de Criptomoneda</strong></div>
+                    <div class="panel-body">
+
+                        @foreach (TipoCriptomoneda s in tipoCriptomoneda)
+                        {
+                            bool bandera = false; string Oculto = "";
+                            if (s.Nombre == "Aaux") { Oculto = "visibility: hidden;height: 0px;width: 0px;"; }
+                            <p style="display: inline; @Oculto">
+                                @if (s.Nombre != "Aaux")
+                                {@s.Nombre}
+                            </p>
+                            if (InversionesB != null) { foreach (string c in tipoCriptomonedaB) { if (c == (s.Nombre)) { bandera = true; } } }
+                            if (s.Nombre == "Aaux") { bandera = false; }
+                            if (bandera)
+                            {
+                                @Html.CheckBox("TipoCripto", htmlAttributes: new { @class = "", @Value = (s.Nombre), @checked = "checked" });<br />
+                            }
+                            else
+                            {
+                                @Html.CheckBox("TipoCripto", false, htmlAttributes: new { @class = "", @Value = (s.Nombre), @Style = Oculto }); if (s.Nombre != "Aaux")
+                                { <br />}
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Criptomoneda</strong></div>
+                    <div class="panel-body" style="max-height: 120px;overflow-y:scroll;">
+                        @foreach (Capital_Cripto_ResumenWI inv in Inversiones.ToList())
+                        {
+                            bool bandera = false; string Oculto = "";
+                            if (inv.Ticker == "Aaux") { Oculto = "visibility: hidden;height: 0px;width: 0px;"; }
+                            <p style="display: inline; @Oculto">
+                                @if (inv.Ticker != "Aaux")
+                                {@inv.Ticker.ToUpper()}
+                            </p>
+                            if (InversionesB != null) { foreach (string c in InversionesB) { if (c == inv.Ticker) { bandera = true; } } }
+                            if (bandera)
+                            {
+                                @Html.CheckBox("TickerCripto", htmlAttributes: new { @class = "", @Value = (inv.Ticker), @checked = "checked" });<br />
+                            }
+                            else
+                            {
+                                @Html.CheckBox("TickerCripto", false, htmlAttributes: new { @class = "", @Value = (inv.Ticker), @Style = Oculto }); if (inv.Ticker != "Aaux")
+                                { <br /> }
+                            }
+                            @*@Html.CheckBox("TickerCripto", htmlAttributes: new { @class = "", @Value = (inv.Ticker), @checked = (!bandera ? "checked" : "") }); <br />*@
+                        }
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Lugar</strong></div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+
+            </div>
+                </div>
+                <input type="submit" name="name" class="btn btn-info" value="Filtrar" />
+                <a href="~/InversionTemporal/Index/" class="btn btn-danger">Reset</a>
+                @*<input type="button" name="name" value="Reset" />*@
+                @*<input type="button" name="name" class="button" value="Reset"
+        onclick="$.ajax({ url: '/InversionTemporal/UseShippingAddress', data: { id: 12 }})"/>*@
+                @*<input type="button" name="name" class="button" value="Reset"
+        onclick="$.ajax({ url: '/InversionTemporal/ResetFiltros',type='GET'})"/>*@
+                @*onclick="alert('test')"/>*@
+            </div>
+
+    <input type="hidden" id="donutchartDataWI" value="@donutchartData" />
+    <input type="hidden" id="donutchartCateWI" value="@donutchartCate" />
+    <input type="hidden" id="piechartDataWI" value="@piechartData" />
+    <input type="hidden" id="piechartCateWI" value="@piechartCate" />
+    <input type="hidden" id="gaugechartDataBloq" value="@gaugechartDataBloq" />
+    <input type="hidden" id="gaugechartDataDisp" value="@gaugechartDataDisp" />
+}
+
+    @*<input type="text" id="CriptoW" value="" />
+        <input type="text" id="CategoriaW" value="" />
+        <input type="text" id="CapitalW" value="" />
+        <button type="button" onclick="RefrescarGraficos()">actualizar</button>*@
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="~/Scripts/Graficos/donutchartWI.js"></script>
+    <script type="text/javascript" src="~/Scripts/Graficos/columnchartWI.js"></script>
+    <script type="text/javascript" src="~/Scripts/Graficos/gaugechartWI.js"></script>
+    <script>
+        function RefrescarGraficos() {
+            drawChart();
+            drawBasic();
+        }
+        
+        //$.ajax({
+        //    url: 'InversionTemporal/UseShippingAddress',
+        //    type: 'POST',  // http method
+        //    data: { myData: 'This is my data.' },  // data to submit
+        //    success: function (data, status, xhr) { // after success your get data
+        //        $('p').append('status: ' + status + ', data: ' + data);
+        //    },
+        //    error: function (jqXhr, textStatus, errorMessage) { // if any error come then 
+        //        $('p').append('Error' + errorMessage);
+        //    }
+        //});
+    </script>
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create") @Model.Count()
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoInversion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Criptomoneda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadGanada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lugar)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoInversion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Criptomoneda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaFin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdInversion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lugar)
+                </td>
+                <td>
+                    @if (item.TipoInversion == "Simulada")
+                    {
+                        <input type="button" name="name" class="button" value="Eliminar2"
+                               onclick="$.ajax({ url: '/InversionTemporal/Delete',  data: { id: @item.IdInversion }})" />
+                        <input type="button" name="name" class="button" value="Editar"
+                               onclick="$.ajax({ url: '/InversionTemporal/Edit', data: { id: @item.IdInversion }})" />
+
+                    }
+
+
+                    @Html.ActionLink("Edit", "Edit", new { id=item.IdInversion}) |
+                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
+        }
+
+    </table>

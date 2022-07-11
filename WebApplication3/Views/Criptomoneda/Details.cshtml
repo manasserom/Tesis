@@ -1,0 +1,58 @@
+﻿@model WebApplication3.Models.Criptomoneda
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Criptomoneda</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ticker)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ticker)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Logo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Logo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capitalizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capitalizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoCriptomoneda.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoCriptomoneda.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Nombre }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

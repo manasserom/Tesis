@@ -1,0 +1,81 @@
+﻿@model IEnumerable<WebApplication3.Models.vwTenencia>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Wallet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Semilla)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Exchange)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nacional)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Centralizado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Url)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Wallet)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Tipo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Semilla)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Exchange)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nacional)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Centralizado)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Url)
+    </td>
+    @if (item.Wallet != null)
+    {
+        <td>
+            <a href="~/Wallet/Edit/@item.Wallet"><i class="glyphicon glyphicon-pencil" style="color:#000000 "></i></a> |
+            <a href="~/Wallet/Details/@item.Wallet"><i class="glyphicon glyphicon-list" style="color:#000000 "></i></a> |
+            <a href="~/Wallet/Delete/@item.Wallet"><i class="glyphicon glyphicon-check" style="color:#000000 "></i></a> 
+        </td>
+     }
+    else
+    {
+        <td>
+            <a href="~/Exchange/Edit/@item.Exchange"><i class="glyphicon glyphicon-pencil" style="color:#000000 "></i></a> |
+            <a href="~/Exchange/Details/@item.Exchange"><i class="glyphicon glyphicon-list" style="color:#000000 "></i></a> |
+            <a href="~/Exchange/Delete/@item.Exchange"><i class="glyphicon glyphicon-check" style="color:#000000 "></i></a>
+        </td>
+    }
+
+</tr>
+}
+
+</table>

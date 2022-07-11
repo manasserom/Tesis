@@ -1,0 +1,90 @@
+﻿@model WebApplication3.Models.Inversion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Inversion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CriptomonedaGanada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CriptomonedaGanada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TasaEstimada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TasaEstimada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TasaReal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TasaReal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantidadInvertida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantidadInvertida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Criptomoneda1.Ticker)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Criptomoneda1.Ticker)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Instrumento1.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Instrumento1.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tenencia.Lugar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tenencia.Lugar)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdInversion }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9ed86354418c46daa4d4a2007b138fd6" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Criptomoneda" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Exchange" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Instrumento" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Inversion" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.NuevaTenencia" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.TipoCriptomoneda" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.TipoDeWallet" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Wallet" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Capital_Cripto" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Capital_Cripto_Resumen" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Capital_TipoCripto" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.capital_tipocripto_Resumen" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwCapital_TipoCriptoAgrupadas" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwCapital_TipoCriptoSeparadas" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwTenencia" Width="1.5" PointX="7.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="Tesis_Inv2Model.FK_Criptomoneda_TipoCriptomonedaA" ManuallyRouted="false" />
+        <AssociationConnector Association="Tesis_Inv2Model.FK_Inversion_Criptomoneda" ManuallyRouted="false" />
+        <AssociationConnector Association="Tesis_Inv2Model.FK_NuevaTenencia_Exchange" ManuallyRouted="false" />
+        <AssociationConnector Association="Tesis_Inv2Model.FK_Inversion_Instrumento" ManuallyRouted="false" />
+        <AssociationConnector Association="Tesis_Inv2Model.FK_Inversion_NuevaTenencia" ManuallyRouted="false" />
+        <AssociationConnector Association="Tesis_Inv2Model.FK_NuevaTenencia_Wallet" ManuallyRouted="false" />
+        <AssociationConnector Association="Tesis_Inv2Model.FK_Wallet_TipoDeWallet" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Inversion_Cripto_Instru" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwInversion_tenencia" Width="1.5" PointX="12.375" PointY="11.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwInversionesEsteAnio" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwCriptomoneda" Width="1.5" PointX="10.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Inversion_Cripto_Instr" Width="1.5" PointX="12.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwInversionesTop" Width="1.5" PointX="14.375" PointY="5.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwInversionEvolucion" Width="1.5" PointX="14.375" PointY="8.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwCriptosDWB" Width="1.5" PointX="14.375" PointY="11.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.InversionTemporal" Width="1.5" PointX="7.5" PointY="15.25" />
+        <AssociationConnector Association="Tesis_Inv2Model.FK_InversionT_Criptomoneda" />
+        <AssociationConnector Association="Tesis_Inv2Model.FK_InversionT_Instrumento" />
+        <AssociationConnector Association="Tesis_Inv2Model.FK_InversionT_NuevaTenencia" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Capital_Cripto_ResumenWI" Width="1.5" PointX="3.375" PointY="15.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Capital_CriptoWI" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Capital_TipoCriptoWI" Width="1.5" PointX="16.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.capital_tipocripto_ResumenWI" Width="1.5" PointX="16.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.Inversion_Cripto_InstruWI" Width="1.5" PointX="16.375" PointY="9.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwInversion_tenenciaWI" Width="1.5" PointX="16.375" PointY="14.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwCapital_LugarSeparado" Width="1.5" PointX="0.75" PointY="17.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwCapital_LugarArupado" Width="1.5" PointX="0.75" PointY="17.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.EvolucionInversionesTipoCripto" Width="1.5" PointX="10.375" PointY="17.75" />
+        <EntityTypeShape EntityType="Tesis_Inv2Model.vwInversionesReales_Simuladas" Width="1.5" PointX="12.375" PointY="17.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

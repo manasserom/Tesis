@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WebApplication3.Models.Criptomoneda>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<input type="button" name="name" class=" btn button" value="Eliminar2"
+       onclick="$.ajax({ url: '/Criptomoneda/GetProductAsync'})" />
+<button class=" btn btn-success" onclick="Actualizar()">Actualizar </button>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ticker)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Logo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capitalizacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoCriptomoneda.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ticker)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Logo)
+            </td>
+            <td>
+                $ @(item.Capitalizacion.Value.ToString("n"))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoCriptomoneda.Nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Nombre }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Nombre }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Nombre })
+            </td>
+        </tr>
+    }
+
+</table>
+@*<script>
+    function Actualizar() {
+        $.ajax({
+            type: 'GET',
+            url: 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false',
+            dataType: 'json'
+        }).done((data) => {
+            for (let item of data) {
+                let AuxNombre = '' + item.name + '';
+                $.ajax({
+                    url: '/Criptomoneda/Actualizar', data: {
+                        Ticker: item.symbol, Nombre: AuxNombre, Precio: item.current_price, Capitalizacion: item.market_cap }
+                });
+            }
+        });
+    }
+</script>*@

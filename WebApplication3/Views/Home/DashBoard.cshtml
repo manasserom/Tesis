@@ -1,0 +1,114 @@
+﻿@model WebApplication3.Models.Inversion
+@{
+    ViewBag.Title = "DashBoard";
+    string donutchartData = ViewBag.CapTipData;
+    string donutchartCate = ViewBag.CapTipCate;
+    string piechartData = ViewBag.ListaCripData;
+    string piechartCate = ViewBag.ListaCripCate;
+    string gaugechartDataBloq = "" + ViewBag.ListaBloq;
+    string gaugechartDataDisp = "" + ViewBag.ListaDisp;
+    string calendarDay = "" + ViewBag.ListaVencimientosdDia;
+    string calendarMont = "" + ViewBag.ListaVencimientosdMes;
+    string calendarYear = "" + ViewBag.ListaVencimientosdAnio;
+    string tablechartCripto = "" + ViewBag.ListaTCripto;
+    string tablechartCapital = "" + ViewBag.ListaTCapital;
+    string tablechartTipo = "" + ViewBag.ListaTTipo;
+    string ListaLugarData = ViewBag.ListaLugarData;
+    string ListaLugarCate = ViewBag.ListaLugarCate;
+
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Capital segun el tipo</h3>
+            <div id="donutchart" style="width: 100%; height: auto;"></div>
+        </div>
+        <div class="col-md-4">
+            <h3>Capital por criptomoneda</h3>
+            @*<div id="piechart" style="width: 100%; height: auto;"></div>*@
+            <div id="columnchart" style="width: 100%; height: auto;"></div>
+            <br />
+        </div>
+        <div class="col-md-4">
+            <div class="calendar" id="calendar">
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div id="chart_div" style="width: 100%; height: auto;"></div>
+        </div>
+        <div class="col-md-4" style="">
+            @*<div id="tablechart" style="width: 100%; height: auto;"></div>*@
+            <div id="columnchartLug" style="width: 100%; height: auto;"></div>
+        </div>
+        <div class="col-md-4">
+            <p>terminar</p>
+            <div id="SteppedArea" style="width: 100%; height: auto;"></div>
+        </div>
+    </div>
+
+</div>
+
+@*Inicio de Inputs para obtener los valroes*@
+<input type="text" id="donutchartData" value="@donutchartData" />
+<input type="text" id="donutchartCate" value="@donutchartCate" />
+<input type="hidden" id="piechartData" value="@piechartData" />
+<input type="hidden" id="piechartCate" value="@piechartCate" />
+<input type="hidden" id="gaugechartDataBloq" value="@gaugechartDataBloq" />
+<input type="hidden" id="gaugechartDataDisp" value="@gaugechartDataDisp" />
+<input type="hidden" id="calendarDay" value="@calendarDay" />
+<input type="hidden" id="calendarMont" value="@calendarMont" />
+<input type="hidden" id="calendarYear" value="@calendarYear" />
+<input type="hidden" id="tablechartCripto" value="@tablechartCripto" />
+<input type="hidden" id="tablechartCapital" value="@tablechartCapital" />
+<input type="hidden" id="tablechartTipo" value="@tablechartTipo" />
+<input type="hidden" id="ListaLugarData" value="@ListaLugarData" />
+<input type="hidden" id="ListaLugarCate" value="@ListaLugarCate" />
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="~/Scripts/Graficos/donutchart.js"></script>
+@*<script type="text/javascript" src="~/Scripts/Graficos/piechart.js"></script>*@
+<script type="text/javascript" src="~/Scripts/Graficos/gaugechart.js"></script>
+<script type="text/javascript" src="~/Scripts/Graficos/columnchart.js"></script>
+<script type="text/javascript" src="~/Scripts/Graficos/columnchartLugares.js"></script>
+<script type="text/javascript" src="~/Scripts/Graficos/tablechart.js"></script>
+@*<script type="text/javascript" src="~/Scripts/Graficos/geochart.js"></script>*@
+    <script type="text/javascript" src="~/Scripts/Graficos/steppedareachart.js"></script>
+@*Calendrario*@
+<link rel="stylesheet" href="~/Content/estilos/calendar.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/es.js"></script>
+<script type="text/javascript" src="~/Scripts/Graficos/calendar.js"></script>
+<script type="text/javascript" src="~/Scripts/Graficos/calendarEditValues.js"></script>
+<script type="text/javascript">
+    let calendar = new Calendar('calendar');
+    calendar.getElement().addEventListener('change', e => {
+        console.log(calendar.value().format('LLL'));
+    });
+
+    //let calendar2 = new Calendar('calendar2');
+    //calendar2.getElement().addEventListener('change', e => {
+    //    console.log(calendar2.value().format('LLL'));
+    //});
+</script>
+@*@{ for (int i = 0; i < 3; i++)
+        {
+        <style type="text/css">
+            span[data-cell-id='@i'] {
+                background-color: #ff2301;
+            }
+        </style>
+        }
+
+    }*@
+@*<style type="text/css">
+        span[data-cell-id='19'] {
+            background-color: green;
+        }
+    </style>*@
+

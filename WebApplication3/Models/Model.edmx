@@ -1,0 +1,2326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Tesis_Inv2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Criptomoneda">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Precio" Type="float" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Logo" Type="image" />
+          <Property Name="Capitalizacion" Type="float" />
+        </EntityType>
+        <EntityType Name="Exchange">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nacional" Type="bit" Nullable="false" />
+          <Property Name="Centralizado" Type="bit" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Instrumento">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bloqueado" Type="bit" Nullable="false" />
+          <Property Name="InteresFijo" Type="bit" Nullable="false" />
+          <Property Name="PagoDeInteres" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inversion">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+          </Key>
+          <Property Name="IdInversion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lugar1" Type="varchar" MaxLength="50" />
+          <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaEstimada" Type="float" Nullable="false" />
+          <Property Name="TasaReal" Type="float" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="CantidadInvertida" Type="float" Nullable="false" />
+          <Property Name="CantidadGanada" Type="float" />
+          <Property Name="Lugar" Type="int" />
+          <Property Name="PrecioInicio" Type="float" />
+          <Property Name="PrecioFin" Type="float" />
+        </EntityType>
+        <EntityType Name="InversionTemporal">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+          </Key>
+          <Property Name="IdInversion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lugar1" Type="varchar" MaxLength="50" />
+          <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaEstimada" Type="float" Nullable="false" />
+          <Property Name="TasaReal" Type="float" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="CantidadInvertida" Type="float" Nullable="false" />
+          <Property Name="CantidadGanada" Type="float" />
+          <Property Name="Lugar" Type="int" />
+          <Property Name="PrecioInicio" Type="float" />
+          <Property Name="PrecioFin" Type="float" />
+        </EntityType>
+        <EntityType Name="NuevaTenencia">
+          <Key>
+            <PropertyRef Name="idTenencia" />
+          </Key>
+          <Property Name="idTenencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Exchange" Type="varchar" MaxLength="50" />
+          <Property Name="Wallet" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoCriptomoneda">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoDeWallet">
+          <Key>
+            <PropertyRef Name="TipoWallet" />
+          </Key>
+          <Property Name="TipoWallet" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wallet">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Semilla" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Capital_Cripto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Capital_Cripto">
+          <Key>
+            <PropertyRef Name="Capital" />
+            <PropertyRef Name="Ticker" />
+          </Key>
+          <Property Name="Capital" Type="float" Nullable="false" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Capital_Cripto_Resumen' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Capital_Cripto_Resumen">
+          <Key>
+            <PropertyRef Name="Ticker" />
+          </Key>
+          <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CapitalTotal" Type="float" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Capital_Cripto_ResumenWI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Capital_Cripto_ResumenWI">
+          <Key>
+            <PropertyRef Name="Ticker" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CapitalTotal" Type="float" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Capital_CriptoWI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Capital_CriptoWI">
+          <Key>
+            <PropertyRef Name="Capital" />
+            <PropertyRef Name="Ticker" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Capital" Type="float" Nullable="false" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Capital_TipoCripto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Capital_TipoCripto">
+          <Key>
+            <PropertyRef Name="Capital" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Capital" Type="float" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.capital_tipocripto_Resumen' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="capital_tipocripto_Resumen">
+          <Key>
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CapitalTotal" Type="float" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.capital_tipocripto_ResumenWI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="capital_tipocripto_ResumenWI">
+          <Key>
+            <PropertyRef Name="Tipo" />
+            <PropertyRef Name="Ticker" />
+          </Key>
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CapitalTotal" Type="float" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Capital_TipoCriptoWI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Capital_TipoCriptoWI">
+          <Key>
+            <PropertyRef Name="Capital" />
+            <PropertyRef Name="Tipo" />
+            <PropertyRef Name="Ticker" />
+          </Key>
+          <Property Name="Capital" Type="float" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.EvolucionInversionesTipoCripto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="EvolucionInversionesTipoCripto">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Tipo" />
+            <PropertyRef Name="Capital" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Inicio" Type="int" />
+          <Property Name="Fin" Type="int" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Capital" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Inversion_Cripto_Instr' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Inversion_Cripto_Instr">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Lugar" Type="int" />
+          <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaEstimada" Type="float" Nullable="false" />
+          <Property Name="TasaReal" Type="float" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="CantidadInvertida" Type="float" Nullable="false" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Bloqueado" Type="bit" />
+          <Property Name="InteresFijo" Type="bit" />
+          <Property Name="PagoDeInteres" Type="bit" />
+          <Property Name="Capital" Type="float" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Inversion_Cripto_Instru' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Inversion_Cripto_Instru">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Lugar" Type="int" />
+          <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaEstimada" Type="float" Nullable="false" />
+          <Property Name="TasaReal" Type="float" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="CantidadInvertida" Type="float" Nullable="false" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Bloqueado" Type="bit" />
+          <Property Name="InteresFijo" Type="bit" />
+          <Property Name="PagoDeInteres" Type="bit" />
+          <Property Name="Capital" Type="float" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Inversion_Cripto_InstruWI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Inversion_Cripto_InstruWI">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Lugar" Type="int" />
+          <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaEstimada" Type="float" Nullable="false" />
+          <Property Name="TasaReal" Type="float" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="CantidadInvertida" Type="float" Nullable="false" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Bloqueado" Type="bit" />
+          <Property Name="InteresFijo" Type="bit" />
+          <Property Name="PagoDeInteres" Type="bit" />
+          <Property Name="Capital" Type="float" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwCapital_LugarSeparado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwCapital_LugarSeparado">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Capital" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Capital" Type="float" Nullable="false" />
+          <Property Name="Lugar" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwCapital_TipoCriptoAgrupadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwCapital_TipoCriptoAgrupadas">
+          <Key>
+            <PropertyRef Name="Ticker" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Capital" Type="float" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwCapital_TipoCriptoSeparadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwCapital_TipoCriptoSeparadas">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Ticker" />
+            <PropertyRef Name="Tipo" />
+            <PropertyRef Name="Capital" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Capital" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwCriptomoneda' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwCriptomoneda">
+          <Key>
+            <PropertyRef Name="Capital" />
+            <PropertyRef Name="Ticker" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="Capital" Type="float" Nullable="false" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Lugar1" Type="varchar" MaxLength="50" />
+          <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaEstimada" Type="float" Nullable="false" />
+          <Property Name="TasaReal" Type="float" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="CantidadInvertida" Type="float" Nullable="false" />
+          <Property Name="CantidadGanada" Type="float" />
+          <Property Name="Lugar" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwCriptosDWB' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwCriptosDWB">
+          <Key>
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" />
+          <Property Name="Precio" Type="float" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Logo" Type="image" />
+          <Property Name="Capitalizacion" Type="float" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversion_tenencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwInversion_tenencia">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaEstimada" Type="float" Nullable="false" />
+          <Property Name="TasaReal" Type="float" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="CantidadInvertida" Type="float" Nullable="false" />
+          <Property Name="CantidadGanada" Type="float" />
+          <Property Name="Lugar" Type="int" />
+          <Property Name="idTenencia" Type="int" />
+          <Property Name="Exchange" Type="varchar" MaxLength="50" />
+          <Property Name="Wallet" Type="varchar" MaxLength="50" />
+          <Property Name="Centralizado" Type="bit" />
+          <Property Name="Nacional" Type="bit" />
+          <Property Name="Capital" Type="float" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversion_tenenciaWI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwInversion_tenenciaWI">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaEstimada" Type="float" Nullable="false" />
+          <Property Name="TasaReal" Type="float" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="CantidadInvertida" Type="float" Nullable="false" />
+          <Property Name="CantidadGanada" Type="float" />
+          <Property Name="Lugar" Type="int" />
+          <Property Name="idTenencia" Type="int" />
+          <Property Name="Exchange" Type="varchar" MaxLength="50" />
+          <Property Name="Wallet" Type="varchar" MaxLength="50" />
+          <Property Name="Centralizado" Type="bit" />
+          <Property Name="Nacional" Type="bit" />
+          <Property Name="Capital" Type="float" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversionesEsteAnio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwInversionesEsteAnio">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="IdInversion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lugar1" Type="varchar" MaxLength="50" />
+          <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaEstimada" Type="float" Nullable="false" />
+          <Property Name="TasaReal" Type="float" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="CantidadInvertida" Type="float" Nullable="false" />
+          <Property Name="CantidadGanada" Type="float" />
+          <Property Name="Lugar" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversionesReales_Simuladas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwInversionesReales_Simuladas">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+            <PropertyRef Name="TipoInversion" />
+            <PropertyRef Name="Tipo" />
+            <PropertyRef Name="Ticker" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Lugar1" Type="varchar" MaxLength="50" />
+          <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaEstimada" Type="float" Nullable="false" />
+          <Property Name="TasaReal" Type="float" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="CantidadInvertida" Type="float" Nullable="false" />
+          <Property Name="CantidadGanada" Type="float" />
+          <Property Name="Lugar" Type="int" />
+          <Property Name="PrecioInicio" Type="float" />
+          <Property Name="PrecioFin" Type="float" />
+          <Property Name="TipoInversion" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversionesTop' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwInversionesTop">
+          <Key>
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Capital" Type="float" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversionEvolucion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwInversionEvolucion">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="Criptomoneda" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="Capital" Type="float" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwTenencia">
+          <Key>
+            <PropertyRef Name="idTenencia" />
+          </Key>
+          <Property Name="idTenencia" Type="int" Nullable="false" />
+          <Property Name="Wallet" Type="varchar" MaxLength="50" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" />
+          <Property Name="Semilla" Type="varchar" MaxLength="50" />
+          <Property Name="Exchange" Type="varchar" MaxLength="50" />
+          <Property Name="Nacional" Type="bit" />
+          <Property Name="Centralizado" Type="bit" />
+          <Property Name="Url" Type="varchar" MaxLength="50" />
+          <Property Name="Lugar" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Criptomoneda_TipoCriptomonedaA">
+          <End Role="TipoCriptomoneda" Type="Self.TipoCriptomoneda" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Criptomoneda" Type="Self.Criptomoneda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCriptomoneda">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="Criptomoneda">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inversion_Criptomoneda">
+          <End Role="Criptomoneda" Type="Self.Criptomoneda" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inversion" Type="Self.Inversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Criptomoneda">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="Inversion">
+              <PropertyRef Name="Criptomoneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inversion_Instrumento">
+          <End Role="Instrumento" Type="Self.Instrumento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inversion" Type="Self.Inversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instrumento">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="Inversion">
+              <PropertyRef Name="Instrumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inversion_NuevaTenencia">
+          <End Role="NuevaTenencia" Type="Self.NuevaTenencia" Multiplicity="0..1" />
+          <End Role="Inversion" Type="Self.Inversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NuevaTenencia">
+              <PropertyRef Name="idTenencia" />
+            </Principal>
+            <Dependent Role="Inversion">
+              <PropertyRef Name="Lugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InversionT_Criptomoneda">
+          <End Role="Criptomoneda" Type="Self.Criptomoneda" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InversionTemporal" Type="Self.InversionTemporal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Criptomoneda">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="InversionTemporal">
+              <PropertyRef Name="Criptomoneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InversionT_Instrumento">
+          <End Role="Instrumento" Type="Self.Instrumento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InversionTemporal" Type="Self.InversionTemporal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instrumento">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="InversionTemporal">
+              <PropertyRef Name="Instrumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InversionT_NuevaTenencia">
+          <End Role="NuevaTenencia" Type="Self.NuevaTenencia" Multiplicity="0..1" />
+          <End Role="InversionTemporal" Type="Self.InversionTemporal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NuevaTenencia">
+              <PropertyRef Name="idTenencia" />
+            </Principal>
+            <Dependent Role="InversionTemporal">
+              <PropertyRef Name="Lugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NuevaTenencia_Exchange">
+          <End Role="Exchange" Type="Self.Exchange" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NuevaTenencia" Type="Self.NuevaTenencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exchange">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="NuevaTenencia">
+              <PropertyRef Name="Exchange" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NuevaTenencia_Wallet">
+          <End Role="Wallet" Type="Self.Wallet" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NuevaTenencia" Type="Self.NuevaTenencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wallet">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="NuevaTenencia">
+              <PropertyRef Name="Wallet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wallet_TipoDeWallet">
+          <End Role="TipoDeWallet" Type="Self.TipoDeWallet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Wallet" Type="Self.Wallet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDeWallet">
+              <PropertyRef Name="TipoWallet" />
+            </Principal>
+            <Dependent Role="Wallet">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Tesis_Inv2ModelStoreContainer">
+          <EntitySet Name="Criptomoneda" EntityType="Self.Criptomoneda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exchange" EntityType="Self.Exchange" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Instrumento" EntityType="Self.Instrumento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inversion" EntityType="Self.Inversion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InversionTemporal" EntityType="Self.InversionTemporal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NuevaTenencia" EntityType="Self.NuevaTenencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCriptomoneda" EntityType="Self.TipoCriptomoneda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDeWallet" EntityType="Self.TipoDeWallet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wallet" EntityType="Self.Wallet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Capital_Cripto" EntityType="Self.Capital_Cripto" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Capital_Cripto].[Capital] AS [Capital], 
+    [Capital_Cripto].[Ticker] AS [Ticker]
+    FROM [dbo].[Capital_Cripto] AS [Capital_Cripto]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Capital_Cripto_Resumen" EntityType="Self.Capital_Cripto_Resumen" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Capital_Cripto_Resumen].[Ticker] AS [Ticker], 
+    [Capital_Cripto_Resumen].[CapitalTotal] AS [CapitalTotal]
+    FROM [dbo].[Capital_Cripto_Resumen] AS [Capital_Cripto_Resumen]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Capital_Cripto_ResumenWI" EntityType="Self.Capital_Cripto_ResumenWI" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Capital_Cripto_ResumenWI].[Ticker] AS [Ticker], 
+    [Capital_Cripto_ResumenWI].[CapitalTotal] AS [CapitalTotal], 
+    [Capital_Cripto_ResumenWI].[Tipo] AS [Tipo]
+    FROM [dbo].[Capital_Cripto_ResumenWI] AS [Capital_Cripto_ResumenWI]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Capital_CriptoWI" EntityType="Self.Capital_CriptoWI" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Capital_CriptoWI].[Capital] AS [Capital], 
+    [Capital_CriptoWI].[Ticker] AS [Ticker], 
+    [Capital_CriptoWI].[Tipo] AS [Tipo]
+    FROM [dbo].[Capital_CriptoWI] AS [Capital_CriptoWI]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Capital_TipoCripto" EntityType="Self.Capital_TipoCripto" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Capital_TipoCripto].[Capital] AS [Capital], 
+    [Capital_TipoCripto].[Tipo] AS [Tipo]
+    FROM [dbo].[Capital_TipoCripto] AS [Capital_TipoCripto]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="capital_tipocripto_Resumen" EntityType="Self.capital_tipocripto_Resumen" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [capital_tipocripto_Resumen].[Tipo] AS [Tipo], 
+    [capital_tipocripto_Resumen].[CapitalTotal] AS [CapitalTotal]
+    FROM [dbo].[capital_tipocripto_Resumen] AS [capital_tipocripto_Resumen]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="capital_tipocripto_ResumenWI" EntityType="Self.capital_tipocripto_ResumenWI" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [capital_tipocripto_ResumenWI].[Tipo] AS [Tipo], 
+    [capital_tipocripto_ResumenWI].[CapitalTotal] AS [CapitalTotal], 
+    [capital_tipocripto_ResumenWI].[Ticker] AS [Ticker]
+    FROM [dbo].[capital_tipocripto_ResumenWI] AS [capital_tipocripto_ResumenWI]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Capital_TipoCriptoWI" EntityType="Self.Capital_TipoCriptoWI" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Capital_TipoCriptoWI].[Capital] AS [Capital], 
+    [Capital_TipoCriptoWI].[Tipo] AS [Tipo], 
+    [Capital_TipoCriptoWI].[Ticker] AS [Ticker]
+    FROM [dbo].[Capital_TipoCriptoWI] AS [Capital_TipoCriptoWI]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="EvolucionInversionesTipoCripto" EntityType="Self.EvolucionInversionesTipoCripto" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EvolucionInversionesTipoCripto].[IdInversion] AS [IdInversion], 
+    [EvolucionInversionesTipoCripto].[Inicio] AS [Inicio], 
+    [EvolucionInversionesTipoCripto].[Fin] AS [Fin], 
+    [EvolucionInversionesTipoCripto].[Tipo] AS [Tipo], 
+    [EvolucionInversionesTipoCripto].[Capital] AS [Capital]
+    FROM [dbo].[EvolucionInversionesTipoCripto] AS [EvolucionInversionesTipoCripto]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Inversion_Cripto_Instr" EntityType="Self.Inversion_Cripto_Instr" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Inversion_Cripto_Instr].[IdInversion] AS [IdInversion], 
+    [Inversion_Cripto_Instr].[Lugar] AS [Lugar], 
+    [Inversion_Cripto_Instr].[Instrumento] AS [Instrumento], 
+    [Inversion_Cripto_Instr].[Criptomoneda] AS [Criptomoneda], 
+    [Inversion_Cripto_Instr].[CriptomonedaGanada] AS [CriptomonedaGanada], 
+    [Inversion_Cripto_Instr].[TasaEstimada] AS [TasaEstimada], 
+    [Inversion_Cripto_Instr].[TasaReal] AS [TasaReal], 
+    [Inversion_Cripto_Instr].[FechaInicio] AS [FechaInicio], 
+    [Inversion_Cripto_Instr].[FechaFin] AS [FechaFin], 
+    [Inversion_Cripto_Instr].[CantidadInvertida] AS [CantidadInvertida], 
+    [Inversion_Cripto_Instr].[Ticker] AS [Ticker], 
+    [Inversion_Cripto_Instr].[Nombre] AS [Nombre], 
+    [Inversion_Cripto_Instr].[Bloqueado] AS [Bloqueado], 
+    [Inversion_Cripto_Instr].[InteresFijo] AS [InteresFijo], 
+    [Inversion_Cripto_Instr].[PagoDeInteres] AS [PagoDeInteres], 
+    [Inversion_Cripto_Instr].[Capital] AS [Capital]
+    FROM [dbo].[Inversion_Cripto_Instr] AS [Inversion_Cripto_Instr]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Inversion_Cripto_Instru" EntityType="Self.Inversion_Cripto_Instru" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Inversion_Cripto_Instru].[IdInversion] AS [IdInversion], 
+    [Inversion_Cripto_Instru].[Lugar] AS [Lugar], 
+    [Inversion_Cripto_Instru].[Instrumento] AS [Instrumento], 
+    [Inversion_Cripto_Instru].[Criptomoneda] AS [Criptomoneda], 
+    [Inversion_Cripto_Instru].[CriptomonedaGanada] AS [CriptomonedaGanada], 
+    [Inversion_Cripto_Instru].[TasaEstimada] AS [TasaEstimada], 
+    [Inversion_Cripto_Instru].[TasaReal] AS [TasaReal], 
+    [Inversion_Cripto_Instru].[FechaInicio] AS [FechaInicio], 
+    [Inversion_Cripto_Instru].[FechaFin] AS [FechaFin], 
+    [Inversion_Cripto_Instru].[CantidadInvertida] AS [CantidadInvertida], 
+    [Inversion_Cripto_Instru].[Ticker] AS [Ticker], 
+    [Inversion_Cripto_Instru].[Nombre] AS [Nombre], 
+    [Inversion_Cripto_Instru].[Bloqueado] AS [Bloqueado], 
+    [Inversion_Cripto_Instru].[InteresFijo] AS [InteresFijo], 
+    [Inversion_Cripto_Instru].[PagoDeInteres] AS [PagoDeInteres], 
+    [Inversion_Cripto_Instru].[Capital] AS [Capital]
+    FROM [dbo].[Inversion_Cripto_Instru] AS [Inversion_Cripto_Instru]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Inversion_Cripto_InstruWI" EntityType="Self.Inversion_Cripto_InstruWI" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Inversion_Cripto_InstruWI].[IdInversion] AS [IdInversion], 
+    [Inversion_Cripto_InstruWI].[Lugar] AS [Lugar], 
+    [Inversion_Cripto_InstruWI].[Instrumento] AS [Instrumento], 
+    [Inversion_Cripto_InstruWI].[Criptomoneda] AS [Criptomoneda], 
+    [Inversion_Cripto_InstruWI].[CriptomonedaGanada] AS [CriptomonedaGanada], 
+    [Inversion_Cripto_InstruWI].[TasaEstimada] AS [TasaEstimada], 
+    [Inversion_Cripto_InstruWI].[TasaReal] AS [TasaReal], 
+    [Inversion_Cripto_InstruWI].[FechaInicio] AS [FechaInicio], 
+    [Inversion_Cripto_InstruWI].[FechaFin] AS [FechaFin], 
+    [Inversion_Cripto_InstruWI].[CantidadInvertida] AS [CantidadInvertida], 
+    [Inversion_Cripto_InstruWI].[Ticker] AS [Ticker], 
+    [Inversion_Cripto_InstruWI].[Nombre] AS [Nombre], 
+    [Inversion_Cripto_InstruWI].[Bloqueado] AS [Bloqueado], 
+    [Inversion_Cripto_InstruWI].[InteresFijo] AS [InteresFijo], 
+    [Inversion_Cripto_InstruWI].[PagoDeInteres] AS [PagoDeInteres], 
+    [Inversion_Cripto_InstruWI].[Capital] AS [Capital], 
+    [Inversion_Cripto_InstruWI].[Tipo] AS [Tipo]
+    FROM [dbo].[Inversion_Cripto_InstruWI] AS [Inversion_Cripto_InstruWI]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwCapital_LugarSeparado" EntityType="Self.vwCapital_LugarSeparado" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwCapital_LugarSeparado].[IdInversion] AS [IdInversion], 
+    [vwCapital_LugarSeparado].[Capital] AS [Capital], 
+    [vwCapital_LugarSeparado].[Lugar] AS [Lugar]
+    FROM [dbo].[vwCapital_LugarSeparado] AS [vwCapital_LugarSeparado]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwCapital_TipoCriptoAgrupadas" EntityType="Self.vwCapital_TipoCriptoAgrupadas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwCapital_TipoCriptoAgrupadas].[Ticker] AS [Ticker], 
+    [vwCapital_TipoCriptoAgrupadas].[Tipo] AS [Tipo], 
+    [vwCapital_TipoCriptoAgrupadas].[Capital] AS [Capital]
+    FROM [dbo].[vwCapital_TipoCriptoAgrupadas] AS [vwCapital_TipoCriptoAgrupadas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwCapital_TipoCriptoSeparadas" EntityType="Self.vwCapital_TipoCriptoSeparadas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwCapital_TipoCriptoSeparadas].[IdInversion] AS [IdInversion], 
+    [vwCapital_TipoCriptoSeparadas].[Ticker] AS [Ticker], 
+    [vwCapital_TipoCriptoSeparadas].[Tipo] AS [Tipo], 
+    [vwCapital_TipoCriptoSeparadas].[Capital] AS [Capital]
+    FROM [dbo].[vwCapital_TipoCriptoSeparadas] AS [vwCapital_TipoCriptoSeparadas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwCriptomoneda" EntityType="Self.vwCriptomoneda" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwCriptomoneda].[Capital] AS [Capital], 
+    [vwCriptomoneda].[Ticker] AS [Ticker], 
+    [vwCriptomoneda].[Estado] AS [Estado], 
+    [vwCriptomoneda].[IdInversion] AS [IdInversion], 
+    [vwCriptomoneda].[Lugar1] AS [Lugar1], 
+    [vwCriptomoneda].[Instrumento] AS [Instrumento], 
+    [vwCriptomoneda].[Criptomoneda] AS [Criptomoneda], 
+    [vwCriptomoneda].[CriptomonedaGanada] AS [CriptomonedaGanada], 
+    [vwCriptomoneda].[TasaEstimada] AS [TasaEstimada], 
+    [vwCriptomoneda].[TasaReal] AS [TasaReal], 
+    [vwCriptomoneda].[FechaInicio] AS [FechaInicio], 
+    [vwCriptomoneda].[FechaFin] AS [FechaFin], 
+    [vwCriptomoneda].[CantidadInvertida] AS [CantidadInvertida], 
+    [vwCriptomoneda].[CantidadGanada] AS [CantidadGanada], 
+    [vwCriptomoneda].[Lugar] AS [Lugar]
+    FROM [dbo].[vwCriptomoneda] AS [vwCriptomoneda]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwCriptosDWB" EntityType="Self.vwCriptosDWB" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwCriptosDWB].[Nombre] AS [Nombre], 
+    [vwCriptosDWB].[Ticker] AS [Ticker], 
+    [vwCriptosDWB].[Precio] AS [Precio], 
+    [vwCriptosDWB].[Tipo] AS [Tipo], 
+    [vwCriptosDWB].[Logo] AS [Logo], 
+    [vwCriptosDWB].[Capitalizacion] AS [Capitalizacion]
+    FROM [dbo].[vwCriptosDWB] AS [vwCriptosDWB]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwInversion_tenencia" EntityType="Self.vwInversion_tenencia" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwInversion_tenencia].[IdInversion] AS [IdInversion], 
+    [vwInversion_tenencia].[Instrumento] AS [Instrumento], 
+    [vwInversion_tenencia].[Criptomoneda] AS [Criptomoneda], 
+    [vwInversion_tenencia].[CriptomonedaGanada] AS [CriptomonedaGanada], 
+    [vwInversion_tenencia].[TasaEstimada] AS [TasaEstimada], 
+    [vwInversion_tenencia].[TasaReal] AS [TasaReal], 
+    [vwInversion_tenencia].[FechaInicio] AS [FechaInicio], 
+    [vwInversion_tenencia].[FechaFin] AS [FechaFin], 
+    [vwInversion_tenencia].[CantidadInvertida] AS [CantidadInvertida], 
+    [vwInversion_tenencia].[CantidadGanada] AS [CantidadGanada], 
+    [vwInversion_tenencia].[Lugar] AS [Lugar], 
+    [vwInversion_tenencia].[idTenencia] AS [idTenencia], 
+    [vwInversion_tenencia].[Exchange] AS [Exchange], 
+    [vwInversion_tenencia].[Wallet] AS [Wallet], 
+    [vwInversion_tenencia].[Centralizado] AS [Centralizado], 
+    [vwInversion_tenencia].[Nacional] AS [Nacional], 
+    [vwInversion_tenencia].[Capital] AS [Capital]
+    FROM [dbo].[vwInversion_tenencia] AS [vwInversion_tenencia]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwInversion_tenenciaWI" EntityType="Self.vwInversion_tenenciaWI" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwInversion_tenenciaWI].[IdInversion] AS [IdInversion], 
+    [vwInversion_tenenciaWI].[Instrumento] AS [Instrumento], 
+    [vwInversion_tenenciaWI].[Criptomoneda] AS [Criptomoneda], 
+    [vwInversion_tenenciaWI].[CriptomonedaGanada] AS [CriptomonedaGanada], 
+    [vwInversion_tenenciaWI].[TasaEstimada] AS [TasaEstimada], 
+    [vwInversion_tenenciaWI].[TasaReal] AS [TasaReal], 
+    [vwInversion_tenenciaWI].[FechaInicio] AS [FechaInicio], 
+    [vwInversion_tenenciaWI].[FechaFin] AS [FechaFin], 
+    [vwInversion_tenenciaWI].[CantidadInvertida] AS [CantidadInvertida], 
+    [vwInversion_tenenciaWI].[CantidadGanada] AS [CantidadGanada], 
+    [vwInversion_tenenciaWI].[Lugar] AS [Lugar], 
+    [vwInversion_tenenciaWI].[idTenencia] AS [idTenencia], 
+    [vwInversion_tenenciaWI].[Exchange] AS [Exchange], 
+    [vwInversion_tenenciaWI].[Wallet] AS [Wallet], 
+    [vwInversion_tenenciaWI].[Centralizado] AS [Centralizado], 
+    [vwInversion_tenenciaWI].[Nacional] AS [Nacional], 
+    [vwInversion_tenenciaWI].[Capital] AS [Capital], 
+    [vwInversion_tenenciaWI].[Ticker] AS [Ticker], 
+    [vwInversion_tenenciaWI].[Tipo] AS [Tipo]
+    FROM [dbo].[vwInversion_tenenciaWI] AS [vwInversion_tenenciaWI]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwInversionesEsteAnio" EntityType="Self.vwInversionesEsteAnio" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwInversionesEsteAnio].[IdInversion] AS [IdInversion], 
+    [vwInversionesEsteAnio].[Lugar1] AS [Lugar1], 
+    [vwInversionesEsteAnio].[Instrumento] AS [Instrumento], 
+    [vwInversionesEsteAnio].[Criptomoneda] AS [Criptomoneda], 
+    [vwInversionesEsteAnio].[CriptomonedaGanada] AS [CriptomonedaGanada], 
+    [vwInversionesEsteAnio].[TasaEstimada] AS [TasaEstimada], 
+    [vwInversionesEsteAnio].[TasaReal] AS [TasaReal], 
+    [vwInversionesEsteAnio].[FechaInicio] AS [FechaInicio], 
+    [vwInversionesEsteAnio].[FechaFin] AS [FechaFin], 
+    [vwInversionesEsteAnio].[CantidadInvertida] AS [CantidadInvertida], 
+    [vwInversionesEsteAnio].[CantidadGanada] AS [CantidadGanada], 
+    [vwInversionesEsteAnio].[Lugar] AS [Lugar]
+    FROM [dbo].[vwInversionesEsteAnio] AS [vwInversionesEsteAnio]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwInversionesReales_Simuladas" EntityType="Self.vwInversionesReales_Simuladas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwInversionesReales_Simuladas].[IdInversion] AS [IdInversion], 
+    [vwInversionesReales_Simuladas].[Lugar1] AS [Lugar1], 
+    [vwInversionesReales_Simuladas].[Instrumento] AS [Instrumento], 
+    [vwInversionesReales_Simuladas].[Criptomoneda] AS [Criptomoneda], 
+    [vwInversionesReales_Simuladas].[CriptomonedaGanada] AS [CriptomonedaGanada], 
+    [vwInversionesReales_Simuladas].[TasaEstimada] AS [TasaEstimada], 
+    [vwInversionesReales_Simuladas].[TasaReal] AS [TasaReal], 
+    [vwInversionesReales_Simuladas].[FechaInicio] AS [FechaInicio], 
+    [vwInversionesReales_Simuladas].[FechaFin] AS [FechaFin], 
+    [vwInversionesReales_Simuladas].[CantidadInvertida] AS [CantidadInvertida], 
+    [vwInversionesReales_Simuladas].[CantidadGanada] AS [CantidadGanada], 
+    [vwInversionesReales_Simuladas].[Lugar] AS [Lugar], 
+    [vwInversionesReales_Simuladas].[PrecioInicio] AS [PrecioInicio], 
+    [vwInversionesReales_Simuladas].[PrecioFin] AS [PrecioFin], 
+    [vwInversionesReales_Simuladas].[TipoInversion] AS [TipoInversion], 
+    [vwInversionesReales_Simuladas].[Tipo] AS [Tipo], 
+    [vwInversionesReales_Simuladas].[Ticker] AS [Ticker]
+    FROM [dbo].[vwInversionesReales_Simuladas] AS [vwInversionesReales_Simuladas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwInversionesTop" EntityType="Self.vwInversionesTop" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwInversionesTop].[Criptomoneda] AS [Criptomoneda], 
+    [vwInversionesTop].[Tipo] AS [Tipo], 
+    [vwInversionesTop].[Capital] AS [Capital]
+    FROM [dbo].[vwInversionesTop] AS [vwInversionesTop]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwInversionEvolucion" EntityType="Self.vwInversionEvolucion" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwInversionEvolucion].[IdInversion] AS [IdInversion], 
+    [vwInversionEvolucion].[FechaInicio] AS [FechaInicio], 
+    [vwInversionEvolucion].[FechaFin] AS [FechaFin], 
+    [vwInversionEvolucion].[Capital] AS [Capital], 
+    [vwInversionEvolucion].[Tipo] AS [Tipo], 
+    [vwInversionEvolucion].[Criptomoneda] AS [Criptomoneda]
+    FROM [dbo].[vwInversionEvolucion] AS [vwInversionEvolucion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwTenencia" EntityType="Self.vwTenencia" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwTenencia].[idTenencia] AS [idTenencia], 
+    [vwTenencia].[Wallet] AS [Wallet], 
+    [vwTenencia].[Tipo] AS [Tipo], 
+    [vwTenencia].[Semilla] AS [Semilla], 
+    [vwTenencia].[Exchange] AS [Exchange], 
+    [vwTenencia].[Nacional] AS [Nacional], 
+    [vwTenencia].[Centralizado] AS [Centralizado], 
+    [vwTenencia].[Url] AS [Url], 
+    [vwTenencia].[Lugar] AS [Lugar]
+    FROM [dbo].[vwTenencia] AS [vwTenencia]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Criptomoneda_TipoCriptomonedaA" Association="Self.FK_Criptomoneda_TipoCriptomonedaA">
+            <End Role="TipoCriptomoneda" EntitySet="TipoCriptomoneda" />
+            <End Role="Criptomoneda" EntitySet="Criptomoneda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inversion_Criptomoneda" Association="Self.FK_Inversion_Criptomoneda">
+            <End Role="Criptomoneda" EntitySet="Criptomoneda" />
+            <End Role="Inversion" EntitySet="Inversion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inversion_Instrumento" Association="Self.FK_Inversion_Instrumento">
+            <End Role="Instrumento" EntitySet="Instrumento" />
+            <End Role="Inversion" EntitySet="Inversion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inversion_NuevaTenencia" Association="Self.FK_Inversion_NuevaTenencia">
+            <End Role="NuevaTenencia" EntitySet="NuevaTenencia" />
+            <End Role="Inversion" EntitySet="Inversion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InversionT_Criptomoneda" Association="Self.FK_InversionT_Criptomoneda">
+            <End Role="Criptomoneda" EntitySet="Criptomoneda" />
+            <End Role="InversionTemporal" EntitySet="InversionTemporal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InversionT_Instrumento" Association="Self.FK_InversionT_Instrumento">
+            <End Role="Instrumento" EntitySet="Instrumento" />
+            <End Role="InversionTemporal" EntitySet="InversionTemporal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InversionT_NuevaTenencia" Association="Self.FK_InversionT_NuevaTenencia">
+            <End Role="NuevaTenencia" EntitySet="NuevaTenencia" />
+            <End Role="InversionTemporal" EntitySet="InversionTemporal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NuevaTenencia_Exchange" Association="Self.FK_NuevaTenencia_Exchange">
+            <End Role="Exchange" EntitySet="Exchange" />
+            <End Role="NuevaTenencia" EntitySet="NuevaTenencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NuevaTenencia_Wallet" Association="Self.FK_NuevaTenencia_Wallet">
+            <End Role="Wallet" EntitySet="Wallet" />
+            <End Role="NuevaTenencia" EntitySet="NuevaTenencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wallet_TipoDeWallet" Association="Self.FK_Wallet_TipoDeWallet">
+            <End Role="TipoDeWallet" EntitySet="TipoDeWallet" />
+            <End Role="Wallet" EntitySet="Wallet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Tesis_Inv2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Criptomoneda">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ticker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precio" Type="Double" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Capitalizacion" Type="Double" />
+          <NavigationProperty Name="TipoCriptomoneda" Relationship="Self.FK_Criptomoneda_TipoCriptomonedaA" FromRole="Criptomoneda" ToRole="TipoCriptomoneda" />
+          <NavigationProperty Name="Inversion" Relationship="Self.FK_Inversion_Criptomoneda" FromRole="Criptomoneda" ToRole="Inversion" />
+          <NavigationProperty Name="InversionTemporal" Relationship="Tesis_Inv2Model.FK_InversionT_Criptomoneda" FromRole="Criptomoneda" ToRole="InversionTemporal" />
+        </EntityType>
+        <EntityType Name="Exchange">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nacional" Type="Boolean" Nullable="false" />
+          <Property Name="Centralizado" Type="Boolean" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NuevaTenencia" Relationship="Self.FK_NuevaTenencia_Exchange" FromRole="Exchange" ToRole="NuevaTenencia" />
+        </EntityType>
+        <EntityType Name="Instrumento">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bloqueado" Type="Boolean" Nullable="false" />
+          <Property Name="InteresFijo" Type="Boolean" Nullable="false" />
+          <Property Name="PagoDeInteres" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Inversion" Relationship="Self.FK_Inversion_Instrumento" FromRole="Instrumento" ToRole="Inversion" />
+          <NavigationProperty Name="InversionTemporal" Relationship="Tesis_Inv2Model.FK_InversionT_Instrumento" FromRole="Instrumento" ToRole="InversionTemporal" />
+        </EntityType>
+        <EntityType Name="Inversion">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Instrumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Criptomoneda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CriptomonedaGanada" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TasaEstimada" Type="Double" Nullable="false" />
+          <Property Name="TasaReal" Type="Double" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="CantidadInvertida" Type="Double" Nullable="false" />
+          <Property Name="CantidadGanada" Type="Double" />
+          <Property Name="Lugar" Type="Int32" />
+          <NavigationProperty Name="Criptomoneda1" Relationship="Self.FK_Inversion_Criptomoneda" FromRole="Inversion" ToRole="Criptomoneda" />
+          <NavigationProperty Name="Instrumento1" Relationship="Self.FK_Inversion_Instrumento" FromRole="Inversion" ToRole="Instrumento" />
+          <NavigationProperty Name="NuevaTenencia" Relationship="Self.FK_Inversion_NuevaTenencia" FromRole="Inversion" ToRole="NuevaTenencia" />
+          <Property Name="Lugar1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PrecioInicio" Type="Double" />
+          <Property Name="PrecioFin" Type="Double" />
+        </EntityType>
+        <EntityType Name="NuevaTenencia">
+          <Key>
+            <PropertyRef Name="idTenencia" />
+          </Key>
+          <Property Name="idTenencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Exchange" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Wallet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Exchange1" Relationship="Self.FK_NuevaTenencia_Exchange" FromRole="NuevaTenencia" ToRole="Exchange" />
+          <NavigationProperty Name="Inversion" Relationship="Self.FK_Inversion_NuevaTenencia" FromRole="NuevaTenencia" ToRole="Inversion" />
+          <NavigationProperty Name="Wallet1" Relationship="Self.FK_NuevaTenencia_Wallet" FromRole="NuevaTenencia" ToRole="Wallet" />
+          <NavigationProperty Name="InversionTemporal" Relationship="Tesis_Inv2Model.FK_InversionT_NuevaTenencia" FromRole="NuevaTenencia" ToRole="InversionTemporal" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipoCriptomoneda">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Criptomoneda" Relationship="Self.FK_Criptomoneda_TipoCriptomonedaA" FromRole="TipoCriptomoneda" ToRole="Criptomoneda" />
+        </EntityType>
+        <EntityType Name="TipoDeWallet">
+          <Key>
+            <PropertyRef Name="TipoWallet" />
+          </Key>
+          <Property Name="TipoWallet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Wallet" Relationship="Self.FK_Wallet_TipoDeWallet" FromRole="TipoDeWallet" ToRole="Wallet" />
+        </EntityType>
+        <EntityType Name="Wallet">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Semilla" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NuevaTenencia" Relationship="Self.FK_NuevaTenencia_Wallet" FromRole="Wallet" ToRole="NuevaTenencia" />
+          <NavigationProperty Name="TipoDeWallet" Relationship="Self.FK_Wallet_TipoDeWallet" FromRole="Wallet" ToRole="TipoDeWallet" />
+        </EntityType>
+        <EntityType Name="Capital_Cripto">
+          <Key>
+            <PropertyRef Name="Capital" />
+            <PropertyRef Name="Ticker" />
+          </Key>
+          <Property Name="Capital" Type="Double" Nullable="false" />
+          <Property Name="Ticker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Capital_Cripto_Resumen">
+          <Key>
+            <PropertyRef Name="Ticker" />
+          </Key>
+          <Property Name="Ticker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CapitalTotal" Type="Double" />
+        </EntityType>
+        <EntityType Name="Capital_TipoCripto">
+          <Key>
+            <PropertyRef Name="Capital" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Capital" Type="Double" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="capital_tipocripto_Resumen">
+          <Key>
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CapitalTotal" Type="Double" />
+        </EntityType>
+        <EntityType Name="vwCapital_TipoCriptoAgrupadas">
+          <Key>
+            <PropertyRef Name="Ticker" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Ticker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Capital" Type="Double" />
+        </EntityType>
+        <EntityType Name="vwCapital_TipoCriptoSeparadas">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Ticker" />
+            <PropertyRef Name="Tipo" />
+            <PropertyRef Name="Capital" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Ticker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Capital" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwTenencia">
+          <Key>
+            <PropertyRef Name="idTenencia" />
+          </Key>
+          <Property Name="idTenencia" Type="Int32" Nullable="false" />
+          <Property Name="Wallet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Semilla" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Exchange" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nacional" Type="Boolean" />
+          <Property Name="Centralizado" Type="Boolean" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Criptomoneda_TipoCriptomonedaA">
+          <End Role="TipoCriptomoneda" Type="Self.TipoCriptomoneda" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Criptomoneda" Type="Self.Criptomoneda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCriptomoneda">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="Criptomoneda">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inversion_Criptomoneda">
+          <End Role="Criptomoneda" Type="Self.Criptomoneda" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inversion" Type="Self.Inversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Criptomoneda">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="Inversion">
+              <PropertyRef Name="Criptomoneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NuevaTenencia_Exchange">
+          <End Role="Exchange" Type="Self.Exchange" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NuevaTenencia" Type="Self.NuevaTenencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exchange">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="NuevaTenencia">
+              <PropertyRef Name="Exchange" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inversion_Instrumento">
+          <End Role="Instrumento" Type="Self.Instrumento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inversion" Type="Self.Inversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instrumento">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="Inversion">
+              <PropertyRef Name="Instrumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inversion_NuevaTenencia">
+          <End Role="NuevaTenencia" Type="Self.NuevaTenencia" Multiplicity="0..1" />
+          <End Role="Inversion" Type="Self.Inversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NuevaTenencia">
+              <PropertyRef Name="idTenencia" />
+            </Principal>
+            <Dependent Role="Inversion">
+              <PropertyRef Name="Lugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NuevaTenencia_Wallet">
+          <End Role="Wallet" Type="Self.Wallet" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NuevaTenencia" Type="Self.NuevaTenencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wallet">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="NuevaTenencia">
+              <PropertyRef Name="Wallet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wallet_TipoDeWallet">
+          <End Role="TipoDeWallet" Type="Self.TipoDeWallet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Wallet" Type="Self.Wallet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDeWallet">
+              <PropertyRef Name="TipoWallet" />
+            </Principal>
+            <Dependent Role="Wallet">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Tesis_Inv2Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Criptomoneda" EntityType="Self.Criptomoneda" />
+          <EntitySet Name="Exchange" EntityType="Self.Exchange" />
+          <EntitySet Name="Instrumento" EntityType="Self.Instrumento" />
+          <EntitySet Name="Inversion" EntityType="Self.Inversion" />
+          <EntitySet Name="NuevaTenencia" EntityType="Self.NuevaTenencia" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TipoCriptomoneda" EntityType="Self.TipoCriptomoneda" />
+          <EntitySet Name="TipoDeWallet" EntityType="Self.TipoDeWallet" />
+          <EntitySet Name="Wallet" EntityType="Self.Wallet" />
+          <EntitySet Name="Capital_Cripto" EntityType="Self.Capital_Cripto" />
+          <EntitySet Name="Capital_Cripto_Resumen" EntityType="Self.Capital_Cripto_Resumen" />
+          <EntitySet Name="Capital_TipoCripto" EntityType="Self.Capital_TipoCripto" />
+          <EntitySet Name="capital_tipocripto_Resumen" EntityType="Self.capital_tipocripto_Resumen" />
+          <EntitySet Name="vwCapital_TipoCriptoAgrupadas" EntityType="Self.vwCapital_TipoCriptoAgrupadas" />
+          <EntitySet Name="vwCapital_TipoCriptoSeparadas" EntityType="Self.vwCapital_TipoCriptoSeparadas" />
+          <EntitySet Name="vwTenencia" EntityType="Self.vwTenencia" />
+          <AssociationSet Name="FK_Criptomoneda_TipoCriptomonedaA" Association="Self.FK_Criptomoneda_TipoCriptomonedaA">
+            <End Role="TipoCriptomoneda" EntitySet="TipoCriptomoneda" />
+            <End Role="Criptomoneda" EntitySet="Criptomoneda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inversion_Criptomoneda" Association="Self.FK_Inversion_Criptomoneda">
+            <End Role="Criptomoneda" EntitySet="Criptomoneda" />
+            <End Role="Inversion" EntitySet="Inversion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NuevaTenencia_Exchange" Association="Self.FK_NuevaTenencia_Exchange">
+            <End Role="Exchange" EntitySet="Exchange" />
+            <End Role="NuevaTenencia" EntitySet="NuevaTenencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inversion_Instrumento" Association="Self.FK_Inversion_Instrumento">
+            <End Role="Instrumento" EntitySet="Instrumento" />
+            <End Role="Inversion" EntitySet="Inversion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inversion_NuevaTenencia" Association="Self.FK_Inversion_NuevaTenencia">
+            <End Role="NuevaTenencia" EntitySet="NuevaTenencia" />
+            <End Role="Inversion" EntitySet="Inversion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NuevaTenencia_Wallet" Association="Self.FK_NuevaTenencia_Wallet">
+            <End Role="Wallet" EntitySet="Wallet" />
+            <End Role="NuevaTenencia" EntitySet="NuevaTenencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wallet_TipoDeWallet" Association="Self.FK_Wallet_TipoDeWallet">
+            <End Role="TipoDeWallet" EntitySet="TipoDeWallet" />
+            <End Role="Wallet" EntitySet="Wallet" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Tesis_Inv2Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Tesis_Inv2Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Inversion_Cripto_Instru" EntityType="Tesis_Inv2Model.Inversion_Cripto_Instru" />
+          <EntitySet Name="vwInversion_tenencia" EntityType="Tesis_Inv2Model.vwInversion_tenencia" />
+          <EntitySet Name="vwInversionesEsteAnio" EntityType="Tesis_Inv2Model.vwInversionesEsteAnio" />
+          <EntitySet Name="vwCriptomoneda" EntityType="Tesis_Inv2Model.vwCriptomoneda" />
+          <EntitySet Name="Inversion_Cripto_Instr" EntityType="Tesis_Inv2Model.Inversion_Cripto_Instr" />
+          <EntitySet Name="vwInversionesTop" EntityType="Tesis_Inv2Model.vwInversionesTop" />
+          <EntitySet Name="vwInversionEvolucion" EntityType="Tesis_Inv2Model.vwInversionEvolucion" />
+          <EntitySet Name="vwCriptosDWB" EntityType="Tesis_Inv2Model.vwCriptosDWB" />
+          <EntitySet Name="InversionTemporal" EntityType="Tesis_Inv2Model.InversionTemporal" />
+          <AssociationSet Name="FK_InversionT_Criptomoneda" Association="Tesis_Inv2Model.FK_InversionT_Criptomoneda">
+            <End Role="Criptomoneda" EntitySet="Criptomoneda" />
+            <End Role="InversionTemporal" EntitySet="InversionTemporal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InversionT_Instrumento" Association="Tesis_Inv2Model.FK_InversionT_Instrumento">
+            <End Role="Instrumento" EntitySet="Instrumento" />
+            <End Role="InversionTemporal" EntitySet="InversionTemporal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InversionT_NuevaTenencia" Association="Tesis_Inv2Model.FK_InversionT_NuevaTenencia">
+            <End Role="NuevaTenencia" EntitySet="NuevaTenencia" />
+            <End Role="InversionTemporal" EntitySet="InversionTemporal" />
+          </AssociationSet>
+          <EntitySet Name="Capital_Cripto_ResumenWI" EntityType="Tesis_Inv2Model.Capital_Cripto_ResumenWI" />
+          <EntitySet Name="Capital_CriptoWI" EntityType="Tesis_Inv2Model.Capital_CriptoWI" />
+          <EntitySet Name="Capital_TipoCriptoWI" EntityType="Tesis_Inv2Model.Capital_TipoCriptoWI" />
+          <EntitySet Name="capital_tipocripto_ResumenWI" EntityType="Tesis_Inv2Model.capital_tipocripto_ResumenWI" />
+          <EntitySet Name="Inversion_Cripto_InstruWI" EntityType="Tesis_Inv2Model.Inversion_Cripto_InstruWI" />
+          <EntitySet Name="vwInversion_tenenciaWI" EntityType="Tesis_Inv2Model.vwInversion_tenenciaWI" />
+          <EntitySet Name="vwCapital_LugarSeparado" EntityType="Tesis_Inv2Model.vwCapital_LugarSeparado" />
+          <EntitySet Name="EvolucionInversionesTipoCripto" EntityType="Tesis_Inv2Model.EvolucionInversionesTipoCripto" />
+          <EntitySet Name="vwInversionesReales_Simuladas" EntityType="Tesis_Inv2Model.vwInversionesReales_Simuladas" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Inversion_Cripto_Instru">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Lugar" Type="Int32" />
+          <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CriptomonedaGanada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TasaEstimada" Type="Double" Nullable="false" />
+          <Property Name="TasaReal" Type="Double" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="CantidadInvertida" Type="Double" Nullable="false" />
+          <Property Name="Ticker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bloqueado" Type="Boolean" />
+          <Property Name="InteresFijo" Type="Boolean" />
+          <Property Name="PagoDeInteres" Type="Boolean" />
+          <Property Name="Capital" Type="Double" />
+        </EntityType>
+        <EntityType Name="vwInversion_tenencia">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CriptomonedaGanada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TasaEstimada" Type="Double" Nullable="false" />
+          <Property Name="TasaReal" Type="Double" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="CantidadInvertida" Type="Double" Nullable="false" />
+          <Property Name="CantidadGanada" Type="Double" />
+          <Property Name="Lugar" Type="Int32" />
+          <Property Name="idTenencia" Type="Int32" />
+          <Property Name="Exchange" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Wallet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Centralizado" Type="Boolean" />
+          <Property Name="Nacional" Type="Boolean" />
+          <Property Name="Capital" Type="Double" />
+        </EntityType>
+        <EntityType Name="vwInversionesEsteAnio">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lugar1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CriptomonedaGanada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TasaEstimada" Type="Double" Nullable="false" />
+          <Property Name="TasaReal" Type="Double" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="CantidadInvertida" Type="Double" Nullable="false" />
+          <Property Name="CantidadGanada" Type="Double" />
+          <Property Name="Lugar" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vwCriptomoneda">
+          <Key>
+            <PropertyRef Name="Capital" />
+            <PropertyRef Name="Ticker" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="Capital" Type="Double" Nullable="false" />
+          <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Lugar1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CriptomonedaGanada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TasaEstimada" Type="Double" Nullable="false" />
+          <Property Name="TasaReal" Type="Double" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="CantidadInvertida" Type="Double" Nullable="false" />
+          <Property Name="CantidadGanada" Type="Double" />
+          <Property Name="Lugar" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Inversion_Cripto_Instr">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Lugar" Type="Int32" />
+          <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CriptomonedaGanada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TasaEstimada" Type="Double" Nullable="false" />
+          <Property Name="TasaReal" Type="Double" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="CantidadInvertida" Type="Double" Nullable="false" />
+          <Property Name="Ticker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bloqueado" Type="Boolean" />
+          <Property Name="InteresFijo" Type="Boolean" />
+          <Property Name="PagoDeInteres" Type="Boolean" />
+          <Property Name="Capital" Type="Double" />
+        </EntityType>
+        <EntityType Name="vwInversionesTop">
+          <Key>
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Capital" Type="Double" />
+        </EntityType>
+        <EntityType Name="vwInversionEvolucion">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="Criptomoneda" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="Capital" Type="Double" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwCriptosDWB">
+          <Key>
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ticker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Double" Nullable="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Capitalizacion" Type="Double" />
+        </EntityType>
+        <EntityType Name="InversionTemporal">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lugar1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CriptomonedaGanada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TasaEstimada" Type="Double" Nullable="false" />
+          <Property Name="TasaReal" Type="Double" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="CantidadInvertida" Type="Double" Nullable="false" />
+          <Property Name="CantidadGanada" Type="Double" />
+          <Property Name="Lugar" Type="Int32" />
+          <NavigationProperty Name="Criptomoneda1" Relationship="Tesis_Inv2Model.FK_InversionT_Criptomoneda" FromRole="InversionTemporal" ToRole="Criptomoneda" />
+          <NavigationProperty Name="Instrumento1" Relationship="Tesis_Inv2Model.FK_InversionT_Instrumento" FromRole="InversionTemporal" ToRole="Instrumento" />
+          <NavigationProperty Name="NuevaTenencia" Relationship="Tesis_Inv2Model.FK_InversionT_NuevaTenencia" FromRole="InversionTemporal" ToRole="NuevaTenencia" />
+          <Property Name="PrecioInicio" Type="Double" />
+          <Property Name="PrecioFin" Type="Double" />
+        </EntityType>
+        <Association Name="FK_InversionT_Criptomoneda">
+          <End Type="Tesis_Inv2Model.Criptomoneda" Role="Criptomoneda" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Tesis_Inv2Model.InversionTemporal" Role="InversionTemporal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Criptomoneda">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="InversionTemporal">
+              <PropertyRef Name="Criptomoneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InversionT_Instrumento">
+          <End Type="Tesis_Inv2Model.Instrumento" Role="Instrumento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Tesis_Inv2Model.InversionTemporal" Role="InversionTemporal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instrumento">
+              <PropertyRef Name="Nombre" />
+            </Principal>
+            <Dependent Role="InversionTemporal">
+              <PropertyRef Name="Instrumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InversionT_NuevaTenencia">
+          <End Type="Tesis_Inv2Model.NuevaTenencia" Role="NuevaTenencia" Multiplicity="0..1" />
+          <End Type="Tesis_Inv2Model.InversionTemporal" Role="InversionTemporal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NuevaTenencia">
+              <PropertyRef Name="idTenencia" />
+            </Principal>
+            <Dependent Role="InversionTemporal">
+              <PropertyRef Name="Lugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Capital_Cripto_ResumenWI">
+          <Key>
+            <PropertyRef Name="Ticker" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CapitalTotal" Type="Double" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Capital_CriptoWI">
+          <Key>
+            <PropertyRef Name="Capital" />
+            <PropertyRef Name="Ticker" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="Capital" Type="Double" Nullable="false" />
+          <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Capital_TipoCriptoWI">
+          <Key>
+            <PropertyRef Name="Capital" />
+            <PropertyRef Name="Tipo" />
+            <PropertyRef Name="Ticker" />
+          </Key>
+          <Property Name="Capital" Type="Double" Nullable="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="capital_tipocripto_ResumenWI">
+          <Key>
+            <PropertyRef Name="Tipo" />
+            <PropertyRef Name="Ticker" />
+          </Key>
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CapitalTotal" Type="Double" />
+          <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Inversion_Cripto_InstruWI">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Lugar" Type="Int32" />
+          <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CriptomonedaGanada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TasaEstimada" Type="Double" Nullable="false" />
+          <Property Name="TasaReal" Type="Double" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="CantidadInvertida" Type="Double" Nullable="false" />
+          <Property Name="Ticker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bloqueado" Type="Boolean" />
+          <Property Name="InteresFijo" Type="Boolean" />
+          <Property Name="PagoDeInteres" Type="Boolean" />
+          <Property Name="Capital" Type="Double" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwInversion_tenenciaWI">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CriptomonedaGanada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TasaEstimada" Type="Double" Nullable="false" />
+          <Property Name="TasaReal" Type="Double" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="CantidadInvertida" Type="Double" Nullable="false" />
+          <Property Name="CantidadGanada" Type="Double" />
+          <Property Name="Lugar" Type="Int32" />
+          <Property Name="idTenencia" Type="Int32" />
+          <Property Name="Exchange" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Wallet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Centralizado" Type="Boolean" />
+          <Property Name="Nacional" Type="Boolean" />
+          <Property Name="Capital" Type="Double" />
+          <Property Name="Ticker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwCapital_LugarSeparado">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Capital" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Capital" Type="Double" Nullable="false" />
+          <Property Name="Lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EvolucionInversionesTipoCripto">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Tipo" />
+            <PropertyRef Name="Capital" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Inicio" Type="Int32" />
+          <Property Name="Fin" Type="Int32" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Capital" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwInversionesReales_Simuladas">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+            <PropertyRef Name="TipoInversion" />
+            <PropertyRef Name="Tipo" />
+            <PropertyRef Name="Ticker" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Lugar1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CriptomonedaGanada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TasaEstimada" Type="Double" Nullable="false" />
+          <Property Name="TasaReal" Type="Double" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="CantidadInvertida" Type="Double" Nullable="false" />
+          <Property Name="CantidadGanada" Type="Double" />
+          <Property Name="Lugar" Type="Int32" />
+          <Property Name="PrecioInicio" Type="Double" />
+          <Property Name="PrecioFin" Type="Double" />
+          <Property Name="TipoInversion" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Tesis_Inv2ModelStoreContainer" CdmEntityContainer="Tesis_Inv2Entities1">
+          <EntitySetMapping Name="Criptomoneda">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Criptomoneda">
+              <MappingFragment StoreEntitySet="Criptomoneda">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Capitalizacion" ColumnName="Capitalizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exchange">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Exchange">
+              <MappingFragment StoreEntitySet="Exchange">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Nacional" ColumnName="Nacional" />
+                <ScalarProperty Name="Centralizado" ColumnName="Centralizado" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instrumento">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Instrumento">
+              <MappingFragment StoreEntitySet="Instrumento">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Bloqueado" ColumnName="Bloqueado" />
+                <ScalarProperty Name="InteresFijo" ColumnName="InteresFijo" />
+                <ScalarProperty Name="PagoDeInteres" ColumnName="PagoDeInteres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inversion">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Inversion">
+              <MappingFragment StoreEntitySet="Inversion">
+                <ScalarProperty Name="PrecioFin" ColumnName="PrecioFin" />
+                <ScalarProperty Name="PrecioInicio" ColumnName="PrecioInicio" />
+                <ScalarProperty Name="Lugar1" ColumnName="Lugar1" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+                <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
+                <ScalarProperty Name="TasaEstimada" ColumnName="TasaEstimada" />
+                <ScalarProperty Name="TasaReal" ColumnName="TasaReal" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="CantidadInvertida" ColumnName="CantidadInvertida" />
+                <ScalarProperty Name="CantidadGanada" ColumnName="CantidadGanada" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NuevaTenencia">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.NuevaTenencia">
+              <MappingFragment StoreEntitySet="NuevaTenencia">
+                <ScalarProperty Name="idTenencia" ColumnName="idTenencia" />
+                <ScalarProperty Name="Exchange" ColumnName="Exchange" />
+                <ScalarProperty Name="Wallet" ColumnName="Wallet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCriptomoneda">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.TipoCriptomoneda">
+              <MappingFragment StoreEntitySet="TipoCriptomoneda">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDeWallet">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.TipoDeWallet">
+              <MappingFragment StoreEntitySet="TipoDeWallet">
+                <ScalarProperty Name="TipoWallet" ColumnName="TipoWallet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wallet">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Wallet">
+              <MappingFragment StoreEntitySet="Wallet">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Semilla" ColumnName="Semilla" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Capital_Cripto">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Capital_Cripto">
+              <MappingFragment StoreEntitySet="Capital_Cripto">
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Capital_Cripto_Resumen">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Capital_Cripto_Resumen">
+              <MappingFragment StoreEntitySet="Capital_Cripto_Resumen">
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="CapitalTotal" ColumnName="CapitalTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Capital_TipoCripto">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Capital_TipoCripto">
+              <MappingFragment StoreEntitySet="Capital_TipoCripto">
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="capital_tipocripto_Resumen">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.capital_tipocripto_Resumen">
+              <MappingFragment StoreEntitySet="capital_tipocripto_Resumen">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="CapitalTotal" ColumnName="CapitalTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwCapital_TipoCriptoAgrupadas">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwCapital_TipoCriptoAgrupadas">
+              <MappingFragment StoreEntitySet="vwCapital_TipoCriptoAgrupadas">
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwCapital_TipoCriptoSeparadas">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwCapital_TipoCriptoSeparadas">
+              <MappingFragment StoreEntitySet="vwCapital_TipoCriptoSeparadas">
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwTenencia">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwTenencia">
+              <MappingFragment StoreEntitySet="vwTenencia">
+                <ScalarProperty Name="idTenencia" ColumnName="idTenencia" />
+                <ScalarProperty Name="Wallet" ColumnName="Wallet" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Semilla" ColumnName="Semilla" />
+                <ScalarProperty Name="Exchange" ColumnName="Exchange" />
+                <ScalarProperty Name="Nacional" ColumnName="Nacional" />
+                <ScalarProperty Name="Centralizado" ColumnName="Centralizado" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Tesis_Inv2Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Tesis_Inv2Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Tesis_Inv2Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Tesis_Inv2Model.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Tesis_Inv2Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Tesis_Inv2Model.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Tesis_Inv2Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Tesis_Inv2Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Tesis_Inv2Model.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Inversion_Cripto_Instru">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Inversion_Cripto_Instru">
+              <MappingFragment StoreEntitySet="Inversion_Cripto_Instru">
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="PagoDeInteres" ColumnName="PagoDeInteres" />
+                <ScalarProperty Name="InteresFijo" ColumnName="InteresFijo" />
+                <ScalarProperty Name="Bloqueado" ColumnName="Bloqueado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="CantidadInvertida" ColumnName="CantidadInvertida" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="TasaReal" ColumnName="TasaReal" />
+                <ScalarProperty Name="TasaEstimada" ColumnName="TasaEstimada" />
+                <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwInversion_tenencia">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwInversion_tenencia">
+              <MappingFragment StoreEntitySet="vwInversion_tenencia">
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="Nacional" ColumnName="Nacional" />
+                <ScalarProperty Name="Centralizado" ColumnName="Centralizado" />
+                <ScalarProperty Name="Wallet" ColumnName="Wallet" />
+                <ScalarProperty Name="Exchange" ColumnName="Exchange" />
+                <ScalarProperty Name="idTenencia" ColumnName="idTenencia" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="CantidadGanada" ColumnName="CantidadGanada" />
+                <ScalarProperty Name="CantidadInvertida" ColumnName="CantidadInvertida" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="TasaReal" ColumnName="TasaReal" />
+                <ScalarProperty Name="TasaEstimada" ColumnName="TasaEstimada" />
+                <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwInversionesEsteAnio">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwInversionesEsteAnio">
+              <MappingFragment StoreEntitySet="vwInversionesEsteAnio">
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="CantidadGanada" ColumnName="CantidadGanada" />
+                <ScalarProperty Name="CantidadInvertida" ColumnName="CantidadInvertida" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="TasaReal" ColumnName="TasaReal" />
+                <ScalarProperty Name="TasaEstimada" ColumnName="TasaEstimada" />
+                <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
+                <ScalarProperty Name="Lugar1" ColumnName="Lugar1" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwCriptomoneda">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwCriptomoneda">
+              <MappingFragment StoreEntitySet="vwCriptomoneda">
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="CantidadGanada" ColumnName="CantidadGanada" />
+                <ScalarProperty Name="CantidadInvertida" ColumnName="CantidadInvertida" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="TasaReal" ColumnName="TasaReal" />
+                <ScalarProperty Name="TasaEstimada" ColumnName="TasaEstimada" />
+                <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
+                <ScalarProperty Name="Lugar1" ColumnName="Lugar1" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inversion_Cripto_Instr">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Inversion_Cripto_Instr">
+              <MappingFragment StoreEntitySet="Inversion_Cripto_Instr">
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="PagoDeInteres" ColumnName="PagoDeInteres" />
+                <ScalarProperty Name="InteresFijo" ColumnName="InteresFijo" />
+                <ScalarProperty Name="Bloqueado" ColumnName="Bloqueado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="CantidadInvertida" ColumnName="CantidadInvertida" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="TasaReal" ColumnName="TasaReal" />
+                <ScalarProperty Name="TasaEstimada" ColumnName="TasaEstimada" />
+                <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwInversionesTop">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwInversionesTop">
+              <MappingFragment StoreEntitySet="vwInversionesTop">
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwInversionEvolucion">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwInversionEvolucion">
+              <MappingFragment StoreEntitySet="vwInversionEvolucion">
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwCriptosDWB">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwCriptosDWB">
+              <MappingFragment StoreEntitySet="vwCriptosDWB">
+                <ScalarProperty Name="Capitalizacion" ColumnName="Capitalizacion" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InversionTemporal">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.InversionTemporal">
+              <MappingFragment StoreEntitySet="InversionTemporal">
+                <ScalarProperty Name="PrecioFin" ColumnName="PrecioFin" />
+                <ScalarProperty Name="PrecioInicio" ColumnName="PrecioInicio" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="CantidadGanada" ColumnName="CantidadGanada" />
+                <ScalarProperty Name="CantidadInvertida" ColumnName="CantidadInvertida" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="TasaReal" ColumnName="TasaReal" />
+                <ScalarProperty Name="TasaEstimada" ColumnName="TasaEstimada" />
+                <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
+                <ScalarProperty Name="Lugar1" ColumnName="Lugar1" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Capital_Cripto_ResumenWI">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Capital_Cripto_ResumenWI">
+              <MappingFragment StoreEntitySet="Capital_Cripto_ResumenWI">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="CapitalTotal" ColumnName="CapitalTotal" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Capital_CriptoWI">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Capital_CriptoWI">
+              <MappingFragment StoreEntitySet="Capital_CriptoWI">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Capital_TipoCriptoWI">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Capital_TipoCriptoWI">
+              <MappingFragment StoreEntitySet="Capital_TipoCriptoWI">
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="capital_tipocripto_ResumenWI">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.capital_tipocripto_ResumenWI">
+              <MappingFragment StoreEntitySet="capital_tipocripto_ResumenWI">
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="CapitalTotal" ColumnName="CapitalTotal" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inversion_Cripto_InstruWI">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.Inversion_Cripto_InstruWI">
+              <MappingFragment StoreEntitySet="Inversion_Cripto_InstruWI">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="PagoDeInteres" ColumnName="PagoDeInteres" />
+                <ScalarProperty Name="InteresFijo" ColumnName="InteresFijo" />
+                <ScalarProperty Name="Bloqueado" ColumnName="Bloqueado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="CantidadInvertida" ColumnName="CantidadInvertida" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="TasaReal" ColumnName="TasaReal" />
+                <ScalarProperty Name="TasaEstimada" ColumnName="TasaEstimada" />
+                <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwInversion_tenenciaWI">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwInversion_tenenciaWI">
+              <MappingFragment StoreEntitySet="vwInversion_tenenciaWI">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="Nacional" ColumnName="Nacional" />
+                <ScalarProperty Name="Centralizado" ColumnName="Centralizado" />
+                <ScalarProperty Name="Wallet" ColumnName="Wallet" />
+                <ScalarProperty Name="Exchange" ColumnName="Exchange" />
+                <ScalarProperty Name="idTenencia" ColumnName="idTenencia" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="CantidadGanada" ColumnName="CantidadGanada" />
+                <ScalarProperty Name="CantidadInvertida" ColumnName="CantidadInvertida" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="TasaReal" ColumnName="TasaReal" />
+                <ScalarProperty Name="TasaEstimada" ColumnName="TasaEstimada" />
+                <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwCapital_LugarSeparado">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwCapital_LugarSeparado">
+              <MappingFragment StoreEntitySet="vwCapital_LugarSeparado">
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EvolucionInversionesTipoCripto">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.EvolucionInversionesTipoCripto">
+              <MappingFragment StoreEntitySet="EvolucionInversionesTipoCripto">
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Fin" ColumnName="Fin" />
+                <ScalarProperty Name="Inicio" ColumnName="Inicio" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwInversionesReales_Simuladas">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwInversionesReales_Simuladas">
+              <MappingFragment StoreEntitySet="vwInversionesReales_Simuladas">
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="TipoInversion" ColumnName="TipoInversion" />
+                <ScalarProperty Name="PrecioFin" ColumnName="PrecioFin" />
+                <ScalarProperty Name="PrecioInicio" ColumnName="PrecioInicio" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="CantidadGanada" ColumnName="CantidadGanada" />
+                <ScalarProperty Name="CantidadInvertida" ColumnName="CantidadInvertida" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="TasaReal" ColumnName="TasaReal" />
+                <ScalarProperty Name="TasaEstimada" ColumnName="TasaEstimada" />
+                <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
+                <ScalarProperty Name="Lugar1" ColumnName="Lugar1" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

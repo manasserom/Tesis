@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebApplication3.Models.vwCapital_TipoCriptoAgrupadas>
+
+@{
+    ViewBag.Title = "DashBoard_Treemap";
+    string treemapListaTicker = ViewBag.ListaTicker;
+    string treemapListaTipo = ViewBag.ListaTipo;
+    string treemapListaParent = ViewBag.ListaParent;
+    string treemapListaColor = ViewBag.ListaColor;
+
+}
+<h2>Tablero 2</h2>
+@*<h2>DashBoard_Treemap</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ticker)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capital)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ticker)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capital)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>*@
+<input type="hidden" id="treemapListaTicker" value="@treemapListaTicker" />
+<input type="hidden" id="treemapListaTipo" value="@treemapListaTipo" />
+<input type="hidden" id="treemapListaParent" value="@treemapListaParent" />
+<input type="hidden" id="treemapListaColor" value="@treemapListaColor" />
+
+<div id="chart_div" style="width: 100%; min-height: 500px;"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="~/Scripts/Graficos/treemapchart.js"></script>

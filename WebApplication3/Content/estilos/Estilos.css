@@ -1,0 +1,28 @@
+﻿body {
+/*    background: linear-gradient(to bottom left, #3e4144, #474b4e, #65727c );
+*/
+}
+/*.panel {
+    border-color: aqua;
+    border-width: 2px;
+    padding: 10px 10px 10px 10px;
+}*/
+.has-info{
+
+}
+.form-horizontal {
+/*    background-color: aqua;
+    border-color: aqua;
+    border-width: 2px;
+    padding: 10px 10px 10px 10px;
+*/}
+tr, th {
+    background-color: #ffffff;
+}
+.fondo-principal {
+    min-height:max-content;
+    /*background: linear-gradient(to top right, #012e46, #5c26d2);*/
+/*    background: linear-gradient(to top right, #3e4144, #474b4e, #65727c );
+*/}
+
+/*https://paletadecolores.online/grises/*/

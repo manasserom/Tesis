@@ -1,0 +1,93 @@
+﻿@model IEnumerable<WebApplication3.Models.InversionTemporal>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Lugar1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CriptomonedaGanada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TasaEstimada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TasaReal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CantidadInvertida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CantidadGanada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Criptomoneda1.Ticker)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Instrumento1.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NuevaTenencia.Exchange)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lugar1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CriptomonedaGanada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TasaEstimada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TasaReal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaFin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CantidadInvertida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CantidadGanada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Criptomoneda1.Ticker)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Instrumento1.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NuevaTenencia.Exchange)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdInversion }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdInversion }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdInversion })
+        </td>
+    </tr>
+}
+
+</table>

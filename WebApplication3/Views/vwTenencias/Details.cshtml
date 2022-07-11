@@ -1,0 +1,74 @@
+﻿@model WebApplication3.Models.vwTenencia
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>vwTenencia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Wallet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wallet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Semilla)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Semilla)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Exchange)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Exchange)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nacional)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nacional)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Centralizado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Centralizado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idTenencia }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

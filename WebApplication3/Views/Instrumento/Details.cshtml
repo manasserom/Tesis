@@ -1,0 +1,42 @@
+﻿@model WebApplication3.Models.Instrumento
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Instrumento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Bloqueado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bloqueado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InteresFijo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InteresFijo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PagoDeInteres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PagoDeInteres)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Nombre }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
