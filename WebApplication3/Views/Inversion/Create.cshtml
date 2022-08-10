@@ -4,100 +4,108 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
-
+@*<h2>Create</h2>*@
+<br />
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+<div class="" style="align-content: center; justify-content: center; align-items: center; display: flex;">
+<div class="panel panel-success " style="width: fit-content;">
+    <div class="panel-heading"><h4>Cargar Inversión</h4></div>
+    <div class="panel-body text-center" style="padding-right: 30px; padding-left: 30px;">
     <div class="form-horizontal">
-        <h4>Inversion</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Lugar, "Lugar", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @*@Html.LabelFor(model => model.Lugar, "Lugar", htmlAttributes: new { @class = "control-label col-md-4" })*@
+            <label for="Lugar" class="col-md-4" style="text-align:left;">Lugar</label>
+            <div class="col-md-8">
                 @Html.DropDownList("Lugar", null, htmlAttributes: new { @class = "form-control" })
                 @*@Html.ValidationMessageFor(model => model.Lugar, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Instrumento, "Instrumento", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @*@Html.LabelFor(model => model.Instrumento, "Instrumento", htmlAttributes: new { @class = "control-label col-md-4" })*@
+            <label for="Instrumento" class="col-md-4" style="text-align:left;">Instrumento</label>
+            <div class="col-md-8">
                 @Html.DropDownList("Instrumento", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Instrumento, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Criptomoneda, "Criptomoneda", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @*@Html.LabelFor(model => model.Criptomoneda, "Criptomoneda", htmlAttributes: new { @class = "control-label col-md-4" })*@
+            <label for="Criptomoneda" class="col-md-4" style="text-align:left;">Criptomoneda</label>
+            <div class="col-md-8">
                 @Html.DropDownList("Criptomoneda", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Criptomoneda, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CriptomonedaGanada, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @*@Html.LabelFor(model => model.CriptomonedaGanada, htmlAttributes: new { @class = "control-label col-md-4", @style = "style=overflow: auto;" })*@
+            <label for="CriptomonedaGanada" class="col-md-4" style="text-align:left;">Criptomoneda Ganada</label>
+            <div class="col-md-8">
                 @Html.DropDownList("CriptomonedaGanada", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CriptomonedaGanada, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TasaEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TasaEstimada, new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.LabelFor(model => model.TasaEstimada, htmlAttributes: new { @class = "control-label col-md-4" })*@
+            <label for="TasaEstimada" class="col-md-4" style="text-align:left;">Tasa Estimada</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.TasaEstimada, new { htmlAttributes = new { @class = "form-control", @type="number" } })
                 @Html.ValidationMessageFor(model => model.TasaEstimada, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TasaReal, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TasaReal, new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.LabelFor(model => model.TasaReal, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label for="TasaReal" class="col-md-4" style="text-align:left;">Tasa Real</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.TasaReal, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
                 @Html.ValidationMessageFor(model => model.TasaReal, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @*@Html.LabelFor(model => model.FechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label for="FechaInicio" class="col-md-4" style="text-align:left;">Fecha de Inicio</label>
+            <div class="col-md-8">
                 @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control datepicker", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control datepicker", @type= "date" } })
+            @*@Html.LabelFor(model => model.FechaFin, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label for="FechaFin" class="col-md-4" style="text-align:left;">Fecha de Finalización</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control datepicker", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CantidadInvertida, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CantidadInvertida, new { htmlAttributes = new { @class = "form-control" } })
+            <label for="CantidadInvertida" class="col-md-4" style="text-align:left;">Cantidad Invertida</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.CantidadInvertida, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
                 @Html.ValidationMessageFor(model => model.CantidadInvertida, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <div class="form-group">            
+            <div class="pull-right" style="padding-right: 15px;">
+                <a href="~/Inversion/Index" class="btn btn-default">Cancelar</a>
+                <input type="submit" value="Cargar" class="btn btn-success" />
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    </div>
+    </div>
 </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -56,6 +56,7 @@ namespace WebApplication3.Controllers
         {
             if (ModelState.IsValid)
             {
+                inversion.PrecioInicio = db.Criptomoneda.Find(inversion.Criptomoneda).Precio;//guardamos el precio actual
                 db.Inversion.Add(inversion);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -139,6 +140,27 @@ namespace WebApplication3.Controllers
         {
             if (ModelState.IsValid)
             {
+                inversion.PrecioFin = db.Criptomoneda.Find(inversion.Criptomoneda).Precio;//guardamos el precio final
+                if(inversion.Instrumento == "Farming")
+                {
+                    //actualización de datos de la inversion original
+                    //inversion.FechaFin = DateTime.Now.Date;
+
+                    //Agregar la nueva inversion
+                    Inversion nueva = new Inversion();
+                    nueva.Lugar = inversion.Lugar;
+                    nueva.Criptomoneda = inversion.CriptomonedaGanada;
+                    nueva.CriptomonedaGanada = inversion.CriptomonedaGanada;
+                    nueva.TasaEstimada = 0;
+                    nueva.TasaReal = 0;
+                    nueva.FechaInicio = DateTime.Now.Date;
+                    nueva.CantidadInvertida = inversion.CantidadGanada.HasValue?inversion.CantidadGanada.Value : 0;
+                    nueva.Instrumento = "Holding";
+                    nueva.Lugar = inversion.Lugar;
+                    nueva.PrecioInicio = db.Criptomoneda.Find(inversion.CriptomonedaGanada).Precio;
+                    db.Inversion.Add(nueva);
+                    await db.SaveChangesAsync();
+                }
                 db.Entry(inversion).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

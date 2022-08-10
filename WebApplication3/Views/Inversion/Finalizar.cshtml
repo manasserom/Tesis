@@ -16,6 +16,14 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.IdInversion)
+    @Html.HiddenFor(model => model.Criptomoneda)
+    @Html.HiddenFor(model => model.CriptomonedaGanada)
+    @Html.HiddenFor(model => model.Lugar)
+    @Html.HiddenFor(model => model.Instrumento)
+    @Html.HiddenFor(model => model.PrecioInicio)
+    @Html.HiddenFor(model => model.PrecioFin)
+    @Html.HiddenFor(model => model.CantidadInvertida)
+    @Html.HiddenFor(model => model.FechaInicio)
 
     <div class="container panel">
         <div class="form-group">

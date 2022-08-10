@@ -17,7 +17,7 @@ namespace WebApplication3.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("DashBoard");
         }
 
         public ActionResult DashBoard()
