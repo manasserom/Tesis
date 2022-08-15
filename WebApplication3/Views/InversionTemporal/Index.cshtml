@@ -154,7 +154,7 @@
     <div class="row">
         <div class="col-md-3"><p>Inversiones:  @Model.Count()</p></div>
         <div class="col-md-3"><p>Reales: @Model.Where(t => t.TipoInversion == "Real").Count()</p></div>
-        <div class="col-md-3"><p>Reales: @Model.Where(t => t.TipoInversion == "Real").Count()</p></div>
+        <div class="col-md-3"><p>Simuladas: @Model.Where(t => t.TipoInversion == "Simulada").Count()</p></div>
         <div class="col-md-3"><button class="btn btn-success" onclick="window.location.href = '/InversionTemporal/Create'">Agregar Inversión simulada</button></div>            
     </div>
     

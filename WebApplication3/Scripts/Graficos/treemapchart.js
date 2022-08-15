@@ -18,10 +18,10 @@ function drawChart() {
         if (j == 0) {
             b[j] =  ['Ticker', 'Tipo', 'Cantidad', 'Color'];
             b[j + 1] = ['Global', null, 0, 0];
-            b[j + 2] = ['Accion', 'Global', 0, 0];
+            b[j + 2] = ['Acci\u00F3n', 'Global', 0, 0];
             b[j + 3] = ['Commoditie', 'Global', 0, 0];
             b[j + 4] = ['Estable', 'Global', 0, 0];
-            b[j + 5] = ['InEstable', 'Global', 0, 0];
+            b[j + 5] = ['Vol\u00E1til', 'Global', 0, 0];
 
         }
         if(j >= 6) {
