@@ -119,8 +119,8 @@
     <input type="hidden" id="donutchartCateWI" value="@donutchartCate" />
     <input type="hidden" id="piechartDataWI" value="@piechartData" />
     <input type="hidden" id="piechartCateWI" value="@piechartCate" />
-    <input type="hidden" id="gaugechartDataBloq" value="@gaugechartDataBloq" />
-    <input type="hidden" id="gaugechartDataDisp" value="@gaugechartDataDisp" />
+    <input type="text" id="gaugechartDataBloq" value="@gaugechartDataBloq" />
+    <input type="text" id="gaugechartDataDisp" value="@gaugechartDataDisp" />
 }
 
     @*<input type="text" id="CriptoW" value="" />
@@ -180,7 +180,9 @@
 
         @foreach (var item in Model)
         {
-            <tr>
+            string defaultClass = (item.TipoInversion == "Simulada" ? "" : "bg-default");
+
+            <tr class="@defaultClass">
                 <td>
                     @Html.DisplayFor(modelItem => item.TipoInversion)
                 </td>
@@ -199,7 +201,7 @@
                 <td>
                     @if (item.TipoInversion == "Simulada")
                     {
-                        <input type="button" name="name" class="button" value="Eliminar2"
+                        <input type="button" name="name" class="button" value="Eliminar"
                                onclick="$.ajax({ url: '/InversionTemporal/Delete',  data: { id: @item.IdInversion }})" />
                         <input type="button" name="name" class="button" value="Editar"
                                onclick="$.ajax({ url: '/InversionTemporal/Edit', data: { id: @item.IdInversion }})" />
@@ -207,7 +209,7 @@
                     }
 
 
-                    @Html.ActionLink("Edit", "Edit", new { id=item.IdInversion}) |
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.IdInversion}) |*@
                     @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
                 </td>

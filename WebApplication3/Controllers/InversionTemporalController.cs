@@ -159,7 +159,7 @@ namespace WebApplication3.Controllers
             Centralizado = Centralizado * 100 / (Centralizado + DesCentralizado);
             //ListaBloq = Bloqueado + "," + Disponibilidad;
             ViewBag.ListaBloq = Bloqueado;  //Bloqueado actualizado a porcentaje
-            ViewBag.ListaDisp = Centralizado; //Cambiar por Centralizacion, la disponibilidad ya esta en la parte de Bloqueado
+            //ViewBag.ListaDisp = Centralizado; //Cambiar por Centralizacion, la disponibilidad ya esta en la parte de Bloqueado
             //Capital Segun el Lugar
             double Centralizado2 = 0;
             double DesCentralizado2 = 0;
@@ -181,7 +181,7 @@ namespace WebApplication3.Controllers
             Bloqueado = Bloqueado * 100 / Total;
             Centralizado = Centralizado * 100 / (Centralizado + DesCentralizado);
             //ListaBloq = Bloqueado + "," + Disponibilidad;
-            ViewBag.ListaBloq = Bloqueado;  //Bloqueado actualizado a porcentaje
+            //ViewBag.ListaBloq = Bloqueado;  //Bloqueado actualizado a porcentaje
             ViewBag.ListaDisp = Centralizado; //Cambiar por Centralizacion, la disponibilidad ya esta en la parte de Bloqueado
 
 

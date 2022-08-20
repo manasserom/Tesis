@@ -94,7 +94,7 @@ class Calendar {
                 //var auxfecha = this.cells[i].date.year;
                 //var auxfecha2 = this.cells[i].date.years;
                 if (this.cells[i].date.date() == cd[j]
-                    && this.cells[i].date.month() == cm[j] - 1
+                    && this.cells[i].date.month() == cm[j] - 1 && bandera != true
                     //&& this.cells[i].date.getFullYear() == borrarAnio[j]
                 ) {
                     templateCells += `

@@ -24,5 +24,7 @@ tr, th {
     /*background: linear-gradient(to top right, #012e46, #5c26d2);*/
 /*    background: linear-gradient(to top right, #3e4144, #474b4e, #65727c );
 */}
-
+.bg-default {
+    background-color: #c9c9c9;
+}
 /*https://paletadecolores.online/grises/*/
