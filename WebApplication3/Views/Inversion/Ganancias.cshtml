@@ -5,17 +5,13 @@
     string Estado;
     string EstadoClase;
     string Capital;
+    string CapitalObtenido;
+    string ResultadoClase;
 }
 
-
-
-
-<div class=" container-fluid">
-    <div class="col-md-3"><h2>Inversiones</h2></div>
-    <div class="col-md-push-7 col-md-2 " style="text-align: right;  ">
-        <br />
-        <a href="~/Inversion/Create" class="btn btn-success" style="vertical-align: sub;">Cargar Inversión</a>
-    </div>
+<h2 >Informe de Ganancias</h2>
+<div class="alert alert-info">
+    <p class="">El informe muestras las ganancias/perdidas de las inversiones realizadas. En caso de que la inversión no haya finalizado se muestran los resultados parciales</p>
 </div>
 <div class="container-panel" style="background-color:white;">
 
@@ -26,6 +22,9 @@
                 @Html.DisplayNameFor(model => model.Criptomoneda1.Ticker)
             </th>
             <th>
+                <strong>Cantidad</strong>
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Instrumento1.Nombre)
             </th>
             <th>
@@ -34,23 +33,18 @@
             <th>
                 <strong>Estado</strong>
             </th>
-            <th>
-                <strong>T. Estimada</strong>
-            </th>
-            <th>
+            @*<th>
                 <strong>T. Real</strong>
-            </th>
+            </th>*@
             <th>
                 <strong>F. Inicio</strong>
             </th>
             <th>
                 <strong>F. Fin</strong>
             </th>
-            <th>
-                <strong>Cantidad</strong>
-            </th>
-            <th><strong>Capital</strong></th>
-            <th></th>
+            <th><strong>Capital Inicial</strong></th>
+            <th><strong>Capital Final</strong></th>
+            <th><strong>Resultado</strong></th>
         </tr>
 
         @foreach (var item in Model)
@@ -66,14 +60,29 @@
                 EstadoClase = "alert alert-success";
 
             }
-            
+
             //Armado de formato de moneda
-            Capital = (item.Criptomoneda1.Precio * item.CantidadInvertida).ToString("C");
+            Capital = (item.PrecioInicio.GetValueOrDefault(0) * item.CantidadInvertida).ToString("C");
+            CapitalObtenido = (item.PrecioFin.GetValueOrDefault(0) * (item.CantidadInvertida + item.CantidadGanada.GetValueOrDefault(0))).ToString("C");
             //Capital = Capital.ToString("C");
+            //Calculo de Resultados
+            double ResultadoInicial = item.CantidadInvertida * item.PrecioInicio.GetValueOrDefault(item.Criptomoneda1.Precio);
+            double ResultadoFinal = (item.CantidadInvertida + item.CantidadGanada.GetValueOrDefault(0)) * item.PrecioFin.GetValueOrDefault(item.Criptomoneda1.Precio);
+            double Resultado = ResultadoFinal - ResultadoInicial;
+            if (Resultado > 0)
+            {
+                ResultadoClase = "text-success";
+            }
+            else {
+                ResultadoClase = "text-danger";
+            }
 
             <tr class="">
                 <td>
                     @Html.DisplayFor(modelItem => item.Criptomoneda1.Ticker)
+                </td>
+                <td>
+                    @(item.CantidadInvertida.ToString("n"))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Instrumento1.Nombre)
@@ -92,12 +101,9 @@
                 <td class="@EstadoClase">
                     <strong>@Estado</strong>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TasaEstimada) %
-                </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.TasaReal) %
-                </td>
+                </td>*@
                 <td>
                     @(item.FechaInicio.ToShortDateString())
                 </td>
@@ -105,19 +111,14 @@
                     @(item.FechaFin.HasValue ?  item.FechaFin.Value.ToShortDateString() : "")
                 </td>
                 <td>
-                    @(item.CantidadInvertida.ToString("n"))
-                </td>
-                <td>
                     @Capital
                 </td>
                 <td>
-                    <a href="~/Inversion/Edit/@item.IdInversion"><i class="glyphicon glyphicon-pencil" style="color:#000000 "></i></a> |
-                    <a href="~/Inversion/Details/@item.IdInversion"><i class="glyphicon glyphicon-list" style="color:#000000 "></i></a> |
-                    <a href="~/Inversion/Finalizar/@item.IdInversion"><i class="glyphicon glyphicon-check" style="color:#000000 "></i></a>
-                    
-                    @*@Html.ActionLink("Details", "Details", new { id = item.IdInversion }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.IdInversion }) |
-        @Html.ActionLink("Finalizar", "Finalizar", new { id = item.IdInversion })*@
+                    @*@(Estado == "Vigente" ? 0.ToString("n") : CapitalObtenido )*@
+                    @CapitalObtenido
+                </td>
+                <td>
+                    <p class="@ResultadoClase" style="margin-bottom: 0px;">@Resultado.ToString("C")</p>
                 </td>
             </tr>
         }

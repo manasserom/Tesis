@@ -487,6 +487,9 @@
     <Content Include="Views\InversionTemporal\Edit.cshtml" />
     <Content Include="Views\InversionTemporal\Index1.cshtml" />
     <Content Include="Views\InversionTemporal\Index.cshtml" />
+    <Content Include="Views\Inversion\Ganancias.cshtml" />
+    <Content Include="Views\Inversion\Actuales.cshtml" />
+    <Content Include="Views\Home\DashboardDetalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

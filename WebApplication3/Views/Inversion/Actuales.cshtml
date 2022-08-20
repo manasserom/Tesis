@@ -7,16 +7,11 @@
     string Capital;
 }
 
+<h2 >Inversiones</h2>
 
-
-
-<div class=" container-fluid">
-    <div class="col-md-3"><h2>Inversiones</h2></div>
-    <div class="col-md-push-7 col-md-2 " style="text-align: right;  ">
-        <br />
-        <a href="~/Inversion/Create" class="btn btn-success" style="vertical-align: sub;">Cargar Inversión</a>
-    </div>
-</div>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <div class="container-panel" style="background-color:white;">
 
     <br />
@@ -53,7 +48,7 @@
             <th></th>
         </tr>
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.Where(t => t.FechaFin is null))
         {
             if (DateTime.Now.Date >= item.FechaFin)
             {

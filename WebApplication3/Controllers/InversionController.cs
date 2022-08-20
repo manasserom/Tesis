@@ -196,7 +196,18 @@ namespace WebApplication3.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
+        //Ganancias obtenidas
+        public async Task<ActionResult> Ganancias()
+        {
+            var inversion = db.Inversion.Include(i => i.Criptomoneda1).Include(i => i.Instrumento1).Include(i => i.NuevaTenencia);
+            return View(await inversion.ToListAsync());
+        }
+        //Inversiones Actuales - Vigentes
+        public async Task<ActionResult> Actuales()
+        {
+            var inversion = db.Inversion.Include(i => i.Criptomoneda1).Include(i => i.Instrumento1).Include(i => i.NuevaTenencia);
+            return View(await inversion.ToListAsync());
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
