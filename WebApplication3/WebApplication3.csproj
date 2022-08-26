@@ -322,6 +322,9 @@
     <Compile Include="Models\vwCapital_LugarSeparado.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\vwCapital_LugarSeparadoWI.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\vwCapital_TipoCriptoAgrupadas.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -353,6 +356,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\vwTenencia.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vwTenenciaWI.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Wallet.cs">
@@ -403,10 +409,12 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Graficos\calendar.js" />
     <Content Include="Scripts\Graficos\calendarEditValues.js" />
+    <Content Include="Scripts\Graficos\columnchartLugaresWI.js" />
     <Content Include="Scripts\Graficos\columnchartLugares.js" />
     <Content Include="Scripts\Graficos\columnchartWI.js" />
     <Content Include="Scripts\Graficos\columnchart.js" />
     <Content Include="Scripts\Graficos\donutchartWI.js" />
+    <Content Include="Scripts\Graficos\gaugechartWI2.js" />
     <Content Include="Scripts\Graficos\gaugechartWI.js" />
     <Content Include="Scripts\Graficos\tablechart.js" />
     <Content Include="Scripts\Graficos\treemapchart.js" />

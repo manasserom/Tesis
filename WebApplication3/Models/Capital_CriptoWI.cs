@@ -17,5 +17,8 @@ namespace WebApplication3.Models
         public double Capital { get; set; }
         public string Ticker { get; set; }
         public string Tipo { get; set; }
+        public int idTenencia { get; set; }
+        public Nullable<bool> Centralizado { get; set; }
+        public string Lugar { get; set; }
     }
 }

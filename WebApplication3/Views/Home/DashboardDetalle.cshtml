@@ -16,6 +16,8 @@
     IEnumerable<capital_tipocripto_Resumen> CapTip = ViewBag.capital_tipocripto_Resumen;
     IEnumerable<Capital_Cripto_Resumen> CapCrip = ViewBag.Capital_Cripto_Resumen;
     var CapLugar = ViewBag.vwCapital_LugarSeparado;
+    double Capital = 0;
+    double CapitalTotal = 0;
 }
 <div class=" container">
     <br />
@@ -28,12 +30,15 @@
                         <tr>
                             <th><strong>Tipo</strong></th>
                             <th><strong>Capital</strong></th>
+                            <th><strong>Porcentaje</strong></th>
                         </tr>
+                        @{ foreach (capital_tipocripto_Resumen capital_Tipocripto_Resumen in CapTip.OrderByDescending(t => t.CapitalTotal)) { CapitalTotal += capital_Tipocripto_Resumen.CapitalTotal.GetValueOrDefault(0); } }
                         @foreach (capital_tipocripto_Resumen capital_Tipocripto_Resumen in CapTip.OrderByDescending(t => t.CapitalTotal))
                         {
                             <tr>
-                                <td class="col-md-6">@capital_Tipocripto_Resumen.Tipo</td>
-                                <td class="col-md-6">@capital_Tipocripto_Resumen.CapitalTotal.GetValueOrDefault(0).ToString("C")</td>
+                                <td class="col-md-4">@capital_Tipocripto_Resumen.Tipo</td>
+                                <td class="col-md-4">@capital_Tipocripto_Resumen.CapitalTotal.GetValueOrDefault(0).ToString("C")</td>
+                                <td class="col-md-4">@((capital_Tipocripto_Resumen.CapitalTotal.GetValueOrDefault(0) * 100 / CapitalTotal).ToString("N2")) %</td>
                             </tr>
                         }
                     </table>
@@ -48,12 +53,15 @@
                         <tr>
                             <th><strong>Ticker</strong></th>
                             <th><strong>Capital</strong></th>
+                            <th><strong>Porcentaje</strong></th>
                         </tr>
+                        @{CapitalTotal = 0; foreach (Capital_Cripto_Resumen Capital_Cripto_Resumen in CapCrip) { CapitalTotal += Capital_Cripto_Resumen.CapitalTotal.GetValueOrDefault(0); } }
                         @foreach (Capital_Cripto_Resumen Capital_Cripto_Resumen in CapCrip.OrderByDescending(t => t.CapitalTotal))
                         {
                             <tr>
-                                <td class="col-md-6">@Capital_Cripto_Resumen.Ticker</td>
-                                <td class="col-md-6">@Capital_Cripto_Resumen.CapitalTotal.GetValueOrDefault(0).ToString("C")</td>
+                                <td class="col-md-4">@Capital_Cripto_Resumen.Ticker.ToUpper()</td>
+                                <td class="col-md-4">@Capital_Cripto_Resumen.CapitalTotal.GetValueOrDefault(0).ToString("C")</td>
+                                <td class="col-md-4">@((Capital_Cripto_Resumen.CapitalTotal.GetValueOrDefault(0) * 100 / CapitalTotal).ToString("N2")) %</td>
                             </tr>
                         }
                     </table>

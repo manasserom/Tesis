@@ -1,14 +1,14 @@
       google.charts.load('current', {'packages':['gauge']});
-      google.charts.setOnLoadCallback(drawChartGauge);
+      google.charts.setOnLoadCallback(drawChartGauge2);
 
-      function drawChartGauge() {
+      function drawChartGauge2() {
           var Bloq = " " + document.getElementById('gaugechartDataBloq').getAttribute('value');
           var Disp = " " + document.getElementById('gaugechartDataDisp').getAttribute('value');
 
         var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-            ['Disponibilidad', parseInt(Bloq)],
-            //['Centralización', parseInt(Disp)],
+            //['Disponibilidad', parseInt(Bloq)],
+            ['Centralización', parseInt(Disp)],
         ]);
 
         var options = {
@@ -18,7 +18,7 @@
           minorTicks: 5
         };
 
-          var chart = new google.visualization.Gauge(document.getElementById('gaugechart'));
+          var chart = new google.visualization.Gauge(document.getElementById('gaugechart2'));
 
         chart.draw(data, options);
       }

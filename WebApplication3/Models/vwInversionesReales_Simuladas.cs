@@ -31,5 +31,7 @@ namespace WebApplication3.Models
         public string TipoInversion { get; set; }
         public string Tipo { get; set; }
         public string Ticker { get; set; }
+        public string LugarNombre { get; set; }
+        public double CapitalActual { get; set; }
     }
 }

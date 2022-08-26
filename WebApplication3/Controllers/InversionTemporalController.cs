@@ -16,14 +16,16 @@ namespace WebApplication3.Controllers
         private Tesis_Inv2Entities1 db = new Tesis_Inv2Entities1();
 
         // GET: InversionTemporal
-        public ActionResult Index(string[] TipoCripto, string[] TickerCripto)
+        public ActionResult Index(string[] TipoCripto, string[] TickerCripto, string[] Lugar)
         {
             IEnumerable<vwInversionesReales_Simuladas> inversionTemporal = db.vwInversionesReales_Simuladas;
             IEnumerable<capital_tipocripto_ResumenWI> CapTip = db.capital_tipocripto_ResumenWI.ToList();
             IEnumerable<Capital_Cripto_ResumenWI> CapCrip = db.Capital_Cripto_ResumenWI.OrderBy(t => t.CapitalTotal).ToList();
             IEnumerable<Inversion_Cripto_InstruWI> Disponibilidad = db.Inversion_Cripto_InstruWI.ToList();
             IEnumerable<vwInversion_tenenciaWI> Centralizacion = db.vwInversion_tenenciaWI.ToList();
-
+            IEnumerable<vwCapital_LugarSeparadoWI> CapLugar = db.vwCapital_LugarSeparadoWI.OrderBy(t => t.Capital).ToList();
+            IEnumerable<int> AuxLugar = new List<int>();
+            
             //Filtro
             if (TipoCripto != null)
                 for (int i = 0; i < TipoCripto.Length-1; i++)
@@ -35,9 +37,40 @@ namespace WebApplication3.Controllers
                             CapCrip = CapCrip.Where(t => t.Tipo != TipoCripto[i]).ToList();
                             Disponibilidad = Disponibilidad.Where(t => t.Tipo != TipoCripto[i]).ToList();
                             Centralizacion = Centralizacion.Where(t => t.Tipo != TipoCripto[i]).ToList();
-                            
+                            CapLugar = CapLugar.Where(t => t.Tipo != TipoCripto[i]).ToList();
+
                     }
                 }
+            foreach (vwCapital_LugarSeparadoWI CapLugarAux in CapLugar.ToArray())
+            {
+                if (AuxLugar.Count() > 0)
+                {
+                    if (!AuxLugar.Contains(CapLugarAux.idTenencia) && Lugar != null)
+                    {
+                        if (Lugar.Contains(CapLugarAux.Lugar))
+                            AuxLugar = AuxLugar.Append(CapLugarAux.idTenencia);
+                    }
+                }
+                else { AuxLugar = AuxLugar.Append(CapLugarAux.idTenencia); }
+            }
+            int j = 0;
+            if (Lugar != null)
+                for (int i = 0; i < Lugar.Count()-1; i++)
+                {
+                    if (Lugar[i] != "false")
+                    {   if (AuxLugar.Count() != 0 && AuxLugar.Count()>j)
+                        {
+                            Disponibilidad = Disponibilidad.Where(t => t.Lugar != AuxLugar.ElementAt(j)).ToList();
+                            Centralizacion = Centralizacion.Where(t => t.Lugar != AuxLugar.ElementAt(j)).ToList();
+                            inversionTemporal = inversionTemporal.Where(t => t.Lugar != AuxLugar.ElementAt(j)).ToList();
+                            j++;
+                        }
+                        CapTip = CapTip.Where(t => t.Lugar != Lugar[i]).ToList();
+                        CapCrip = CapCrip.Where(t => t.Lugar!= Lugar[i]).ToList();
+                        CapLugar = CapLugar.Where(t=> t.Lugar != Lugar[i]).ToList();
+                    }
+                }
+            j= 0;
             if (TickerCripto != null)
                 for (int i = 0; i < TickerCripto.Length-1; i++)
                 {
@@ -48,7 +81,8 @@ namespace WebApplication3.Controllers
                             CapCrip = CapCrip.Where(t => t.Ticker != TickerCripto[i]).ToList();
                             Disponibilidad = Disponibilidad.Where(t => t.Ticker != TickerCripto[i]).ToList();
                             Centralizacion = Centralizacion.Where(t => t.Ticker != TickerCripto[i]).ToList();
-                            
+                            CapLugar = CapLugar.Where(t => t.Ticker != TickerCripto[i]).ToList();
+
                     }
                 }
             //Carga de listados para los filtros
@@ -58,11 +92,43 @@ namespace WebApplication3.Controllers
             tipoCriptomoneda = tipoCriptomoneda.ToList().Append(auxTipo);           
             ViewBag.FiltroTipo = tipoCriptomoneda.OrderBy(t => t.Nombre).ToList();
             ViewBag.FiltroTipoB = TipoCripto;
+
             IEnumerable<Capital_Cripto_ResumenWI> Capital_Cripto_ResumenWI = db.Capital_Cripto_ResumenWI.ToList();
             Capital_Cripto_ResumenWI auxCripto = new Capital_Cripto_ResumenWI { Ticker = "Aaux", CapitalTotal= 0, Tipo= "Estable" };
             Capital_Cripto_ResumenWI = Capital_Cripto_ResumenWI.ToList().Append(auxCripto);
             ViewBag.FiltroTicker = Capital_Cripto_ResumenWI.OrderBy(t => t.Ticker).ToList();
             ViewBag.FiltroTickerB = TickerCripto;
+            
+            IEnumerable<vwTenenciaWI> vwTenenciaWI = db.vwTenenciaWI.OrderBy(t => t.Lugar).ToList();
+            vwTenenciaWI auxLugar = new vwTenenciaWI { Lugar = "Aaux" };
+            IEnumerable<vwTenenciaWI> vwTenenciasAux = new List<vwTenenciaWI>();
+            IEnumerable<string> vwTenAux = new List<string>();
+            vwTenAux = vwTenAux.Append(vwTenenciaWI.First().Lugar);
+            foreach (vwTenenciaWI a in vwTenenciaWI)
+            {
+                if (vwTenAux.Count() > 0)
+                    if (!vwTenAux.Contains(a.Lugar))
+                        vwTenAux = vwTenAux.Append(a.Lugar);
+
+            }
+            foreach(string a in vwTenAux)
+            {
+                vwTenenciasAux = vwTenenciasAux.Append(vwTenenciaWI.Where(t=>t.Lugar == a).First());
+            }
+                //foreach(vwTenenciaWI a in vwTenenciaWI)
+                //{
+                //    if (vwTenenciasAux.Count() > 0)
+                //    {
+                //        foreach (vwTenenciaWI b in vwTenenciasAux)
+                //            if (b.Lugar != a.Lugar)
+                //                vwTenenciasAux = vwTenenciasAux.Append(a);
+                //    }
+                //    else
+                //        vwTenenciasAux = vwTenenciasAux.Append(a);
+                //}
+                vwTenenciasAux = vwTenenciasAux.ToList().Append(auxLugar);
+            ViewBag.FiltroLugar = vwTenenciasAux;
+            ViewBag.FiltroLugarB = Lugar;
 
             //Capital segun el tipo
             string ListaCapData = "";
@@ -111,7 +177,7 @@ namespace WebApplication3.Controllers
             //IEnumerable<Capital_Cripto_ResumenWI> CapCrip = db.Capital_Cripto_ResumenWI.OrderBy(t => t.CapitalTotal).ToList();
             foreach (Capital_Cripto_ResumenWI capital in CapCrip)
             {
-                ListaCripData = ListaCripData + capital.Ticker + ",";
+                ListaCripData = ListaCripData + capital.Ticker.ToUpper() + ",";
                 ListaCripCate = ListaCripCate + (int)(capital.CapitalTotal.Value) + ",";
             }
             ListaCripData = ListaCripData.Substring(0, ListaCripData.Length - 1);
@@ -183,6 +249,19 @@ namespace WebApplication3.Controllers
             //ListaBloq = Bloqueado + "," + Disponibilidad;
             //ViewBag.ListaBloq = Bloqueado;  //Bloqueado actualizado a porcentaje
             ViewBag.ListaDisp = Centralizado; //Cambiar por Centralizacion, la disponibilidad ya esta en la parte de Bloqueado
+                                              
+            //Capital segun el Lugar
+            string ListaLugarData = "";
+            string ListaLugarCate = "";
+            foreach (vwCapital_LugarSeparadoWI capital in CapLugar)
+            {
+                ListaLugarData = ListaLugarData + capital.Lugar + ",";
+                ListaLugarCate = ListaLugarCate + (int)(capital.Capital) + ",";
+            }
+            ListaLugarData = ListaLugarData.Substring(0, ListaLugarData.Length - 1);
+            ListaLugarCate = ListaLugarCate.Substring(0, ListaLugarCate.Length - 1);
+            ViewBag.ListaLugarData = ListaLugarData;
+            ViewBag.ListaLugarCate = ListaLugarCate;
 
 
 

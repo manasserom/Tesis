@@ -135,10 +135,14 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Capital_Cripto_ResumenWI' no 
           <Key>
             <PropertyRef Name="Ticker" />
             <PropertyRef Name="Tipo" />
+            <PropertyRef Name="idTenencia" />
           </Key>
           <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CapitalTotal" Type="float" />
           <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idTenencia" Type="int" Nullable="false" />
+          <Property Name="Centralizado" Type="bit" />
+          <Property Name="Lugar" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Capital_CriptoWI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -147,10 +151,14 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Capital_CriptoWI' no tiene de
             <PropertyRef Name="Capital" />
             <PropertyRef Name="Ticker" />
             <PropertyRef Name="Tipo" />
+            <PropertyRef Name="idTenencia" />
           </Key>
           <Property Name="Capital" Type="float" Nullable="false" />
           <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idTenencia" Type="int" Nullable="false" />
+          <Property Name="Centralizado" Type="bit" />
+          <Property Name="Lugar" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Capital_TipoCripto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -177,10 +185,14 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.capital_tipocripto_ResumenWI'
           <Key>
             <PropertyRef Name="Tipo" />
             <PropertyRef Name="Ticker" />
+            <PropertyRef Name="idTenencia" />
           </Key>
           <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CapitalTotal" Type="float" />
           <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idTenencia" Type="int" Nullable="false" />
+          <Property Name="Lugar" Type="varchar" MaxLength="50" />
+          <Property Name="Centralizado" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Capital_TipoCriptoWI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -189,10 +201,14 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.Capital_TipoCriptoWI' no tien
             <PropertyRef Name="Capital" />
             <PropertyRef Name="Tipo" />
             <PropertyRef Name="Ticker" />
+            <PropertyRef Name="idTenencia" />
           </Key>
           <Property Name="Capital" Type="float" Nullable="false" />
           <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idTenencia" Type="int" Nullable="false" />
+          <Property Name="Lugar" Type="varchar" MaxLength="50" />
+          <Property Name="Centralizado" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.EvolucionInversionesTipoCripto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -309,6 +325,23 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwCapital_LugarSeparado' no t
           <Property Name="IdInversion" Type="int" Nullable="false" />
           <Property Name="Capital" Type="float" Nullable="false" />
           <Property Name="Lugar" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwCapital_LugarSeparadoWI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwCapital_LugarSeparadoWI">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Capital" />
+            <PropertyRef Name="idTenencia" />
+            <PropertyRef Name="Ticker" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Capital" Type="float" Nullable="false" />
+          <Property Name="Lugar" Type="varchar" MaxLength="50" />
+          <Property Name="idTenencia" Type="int" Nullable="false" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwCapital_TipoCriptoAgrupadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -487,6 +520,7 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversionesReales_Simuladas
             <PropertyRef Name="TipoInversion" />
             <PropertyRef Name="Tipo" />
             <PropertyRef Name="Ticker" />
+            <PropertyRef Name="CapitalActual" />
           </Key>
           <Property Name="IdInversion" Type="int" Nullable="false" />
           <Property Name="Lugar1" Type="varchar" MaxLength="50" />
@@ -505,6 +539,8 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversionesReales_Simuladas
           <Property Name="TipoInversion" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Ticker" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LugarNombre" Type="varchar" MaxLength="50" />
+          <Property Name="CapitalActual" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversionesTop' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -546,6 +582,22 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
           <Property Name="Nacional" Type="bit" />
           <Property Name="Centralizado" Type="bit" />
           <Property Name="Url" Type="varchar" MaxLength="50" />
+          <Property Name="Lugar" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwTenenciaWI">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="FechaInicio" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
           <Property Name="Lugar" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Criptomoneda_TipoCriptomonedaA">
@@ -742,14 +794,20 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
             <DefiningQuery>SELECT 
     [Capital_Cripto_ResumenWI].[Ticker] AS [Ticker], 
     [Capital_Cripto_ResumenWI].[CapitalTotal] AS [CapitalTotal], 
-    [Capital_Cripto_ResumenWI].[Tipo] AS [Tipo]
+    [Capital_Cripto_ResumenWI].[Tipo] AS [Tipo], 
+    [Capital_Cripto_ResumenWI].[idTenencia] AS [idTenencia], 
+    [Capital_Cripto_ResumenWI].[Centralizado] AS [Centralizado], 
+    [Capital_Cripto_ResumenWI].[Lugar] AS [Lugar]
     FROM [dbo].[Capital_Cripto_ResumenWI] AS [Capital_Cripto_ResumenWI]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Capital_CriptoWI" EntityType="Self.Capital_CriptoWI" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Capital_CriptoWI].[Capital] AS [Capital], 
     [Capital_CriptoWI].[Ticker] AS [Ticker], 
-    [Capital_CriptoWI].[Tipo] AS [Tipo]
+    [Capital_CriptoWI].[Tipo] AS [Tipo], 
+    [Capital_CriptoWI].[idTenencia] AS [idTenencia], 
+    [Capital_CriptoWI].[Centralizado] AS [Centralizado], 
+    [Capital_CriptoWI].[Lugar] AS [Lugar]
     FROM [dbo].[Capital_CriptoWI] AS [Capital_CriptoWI]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Capital_TipoCripto" EntityType="Self.Capital_TipoCripto" store:Type="Views" store:Schema="dbo">
@@ -768,14 +826,20 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
             <DefiningQuery>SELECT 
     [capital_tipocripto_ResumenWI].[Tipo] AS [Tipo], 
     [capital_tipocripto_ResumenWI].[CapitalTotal] AS [CapitalTotal], 
-    [capital_tipocripto_ResumenWI].[Ticker] AS [Ticker]
+    [capital_tipocripto_ResumenWI].[Ticker] AS [Ticker], 
+    [capital_tipocripto_ResumenWI].[idTenencia] AS [idTenencia], 
+    [capital_tipocripto_ResumenWI].[Lugar] AS [Lugar], 
+    [capital_tipocripto_ResumenWI].[Centralizado] AS [Centralizado]
     FROM [dbo].[capital_tipocripto_ResumenWI] AS [capital_tipocripto_ResumenWI]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Capital_TipoCriptoWI" EntityType="Self.Capital_TipoCriptoWI" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Capital_TipoCriptoWI].[Capital] AS [Capital], 
     [Capital_TipoCriptoWI].[Tipo] AS [Tipo], 
-    [Capital_TipoCriptoWI].[Ticker] AS [Ticker]
+    [Capital_TipoCriptoWI].[Ticker] AS [Ticker], 
+    [Capital_TipoCriptoWI].[idTenencia] AS [idTenencia], 
+    [Capital_TipoCriptoWI].[Lugar] AS [Lugar], 
+    [Capital_TipoCriptoWI].[Centralizado] AS [Centralizado]
     FROM [dbo].[Capital_TipoCriptoWI] AS [Capital_TipoCriptoWI]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="EvolucionInversionesTipoCripto" EntityType="Self.EvolucionInversionesTipoCripto" store:Type="Views" store:Schema="dbo">
@@ -854,6 +918,16 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
     [vwCapital_LugarSeparado].[Capital] AS [Capital], 
     [vwCapital_LugarSeparado].[Lugar] AS [Lugar]
     FROM [dbo].[vwCapital_LugarSeparado] AS [vwCapital_LugarSeparado]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwCapital_LugarSeparadoWI" EntityType="Self.vwCapital_LugarSeparadoWI" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwCapital_LugarSeparadoWI].[IdInversion] AS [IdInversion], 
+    [vwCapital_LugarSeparadoWI].[Capital] AS [Capital], 
+    [vwCapital_LugarSeparadoWI].[Lugar] AS [Lugar], 
+    [vwCapital_LugarSeparadoWI].[idTenencia] AS [idTenencia], 
+    [vwCapital_LugarSeparadoWI].[Ticker] AS [Ticker], 
+    [vwCapital_LugarSeparadoWI].[Tipo] AS [Tipo]
+    FROM [dbo].[vwCapital_LugarSeparadoWI] AS [vwCapital_LugarSeparadoWI]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwCapital_TipoCriptoAgrupadas" EntityType="Self.vwCapital_TipoCriptoAgrupadas" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -977,7 +1051,9 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
     [vwInversionesReales_Simuladas].[PrecioFin] AS [PrecioFin], 
     [vwInversionesReales_Simuladas].[TipoInversion] AS [TipoInversion], 
     [vwInversionesReales_Simuladas].[Tipo] AS [Tipo], 
-    [vwInversionesReales_Simuladas].[Ticker] AS [Ticker]
+    [vwInversionesReales_Simuladas].[Ticker] AS [Ticker], 
+    [vwInversionesReales_Simuladas].[LugarNombre] AS [LugarNombre], 
+    [vwInversionesReales_Simuladas].[CapitalActual] AS [CapitalActual]
     FROM [dbo].[vwInversionesReales_Simuladas] AS [vwInversionesReales_Simuladas]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwInversionesTop" EntityType="Self.vwInversionesTop" store:Type="Views" store:Schema="dbo">
@@ -1009,6 +1085,16 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
     [vwTenencia].[Url] AS [Url], 
     [vwTenencia].[Lugar] AS [Lugar]
     FROM [dbo].[vwTenencia] AS [vwTenencia]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwTenenciaWI" EntityType="Self.vwTenenciaWI" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwTenenciaWI].[IdInversion] AS [IdInversion], 
+    [vwTenenciaWI].[Instrumento] AS [Instrumento], 
+    [vwTenenciaWI].[Criptomoneda] AS [Criptomoneda], 
+    [vwTenenciaWI].[FechaInicio] AS [FechaInicio], 
+    [vwTenenciaWI].[FechaFin] AS [FechaFin], 
+    [vwTenenciaWI].[Lugar] AS [Lugar]
+    FROM [dbo].[vwTenenciaWI] AS [vwTenenciaWI]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Criptomoneda_TipoCriptomonedaA" Association="Self.FK_Criptomoneda_TipoCriptomonedaA">
             <End Role="TipoCriptomoneda" EntitySet="TipoCriptomoneda" />
@@ -1424,6 +1510,8 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
           <EntitySet Name="vwCapital_LugarSeparado" EntityType="Tesis_Inv2Model.vwCapital_LugarSeparado" />
           <EntitySet Name="EvolucionInversionesTipoCripto" EntityType="Tesis_Inv2Model.EvolucionInversionesTipoCripto" />
           <EntitySet Name="vwInversionesReales_Simuladas" EntityType="Tesis_Inv2Model.vwInversionesReales_Simuladas" />
+          <EntitySet Name="vwTenenciaWI" EntityType="Tesis_Inv2Model.vwTenenciaWI" />
+          <EntitySet Name="vwCapital_LugarSeparadoWI" EntityType="Tesis_Inv2Model.vwCapital_LugarSeparadoWI" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1676,39 +1764,55 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
           <Key>
             <PropertyRef Name="Ticker" />
             <PropertyRef Name="Tipo" />
+            <PropertyRef Name="idTenencia" />
           </Key>
           <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CapitalTotal" Type="Double" />
           <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idTenencia" Type="Int32" Nullable="false" />
+          <Property Name="Centralizado" Type="Boolean" />
+          <Property Name="Lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Capital_CriptoWI">
           <Key>
             <PropertyRef Name="Capital" />
             <PropertyRef Name="Ticker" />
             <PropertyRef Name="Tipo" />
+            <PropertyRef Name="idTenencia" />
           </Key>
           <Property Name="Capital" Type="Double" Nullable="false" />
           <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idTenencia" Type="Int32" Nullable="false" />
+          <Property Name="Centralizado" Type="Boolean" />
+          <Property Name="Lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Capital_TipoCriptoWI">
           <Key>
             <PropertyRef Name="Capital" />
             <PropertyRef Name="Tipo" />
             <PropertyRef Name="Ticker" />
+            <PropertyRef Name="idTenencia" />
           </Key>
           <Property Name="Capital" Type="Double" Nullable="false" />
           <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idTenencia" Type="Int32" Nullable="false" />
+          <Property Name="Lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Centralizado" Type="Boolean" />
         </EntityType>
         <EntityType Name="capital_tipocripto_ResumenWI">
           <Key>
             <PropertyRef Name="Tipo" />
             <PropertyRef Name="Ticker" />
+            <PropertyRef Name="idTenencia" />
           </Key>
           <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CapitalTotal" Type="Double" />
           <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idTenencia" Type="Int32" Nullable="false" />
+          <Property Name="Lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Centralizado" Type="Boolean" />
         </EntityType>
         <EntityType Name="Inversion_Cripto_InstruWI">
           <Key>
@@ -1804,6 +1908,7 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
             <PropertyRef Name="TipoInversion" />
             <PropertyRef Name="Tipo" />
             <PropertyRef Name="Ticker" />
+            <PropertyRef Name="CapitalActual" />
           </Key>
           <Property Name="IdInversion" Type="Int32" Nullable="false" />
           <Property Name="Lugar1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1822,6 +1927,37 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
           <Property Name="TipoInversion" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LugarNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CapitalActual" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwTenenciaWI">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="FechaInicio" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="Lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwCapital_LugarSeparadoWI">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Capital" />
+            <PropertyRef Name="idTenencia" />
+            <PropertyRef Name="Ticker" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Capital" Type="Double" Nullable="false" />
+          <Property Name="Lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idTenencia" Type="Int32" Nullable="false" />
+          <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2176,6 +2312,9 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
           <EntitySetMapping Name="Capital_Cripto_ResumenWI">
             <EntityTypeMapping TypeName="Tesis_Inv2Model.Capital_Cripto_ResumenWI">
               <MappingFragment StoreEntitySet="Capital_Cripto_ResumenWI">
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="Centralizado" ColumnName="Centralizado" />
+                <ScalarProperty Name="idTenencia" ColumnName="idTenencia" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="CapitalTotal" ColumnName="CapitalTotal" />
                 <ScalarProperty Name="Ticker" ColumnName="Ticker" />
@@ -2185,6 +2324,9 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
           <EntitySetMapping Name="Capital_CriptoWI">
             <EntityTypeMapping TypeName="Tesis_Inv2Model.Capital_CriptoWI">
               <MappingFragment StoreEntitySet="Capital_CriptoWI">
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="Centralizado" ColumnName="Centralizado" />
+                <ScalarProperty Name="idTenencia" ColumnName="idTenencia" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="Ticker" ColumnName="Ticker" />
                 <ScalarProperty Name="Capital" ColumnName="Capital" />
@@ -2194,6 +2336,9 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
           <EntitySetMapping Name="Capital_TipoCriptoWI">
             <EntityTypeMapping TypeName="Tesis_Inv2Model.Capital_TipoCriptoWI">
               <MappingFragment StoreEntitySet="Capital_TipoCriptoWI">
+                <ScalarProperty Name="Centralizado" ColumnName="Centralizado" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="idTenencia" ColumnName="idTenencia" />
                 <ScalarProperty Name="Ticker" ColumnName="Ticker" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="Capital" ColumnName="Capital" />
@@ -2203,6 +2348,9 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
           <EntitySetMapping Name="capital_tipocripto_ResumenWI">
             <EntityTypeMapping TypeName="Tesis_Inv2Model.capital_tipocripto_ResumenWI">
               <MappingFragment StoreEntitySet="capital_tipocripto_ResumenWI">
+                <ScalarProperty Name="Centralizado" ColumnName="Centralizado" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="idTenencia" ColumnName="idTenencia" />
                 <ScalarProperty Name="Ticker" ColumnName="Ticker" />
                 <ScalarProperty Name="CapitalTotal" ColumnName="CapitalTotal" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
@@ -2280,6 +2428,8 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
           <EntitySetMapping Name="vwInversionesReales_Simuladas">
             <EntityTypeMapping TypeName="Tesis_Inv2Model.vwInversionesReales_Simuladas">
               <MappingFragment StoreEntitySet="vwInversionesReales_Simuladas">
+                <ScalarProperty Name="CapitalActual" ColumnName="CapitalActual" />
+                <ScalarProperty Name="LugarNombre" ColumnName="LugarNombre" />
                 <ScalarProperty Name="Ticker" ColumnName="Ticker" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="TipoInversion" ColumnName="TipoInversion" />
@@ -2296,6 +2446,30 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenencia' no tiene definida
                 <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
                 <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
                 <ScalarProperty Name="Lugar1" ColumnName="Lugar1" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwTenenciaWI">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwTenenciaWI">
+              <MappingFragment StoreEntitySet="vwTenenciaWI">
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwCapital_LugarSeparadoWI">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwCapital_LugarSeparadoWI">
+              <MappingFragment StoreEntitySet="vwCapital_LugarSeparadoWI">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="idTenencia" ColumnName="idTenencia" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
                 <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
               </MappingFragment>
             </EntityTypeMapping>

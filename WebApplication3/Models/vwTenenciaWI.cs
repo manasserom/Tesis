@@ -12,13 +12,13 @@ namespace WebApplication3.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class capital_tipocripto_ResumenWI
+    public partial class vwTenenciaWI
     {
-        public string Tipo { get; set; }
-        public Nullable<double> CapitalTotal { get; set; }
-        public string Ticker { get; set; }
-        public int idTenencia { get; set; }
+        public int IdInversion { get; set; }
+        public string Instrumento { get; set; }
+        public string Criptomoneda { get; set; }
+        public System.DateTime FechaInicio { get; set; }
+        public Nullable<System.DateTime> FechaFin { get; set; }
         public string Lugar { get; set; }
-        public Nullable<bool> Centralizado { get; set; }
     }
 }
