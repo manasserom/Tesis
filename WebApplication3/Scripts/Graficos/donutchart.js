@@ -23,7 +23,9 @@ function drawChart() {
   var options = {
     //title: 'Capital segun el tipo' ,
       pieHole: 0.4,
-      chartArea: {  width: '100%', height: '100%' }
+      chartArea: { width: '100%', height: '100%' },
+      legend: { position: 'labeled' }
+
 
   };
 

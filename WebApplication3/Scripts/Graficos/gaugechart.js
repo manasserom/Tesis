@@ -12,7 +12,7 @@
         ]);
 
         var options = {
-          width: 400, height: 200,
+            width: '100%', height: 200,
           redFrom: 90, redTo: 100,
           yellowFrom:75, yellowTo: 90,
           minorTicks: 5

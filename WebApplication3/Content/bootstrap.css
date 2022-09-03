@@ -5815,11 +5815,11 @@ button.list-group-item-danger.active:focus {
 .panel-info {
   border-color: #bce8f1;
 }
-.panel-info > .panel-heading {
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-}
+    .panel-info > .panel-heading {
+        color: #fff;
+        background-color: #5bc0de;
+        border-color: #5bc0de;
+    }
 .panel-info > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #bce8f1;
 }
@@ -5831,13 +5831,13 @@ button.list-group-item-danger.active:focus {
   border-bottom-color: #bce8f1;
 }
 .panel-warning {
-  border-color: #faebcc;
+    border-color: #f0ad4e;
 }
-.panel-warning > .panel-heading {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
-}
+    .panel-warning > .panel-heading {
+        color: #fff;
+        background-color: #f0ad4e;
+        border-color: #f0ad4e;
+    }
 .panel-warning > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #faebcc;
 }

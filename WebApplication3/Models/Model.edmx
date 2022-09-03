@@ -52,6 +52,7 @@
           <Property Name="Lugar" Type="int" />
           <Property Name="PrecioInicio" Type="float" />
           <Property Name="PrecioFin" Type="float" />
+          <Property Name="Finalizado" Type="bit" />
         </EntityType>
         <EntityType Name="InversionTemporal">
           <Key>
@@ -71,6 +72,7 @@
           <Property Name="Lugar" Type="int" />
           <Property Name="PrecioInicio" Type="float" />
           <Property Name="PrecioFin" Type="float" />
+          <Property Name="Finalizado" Type="bit" />
         </EntityType>
         <EntityType Name="NuevaTenencia">
           <Key>
@@ -478,6 +480,45 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversion_tenenciaWI' no ti
           <Property Name="Capital" Type="float" />
           <Property Name="Ticker" Type="varchar" MaxLength="50" />
           <Property Name="Tipo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversionDetalle' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwInversionDetalle">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+            <PropertyRef Name="idTenencia" />
+          </Key>
+          <Property Name="IdInversion" Type="int" Nullable="false" />
+          <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaEstimada" Type="float" Nullable="false" />
+          <Property Name="TasaReal" Type="float" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="CantidadInvertida" Type="float" Nullable="false" />
+          <Property Name="CantidadGanada" Type="float" />
+          <Property Name="Lugar" Type="int" />
+          <Property Name="PrecioInicio" Type="float" />
+          <Property Name="PrecioFin" Type="float" />
+          <Property Name="Finalizado" Type="bit" />
+          <Property Name="Bloqueado" Type="bit" />
+          <Property Name="Centralizado" Type="bit" />
+          <Property Name="idTenencia" Type="int" Nullable="false" />
+          <Property Name="Exchange" Type="varchar" MaxLength="50" />
+          <Property Name="Wallet" Type="varchar" MaxLength="50" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" />
+          <Property Name="Precio" Type="float" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" />
+          <Property Name="Logo" Type="image" />
+          <Property Name="Capitalizacion" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversionesEsteAnio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1017,6 +1058,34 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
     [vwInversion_tenenciaWI].[Tipo] AS [Tipo]
     FROM [dbo].[vwInversion_tenenciaWI] AS [vwInversion_tenenciaWI]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwInversionDetalle" EntityType="Self.vwInversionDetalle" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwInversionDetalle].[IdInversion] AS [IdInversion], 
+    [vwInversionDetalle].[Instrumento] AS [Instrumento], 
+    [vwInversionDetalle].[Criptomoneda] AS [Criptomoneda], 
+    [vwInversionDetalle].[CriptomonedaGanada] AS [CriptomonedaGanada], 
+    [vwInversionDetalle].[TasaEstimada] AS [TasaEstimada], 
+    [vwInversionDetalle].[TasaReal] AS [TasaReal], 
+    [vwInversionDetalle].[FechaInicio] AS [FechaInicio], 
+    [vwInversionDetalle].[FechaFin] AS [FechaFin], 
+    [vwInversionDetalle].[CantidadInvertida] AS [CantidadInvertida], 
+    [vwInversionDetalle].[CantidadGanada] AS [CantidadGanada], 
+    [vwInversionDetalle].[Lugar] AS [Lugar], 
+    [vwInversionDetalle].[PrecioInicio] AS [PrecioInicio], 
+    [vwInversionDetalle].[PrecioFin] AS [PrecioFin], 
+    [vwInversionDetalle].[Finalizado] AS [Finalizado], 
+    [vwInversionDetalle].[Bloqueado] AS [Bloqueado], 
+    [vwInversionDetalle].[Centralizado] AS [Centralizado], 
+    [vwInversionDetalle].[idTenencia] AS [idTenencia], 
+    [vwInversionDetalle].[Exchange] AS [Exchange], 
+    [vwInversionDetalle].[Wallet] AS [Wallet], 
+    [vwInversionDetalle].[Ticker] AS [Ticker], 
+    [vwInversionDetalle].[Precio] AS [Precio], 
+    [vwInversionDetalle].[Tipo] AS [Tipo], 
+    [vwInversionDetalle].[Logo] AS [Logo], 
+    [vwInversionDetalle].[Capitalizacion] AS [Capitalizacion]
+    FROM [dbo].[vwInversionDetalle] AS [vwInversionDetalle]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwInversionesEsteAnio" EntityType="Self.vwInversionesEsteAnio" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwInversionesEsteAnio].[IdInversion] AS [IdInversion], 
@@ -1197,6 +1266,7 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
           <Property Name="Lugar1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PrecioInicio" Type="Double" />
           <Property Name="PrecioFin" Type="Double" />
+          <Property Name="Finalizado" Type="Boolean" />
         </EntityType>
         <EntityType Name="NuevaTenencia">
           <Key>
@@ -1512,6 +1582,7 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
           <EntitySet Name="vwInversionesReales_Simuladas" EntityType="Tesis_Inv2Model.vwInversionesReales_Simuladas" />
           <EntitySet Name="vwTenenciaWI" EntityType="Tesis_Inv2Model.vwTenenciaWI" />
           <EntitySet Name="vwCapital_LugarSeparadoWI" EntityType="Tesis_Inv2Model.vwCapital_LugarSeparadoWI" />
+          <EntitySet Name="vwInversionDetalle" EntityType="Tesis_Inv2Model.vwInversionDetalle" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1719,6 +1790,7 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
           <NavigationProperty Name="NuevaTenencia" Relationship="Tesis_Inv2Model.FK_InversionT_NuevaTenencia" FromRole="InversionTemporal" ToRole="NuevaTenencia" />
           <Property Name="PrecioInicio" Type="Double" />
           <Property Name="PrecioFin" Type="Double" />
+          <Property Name="Finalizado" Type="Boolean" />
         </EntityType>
         <Association Name="FK_InversionT_Criptomoneda">
           <End Type="Tesis_Inv2Model.Criptomoneda" Role="Criptomoneda" Multiplicity="1">
@@ -1959,6 +2031,43 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
           <Property Name="Ticker" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="vwInversionDetalle">
+          <Key>
+            <PropertyRef Name="IdInversion" />
+            <PropertyRef Name="Instrumento" />
+            <PropertyRef Name="Criptomoneda" />
+            <PropertyRef Name="CriptomonedaGanada" />
+            <PropertyRef Name="TasaEstimada" />
+            <PropertyRef Name="TasaReal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="CantidadInvertida" />
+            <PropertyRef Name="idTenencia" />
+          </Key>
+          <Property Name="IdInversion" Type="Int32" Nullable="false" />
+          <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CriptomonedaGanada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TasaEstimada" Type="Double" Nullable="false" />
+          <Property Name="TasaReal" Type="Double" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="CantidadInvertida" Type="Double" Nullable="false" />
+          <Property Name="CantidadGanada" Type="Double" />
+          <Property Name="Lugar" Type="Int32" />
+          <Property Name="PrecioInicio" Type="Double" />
+          <Property Name="PrecioFin" Type="Double" />
+          <Property Name="Finalizado" Type="Boolean" />
+          <Property Name="Bloqueado" Type="Boolean" />
+          <Property Name="Centralizado" Type="Boolean" />
+          <Property Name="idTenencia" Type="Int32" Nullable="false" />
+          <Property Name="Exchange" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Wallet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ticker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Double" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Capitalizacion" Type="Double" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2000,6 +2109,7 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
           <EntitySetMapping Name="Inversion">
             <EntityTypeMapping TypeName="Tesis_Inv2Model.Inversion">
               <MappingFragment StoreEntitySet="Inversion">
+                <ScalarProperty Name="Finalizado" ColumnName="Finalizado" />
                 <ScalarProperty Name="PrecioFin" ColumnName="PrecioFin" />
                 <ScalarProperty Name="PrecioInicio" ColumnName="PrecioInicio" />
                 <ScalarProperty Name="Lugar1" ColumnName="Lugar1" />
@@ -2292,6 +2402,7 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
           <EntitySetMapping Name="InversionTemporal">
             <EntityTypeMapping TypeName="Tesis_Inv2Model.InversionTemporal">
               <MappingFragment StoreEntitySet="InversionTemporal">
+                <ScalarProperty Name="Finalizado" ColumnName="Finalizado" />
                 <ScalarProperty Name="PrecioFin" ColumnName="PrecioFin" />
                 <ScalarProperty Name="PrecioInicio" ColumnName="PrecioInicio" />
                 <ScalarProperty Name="Lugar" ColumnName="Lugar" />
@@ -2470,6 +2581,36 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
                 <ScalarProperty Name="idTenencia" ColumnName="idTenencia" />
                 <ScalarProperty Name="Lugar" ColumnName="Lugar" />
                 <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwInversionDetalle">
+            <EntityTypeMapping TypeName="Tesis_Inv2Model.vwInversionDetalle">
+              <MappingFragment StoreEntitySet="vwInversionDetalle">
+                <ScalarProperty Name="Capitalizacion" ColumnName="Capitalizacion" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="Wallet" ColumnName="Wallet" />
+                <ScalarProperty Name="Exchange" ColumnName="Exchange" />
+                <ScalarProperty Name="idTenencia" ColumnName="idTenencia" />
+                <ScalarProperty Name="Centralizado" ColumnName="Centralizado" />
+                <ScalarProperty Name="Bloqueado" ColumnName="Bloqueado" />
+                <ScalarProperty Name="Finalizado" ColumnName="Finalizado" />
+                <ScalarProperty Name="PrecioFin" ColumnName="PrecioFin" />
+                <ScalarProperty Name="PrecioInicio" ColumnName="PrecioInicio" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="CantidadGanada" ColumnName="CantidadGanada" />
+                <ScalarProperty Name="CantidadInvertida" ColumnName="CantidadInvertida" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="TasaReal" ColumnName="TasaReal" />
+                <ScalarProperty Name="TasaEstimada" ColumnName="TasaEstimada" />
+                <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
+                <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
+                <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
                 <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
               </MappingFragment>
             </EntityTypeMapping>

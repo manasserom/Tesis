@@ -132,7 +132,7 @@
                                 @if (inv.Lugar != "Aaux")
                                 {@inv.Lugar}
                             </p>
-                            if (InversionesB != null) { foreach (string c in NomLugar) { if (c == inv.Lugar.ToString()) { bandera = true; } } }
+                            if (NomLugar != null) { foreach (string c in NomLugar) { if (c == inv.Lugar) { bandera = true; } } }
                             if (bandera)
                             {
                                 @Html.CheckBox("Lugar", htmlAttributes: new { @class = "", @Value = (inv.Lugar), @checked = "checked" });<br />
@@ -140,7 +140,7 @@
                             else
                             {
                                 @Html.CheckBox("Lugar", false, htmlAttributes: new { @class = "", @Value = (inv.Lugar), @Style = Oculto }); if (inv.Lugar.ToString() != "Aaux")
-                                { <br />}
+                                {<br />}
                             }
                         }
                     </div>
@@ -219,7 +219,7 @@
     <div class="col-md-3"><button class="btn btn-success" onclick="window.location.href = '/InversionTemporal/Create'">Agregar Inversión simulada</button></div>
 </div>
 
-<table class="table">
+<table class="table table-responsive">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.TipoInversion)
@@ -279,11 +279,6 @@
                     <button class="btn btn-warning" onclick="window.location.href = '/InversionTemporal/Edit/@item.IdInversion'">Editar</button>
                     <button class="btn btn-danger" onclick="window.location.href = '/InversionTemporal/Delete/@item.IdInversion'">Eliminar</button>
                 }
-
-
-                @*@Html.ActionLink("Edit", "Edit", new { id=item.IdInversion}) |*@
-                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
         </tr>
     }

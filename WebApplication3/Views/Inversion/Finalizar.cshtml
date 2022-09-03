@@ -7,8 +7,6 @@
 
 }
 
-<h2>Finalizar</h2>
-
 <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 @using (Html.BeginForm())
@@ -24,96 +22,103 @@
     @Html.HiddenFor(model => model.PrecioFin)
     @Html.HiddenFor(model => model.CantidadInvertida)
     @Html.HiddenFor(model => model.FechaInicio)
-
-    <div class="container panel">
-        <div class="form-group">
-            <div class="col-md-4">
-                <strong>Lugar:</strong>
-                @Html.DropDownList("Lugar", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
-                @Html.ValidationMessageFor(model => model.Lugar, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-4">
-                <strong>Instrumento:</strong>
-                @Html.DropDownList("Instrumento", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
-                @Html.ValidationMessageFor(model => model.Instrumento, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-4">
-                <strong>Criptomoneda:</strong>
-                @Html.DropDownList("Criptomoneda", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
-                @Html.ValidationMessageFor(model => model.Criptomoneda, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-4">
-                <strong>Capital Invertido:</strong>
-                <input type="text" name="name" class="form-control" disabled value="$ @(Model.CantidadInvertida * Model.Criptomoneda1.Precio)" />
-            </div>
-            <div class="col-md-4">
-                <strong>Cantidad Invertida:</strong>
-                @Html.EditorFor(model => model.CantidadInvertida, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                @Html.ValidationMessageFor(model => model.CantidadInvertida, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-4">
-                <strong>Criptomoneda Ganada:</strong>
-                @Html.DropDownList("CriptomonedaGanada", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
-                @Html.ValidationMessageFor(model => model.CriptomonedaGanada, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-4">
-                <strong>Fecha de Inicio:</strong>
-                @Html.EditorFor(model => model.FechaInicio, new
-                {
-                    htmlAttributes = new
-                    {
-                        @class = "form-control",
-                        disabled = "disabled",
-               @type = "date",
-                        @Value = Model.FechaInicio.ToString("yyyy-MM-dd")
-                    }
-                })
-                @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-4 has-success">
-                <strong>Fecha de Finalización:</strong>
-                @Html.EditorFor(model => model.FechaFin, new
-                {
-                    htmlAttributes = new
-                    {
-                        @class = "form-control",
-                        @type = "date",
-               @onchange = "ActializarDuracion()",
-                        @Value = Model.FechaFin.HasValue ? Model.FechaFin.Value.ToString("yyyy-MM-dd") : DateTime.Now.Date.ToString("yyyy-MM-dd")
-                    }
-                })
-                @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-4 has-success">
-                <strong>Duración de la Inversión:</strong>
-                <input type="text" id="DuracionInversion" name="name" class="form-control" disabled value=" X Dias" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-4">
-                <strong>Tasa Estimada:</strong>
-                @Html.EditorFor(model => model.TasaEstimada, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                @Html.ValidationMessageFor(model => model.TasaEstimada, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-4 has-success">
-                <strong>Cantidad Ganada:</strong>
-                @Html.EditorFor(model => model.CantidadGanada, new { htmlAttributes = new { @class = "form-control", @type = "number", @onchange = "ActializarTasaReal()" } })
-                @Html.ValidationMessageFor(model => model.CantidadGanada, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-4 has-success">
-                <strong>Tasa Real:</strong>
-                @Html.EditorFor(model => model.TasaReal, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                @Html.ValidationMessageFor(model => model.TasaReal, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-10 col-md-2">
-                <br />
-                <input type="submit" value="Save" class="btn btn-info form-control" />
+    @Html.HiddenFor(model => model.Finalizado)
+<br />  
+    <div class="" style="align-content: center; justify-content: center; align-items: center; display: flex;">
+        <div class="panel panel-primary " style="width: fit-content;">
+            <div class="panel-heading"><h4>Finalizar Inversión</h4></div>
+            <div class="panel-body text-center" style="padding-right: 30px; padding-left: 30px;">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <strong>Lugar:</strong>
+                        @Html.DropDownList("Lugar", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Lugar, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Instrumento:</strong>
+                        @Html.DropDownList("Instrumento", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Instrumento, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Criptomoneda:</strong>
+                        @Html.DropDownList("Criptomoneda", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Criptomoneda, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <strong>Capital Invertido:</strong>
+                        <input type="text" name="name" class="form-control" disabled value="$ @(Model.CantidadInvertida * Model.Criptomoneda1.Precio)" />
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Cantidad Invertida:</strong>
+                        @Html.EditorFor(model => model.CantidadInvertida, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.CantidadInvertida, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Criptomoneda Ganada:</strong>
+                        @Html.DropDownList("CriptomonedaGanada", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.CriptomonedaGanada, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <strong>Fecha de Inicio:</strong>
+                        @Html.EditorFor(model => model.FechaInicio, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control",
+                                disabled = "disabled",
+                                @type = "date",
+                                @Value = Model.FechaInicio.ToString("yyyy-MM-dd")
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-4 has-success">
+                        <strong>Fecha de Finalización:</strong>
+                        @Html.EditorFor(model => model.FechaFin, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control",
+                                @type = "date",
+                       @onchange = "ActializarDuracion()",
+                                @Value = Model.FechaFin.HasValue ? Model.FechaFin.Value.ToString("yyyy-MM-dd") : DateTime.Now.Date.ToString("yyyy-MM-dd")
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-4 has-success">
+                        <strong>Duración de la Inversión:</strong>
+                        <input type="text" id="DuracionInversion" name="name" class="form-control" disabled value=" X Dias" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <strong>Tasa Estimada:</strong>
+                        @Html.EditorFor(model => model.TasaEstimada, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.TasaEstimada, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-4 has-success">
+                        <strong>Cantidad Ganada:</strong>
+                        @Html.EditorFor(model => model.CantidadGanada, new { htmlAttributes = new { @class = "form-control", @type = "number", @onchange = "ActializarTasaReal()" } })
+                        @Html.ValidationMessageFor(model => model.CantidadGanada, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-4 has-success">
+                        <strong>Tasa Real:</strong>
+                        @Html.EditorFor(model => model.TasaReal, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.TasaReal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group" style="">
+                    <div class="pull-right" style="padding-right: 15px;">
+                        <br />
+                        <a href="~/Inversion/Index" class="btn btn-default">Cancelar</a>
+                        <input type="submit" value="Finalizar" class="btn btn-primary" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>

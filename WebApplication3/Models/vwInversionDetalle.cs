@@ -12,7 +12,7 @@ namespace WebApplication3.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Inversion
+    public partial class vwInversionDetalle
     {
         public int IdInversion { get; set; }
         public string Instrumento { get; set; }
@@ -25,13 +25,18 @@ namespace WebApplication3.Models
         public double CantidadInvertida { get; set; }
         public Nullable<double> CantidadGanada { get; set; }
         public Nullable<int> Lugar { get; set; }
-        public string Lugar1 { get; set; }
         public Nullable<double> PrecioInicio { get; set; }
         public Nullable<double> PrecioFin { get; set; }
         public Nullable<bool> Finalizado { get; set; }
-    
-        public virtual Criptomoneda Criptomoneda1 { get; set; }
-        public virtual Instrumento Instrumento1 { get; set; }
-        public virtual NuevaTenencia NuevaTenencia { get; set; }
+        public Nullable<bool> Bloqueado { get; set; }
+        public Nullable<bool> Centralizado { get; set; }
+        public int idTenencia { get; set; }
+        public string Exchange { get; set; }
+        public string Wallet { get; set; }
+        public string Ticker { get; set; }
+        public Nullable<double> Precio { get; set; }
+        public string Tipo { get; set; }
+        public byte[] Logo { get; set; }
+        public Nullable<double> Capitalizacion { get; set; }
     }
 }

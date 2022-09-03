@@ -1,90 +1,143 @@
-﻿@model WebApplication3.Models.Inversion
+﻿@model WebApplication3.Models.vwInversionDetalle
 
 @{
     ViewBag.Title = "Details";
+    string Lugar = Model.Wallet != null ? Model.Wallet : Model.Exchange;
+    //string Lugar = "";
+    string CapitalInvertido = "";
+    string ClaseEstado = "";
+    string ValorEstado = "";
+    string CantidadDeDias = "";
+    string Resultado = "";
+    string ResultadoValor = "";
+    string ClaseResultado = "";
+    DateTime date = new DateTime().Date;
+    DateTime Newdate = DateTime.Now;
+
+    double auxCantDias = (Newdate - Model.FechaInicio).TotalHours;
+    CantidadDeDias = "" + Convert.ToInt32(auxCantDias / 24);
+    CapitalInvertido = (Model.PrecioInicio.Value * Model.CantidadInvertida).ToString("C");
+    //if (Model.Finalizado.GetValueOrDefault(false) || (Newdate < Model.FechaFin.GetValueOrDefault()))
+    //{
+    //    CapitalInvertido = "" + (Model.CantidadInvertida * Model.Precio.GetValueOrDefault()).ToString("C");
+    //}
+    //else
+    //{
+    //    CapitalInvertido = "" + ((Model.CantidadInvertida + Model.CantidadGanada.GetValueOrDefault()) * Model.PrecioFin.Value).ToString("C");
+    //}
+    if (!Model.Finalizado.GetValueOrDefault(false))
+    {
+        if (Model.FechaFin.HasValue && (Model.FechaFin) > DateTime.Now.Date)
+        {
+            ClaseEstado = "has-error";
+            ValorEstado = "Vencido";
+        }
+        else
+        {
+            ClaseEstado = "has-success";
+            ValorEstado = "En Proceso";
+        }
+    }
+    else
+    {
+        ClaseEstado = "has-warning";
+        ValorEstado = "Finalizado";
+    }
+    Resultado = Model.Finalizado.GetValueOrDefault(false) ?
+        (((Model.CantidadInvertida + Model.CantidadGanada.Value) * Model.PrecioFin.Value) - (Model.CantidadInvertida * Model.PrecioInicio.Value)).ToString() :
+        ((Model.CantidadInvertida * Model.Precio.Value) - (Model.CantidadInvertida * Model.PrecioInicio.Value)).ToString();
+    ResultadoValor = Model.Finalizado.GetValueOrDefault(false) ?
+(((Model.CantidadInvertida + Model.CantidadGanada.Value) * Model.PrecioFin.Value) - (Model.CantidadInvertida * Model.PrecioInicio.Value)).ToString("C") :
+((Model.CantidadInvertida * Model.Precio.Value) - (Model.CantidadInvertida * Model.PrecioInicio.Value)).ToString("C");
+    double auxRes = Convert.ToDouble(Resultado);
+    if (auxRes > 0)
+    {
+        ClaseResultado = "has-success";
+    }
+    else
+    {
+        ClaseResultado = "has-error";
+    }
+    //ClaseResultado = (auxRes > 0) ? "" : "";
 }
 
-<h2>Details</h2>
+<br />
+<div class="" style="align-content: center; justify-content: center; align-items: center; display: flex;">
+    <div class="panel panel-default " style="width: fit-content;">
+        <div class="panel-heading"><h4>Detalles de la Inversión</h4></div>
+        <div class="panel-body text-center" style="padding-right: 30px; padding-left: 30px;">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <strong>Lugar:</strong>
+                    <input type="text" class="form-control" disabled value="@Lugar" />
+                </div>
+                <div class="col-md-4">
+                    <strong>Instrumento:</strong>
+                    <input type="text" class="form-control" disabled value="@Model.Instrumento" />
+                </div>
+                <div class="col-md-4">
+                    <strong>Criptomoneda:</strong>
+                    <input type="text" class="form-control" disabled value="@Model.Criptomoneda" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <strong>Capital Invertido:</strong>
+                    <input type="text" name="name" class="form-control" disabled value="@(CapitalInvertido)" />
+                </div>
+                <div class="col-md-4">
+                    <strong>Cantidad Invertida:</strong>
+                    <input type="text" name="name" class="form-control" disabled value="@(Model.CantidadInvertida)" />
+                </div>
+                <div class="col-md-4">
+                    <strong>Criptomoneda Ganada:</strong>
+                    <input type="text" name="name" class="form-control" disabled value="@(Model.CriptomonedaGanada)" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <strong>Fecha de Inicio:</strong>
+                    <input type="text" name="name" class="form-control @ClaseEstado" disabled value="@(Model.FechaInicio.ToShortDateString())" />
+                </div>
+                <div class="col-md-4">
+                    <strong>Fecha de Finalización:</strong>
+                    <input type="date" name="name" class="form-control" disabled value="@(Model.FechaFin.HasValue ? Model.FechaFin.Value.ToString("yyyy-MM-dd") : null)" />
+                </div>
+                <div class="col-md-4">
+                    <strong>Duración de la Inversión:</strong>
+                    <input type="text" id="DuracionInversion" name="name" class="form-control" disabled value=" @(CantidadDeDias) Días" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4 @ClaseEstado">
+                    <strong>Estado:</strong>
+                    <input type="text" name="name" class="form-control " disabled value="@(ValorEstado)" />
+                </div>
 
-<div>
-    <h4>Inversion</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CriptomonedaGanada)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CriptomonedaGanada)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TasaEstimada)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TasaEstimada)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TasaReal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TasaReal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaInicio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaInicio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaFin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaFin)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CantidadInvertida)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CantidadInvertida)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Criptomoneda1.Ticker)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Criptomoneda1.Ticker)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Instrumento1.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Instrumento1.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tenencia.Lugar)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tenencia.Lugar)
-        </dd>
-
-    </dl>
+                <div class="col-md-4">
+                    <strong>Cantidad Ganada:</strong>
+                    <input type="text" name="name" class="form-control" disabled value="@(Model.CantidadGanada)" />
+                </div>
+                <div class="col-md-4 @ClaseResultado">
+                    <strong>Resultado:</strong>
+                    <input type="text" name="name" class="form-control" disabled value="@ResultadoValor" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <strong>Tasa Estimada:</strong>
+                    <input type="text" name="name" class="form-control" disabled value="@(Model.TasaEstimada)" />
+                </div>
+                <div class="col-md-4">
+                    <strong>Tasa Real:</strong>
+                    <input type="text" name="name" class="form-control" disabled value="@(Model.TasaReal)" />
+                </div>
+                <div class="col-md-4 has-success">
+                    <strong class="col-md-12">Opciones:</strong>
+                    <a href="~/Inversion/Index" class="btn btn-default col-md-5">Volver</a>
+                    <a href="~/Inversion/Edit/@Model.IdInversion" class="btn btn-warning col-md-5 col-md-offset-2">Editar</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdInversion }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

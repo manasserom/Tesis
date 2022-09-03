@@ -19,6 +19,7 @@ namespace WebApplication3.Controllers
         public async Task<ActionResult> Index()
         {
             var inversion = db.Inversion.Include(i => i.Criptomoneda1).Include(i => i.Instrumento1).Include(i => i.NuevaTenencia);
+            //var inversion = db.vwn
             return View(await inversion.ToListAsync());
         }
 
@@ -29,7 +30,7 @@ namespace WebApplication3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inversion inversion = await db.Inversion.FindAsync(id);
+            vwInversionDetalle inversion = await db.vwInversionDetalle.Where(t => t.IdInversion ==id).FirstAsync();
             if (inversion == null)
             {
                 return HttpNotFound();
@@ -57,6 +58,7 @@ namespace WebApplication3.Controllers
             if (ModelState.IsValid)
             {
                 inversion.PrecioInicio = db.Criptomoneda.Find(inversion.Criptomoneda).Precio;//guardamos el precio actual
+                inversion.CriptomonedaGanada = inversion.CriptomonedaGanada != null ? inversion.CriptomonedaGanada : inversion.Criptomoneda;
                 db.Inversion.Add(inversion);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -98,16 +100,17 @@ namespace WebApplication3.Controllers
         {
             if (ModelState.IsValid)
             {
+                inversion.PrecioInicio = db.Criptomoneda.Find(inversion.Criptomoneda).Precio;//guardamos el precio actual
+                inversion.CriptomonedaGanada = inversion.CriptomonedaGanada != null ? inversion.CriptomonedaGanada : inversion.Criptomoneda;
                 db.Entry(inversion).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             ViewBag.Criptomoneda = new SelectList(db.Criptomoneda, "Nombre", "Ticker", inversion.Criptomoneda);
             ViewBag.Instrumento = new SelectList(db.Instrumento, "Nombre", "Nombre", inversion.Instrumento);
-            ViewBag.Lugar = new SelectList(db.vwTenencia, "Lugar", "Lugar", inversion.Lugar);
+            ViewBag.Lugar = new SelectList(db.vwTenencia, "IdTenencia", "Lugar", inversion.Lugar);
             ViewBag.CriptomonedaGanada = new SelectList(db.Criptomoneda, "Nombre", "Ticker", inversion.CriptomonedaGanada);
             ViewBag.IdTenencia = new SelectList(db.vwTenencia, "IdTenencia", "Lugar", inversion.Lugar);
-
             return View(inversion);
         }
         // GET: Inversion/Edit/5
@@ -141,6 +144,7 @@ namespace WebApplication3.Controllers
             if (ModelState.IsValid)
             {
                 inversion.PrecioFin = db.Criptomoneda.Find(inversion.Criptomoneda).Precio;//guardamos el precio final
+                inversion.Finalizado = true;
                 if(inversion.Instrumento == "Farming")
                 {
                     //actualización de datos de la inversion original

@@ -28,6 +28,7 @@ namespace WebApplication3.Models
         public Nullable<int> Lugar { get; set; }
         public Nullable<double> PrecioInicio { get; set; }
         public Nullable<double> PrecioFin { get; set; }
+        public Nullable<bool> Finalizado { get; set; }
     
         public virtual Criptomoneda Criptomoneda1 { get; set; }
         public virtual Instrumento Instrumento1 { get; set; }

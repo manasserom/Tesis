@@ -53,8 +53,15 @@ function drawBasic() {
         //title: "Density of Precious Metals, in g/cm^3",
         //width: 600,
         //height: 400,
-        bar: { groupWidth: "95%" },
+        //chartArea: { height: '75%' },
+        //hAxis: {maxValue: '100%'},
+        bar: { groupWidth: "85%" },
         legend: { position: "none" },
+        vAxis: {
+            viewWindowMode: 'maximized'
+            //minValue: 0,
+            //maxValue: 100
+        },
     };
 
     var chart = new google.visualization.ColumnChart(

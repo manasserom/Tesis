@@ -27,4 +27,16 @@ tr, th {
 .bg-default {
     background-color: #c9c9c9;
 }
+.panel-default{
+    border-color: #999;
+}
+.panel-default > .panel-heading {
+    background-color: #999;
+}
+.btn-dark {
+    color: #fff;
+    background-color: #999;
+    border-color: #999;
+}
+
 /*https://paletadecolores.online/grises/*/
