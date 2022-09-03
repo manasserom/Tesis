@@ -1,81 +1,75 @@
-﻿@model IEnumerable<WebApplication3.Models.vwTenencia>
+﻿@model IEnumerable<WebApplication3.Models.vwInformeTenencia>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tenencia";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Wallet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tipo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Semilla)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Exchange)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nacional)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Centralizado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Url)
-        </th>
-        <th></th>
-    </tr>
+<div class=" container">
+    <div class="col-md-6"><h2>Exchanges</h2></div>
+    <div class="col-md-push-4 col-md-2 " style="text-align: right;  ">
+        <br />
+        <a href="~/Exchange/Create" class="btn btn-success" style="vertical-align: sub;">Cargar Exchange</a>
+    </div>
+</div>
+<div class="container">
+    <div class="alert alert-info">
+        <p class="">Los calculos se hacen teniendo en cuenta las inversiones "En Proceso" y "Vencidas"</p>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Lugar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capital)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Wallet)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Tipo)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Semilla)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Exchange)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Nacional)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Centralizado)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Url)
-    </td>
-    @if (item.Wallet != null)
-    {
-        <td>
-            <a href="~/Wallet/Edit/@item.Wallet"><i class="glyphicon glyphicon-pencil" style="color:#000000 "></i></a> |
-            <a href="~/Wallet/Details/@item.Wallet"><i class="glyphicon glyphicon-list" style="color:#000000 "></i></a> |
-            <a href="~/Wallet/Delete/@item.Wallet"><i class="glyphicon glyphicon-check" style="color:#000000 "></i></a> 
-        </td>
-     }
-    else
-    {
-        <td>
-            <a href="~/Exchange/Edit/@item.Exchange"><i class="glyphicon glyphicon-pencil" style="color:#000000 "></i></a> |
-            <a href="~/Exchange/Details/@item.Exchange"><i class="glyphicon glyphicon-list" style="color:#000000 "></i></a> |
-            <a href="~/Exchange/Delete/@item.Exchange"><i class="glyphicon glyphicon-check" style="color:#000000 "></i></a>
-        </td>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lugar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @{ string Capital = item.Capital.GetValueOrDefault(0).ToString("C");}
+                    @Capital
+                    @*@Html.DisplayFor(modelItem => item.Capital)*@
+                </td>
 
-</tr>
-}
+                @if (item.Tipo != "Exchange")
+                {
+                    <td>
+                        <a href="~/Wallet/Edit/@item.Lugar"><i class="glyphicon glyphicon-pencil" style="color:#000000 "></i></a> |
+                        @*<a href="~/Wallet/Details/@item.Lugar"><i class="glyphicon glyphicon-list" style="color:#000000 "></i></a> |*@
+                        <a href="~/Wallet/Delete/@item.Lugar"><i class="glyphicon glyphicon-trash" style="color:#000000 "></i></a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a href="~/Exchange/Edit/@item.Lugar"><i class="glyphicon glyphicon-pencil" style="color:#000000 "></i></a> |
+                        @*<a href="~/Exchange/Details/@item.Lugar"><i class="glyphicon glyphicon-list" style="color:#000000 "></i></a> |*@
+                        <a href="~/Exchange/Delete/@item.Lugar"><i class="glyphicon glyphicon-trash" style="color:#000000 "></i></a>
+                    </td>
+                }
 
-</table>
+            </tr>
+        }
+
+    </table>
+</div>

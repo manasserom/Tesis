@@ -38,5 +38,13 @@ tr, th {
     background-color: #999;
     border-color: #999;
 }
-
-/*https://paletadecolores.online/grises/*/
+.row-checkbox {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.item-checkbox {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 2em;
+    width: 2em;
+}

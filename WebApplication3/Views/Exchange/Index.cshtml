@@ -1,51 +1,57 @@
 ﻿@model IEnumerable<WebApplication3.Models.Exchange>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Exchanges";
 }
 
-<h2>Index</h2>
+<div class=" container">
+    <div class="col-md-6"><h2>Exchanges</h2></div>
+    <div class="col-md-push-4 col-md-2 " style="text-align: right;  ">
+        <br />
+        <a href="~/Exchange/Create" class="btn btn-success" style="vertical-align: sub;">Cargar Exchange</a>
+    </div>
+</div>
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Centralizado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nacional)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th></th>
+        </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nacional)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Centralizado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Url)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td class="" style="padding-top: 0px; padding-bottom: 0px;">
+                    <input type="checkbox" class="item-checkbox" disabled checked="@item.Centralizado" style=" " />
+                </td>
+                <td class="" style="padding-top: 0px; padding-bottom: 0px;">
+                    <input type="checkbox" class="item-checkbox" disabled checked="@item.Nacional" style=" " />
+                </td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nacional)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Centralizado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Url)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Nombre }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Nombre }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Nombre })
-        </td>
-    </tr>
-}
+                <td>
+                    <a href="@item.Url" target="_blank">@item.Url</a>
+                    @*@Html.DisplayFor(modelItem => item.Url)*@
+                </td>
+                <td>
+                    <a href="~/Exchange/Edit/@item.Nombre"><i class="glyphicon glyphicon-pencil" style="color:#000000 "></i></a> |
+                    <a href="~/Exchange/Delete/@item.Nombre"><i class="glyphicon glyphicon-trash" style="color:#000000 "></i></a>
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

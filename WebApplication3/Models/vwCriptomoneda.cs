@@ -29,5 +29,8 @@ namespace WebApplication3.Models
         public double CantidadInvertida { get; set; }
         public Nullable<double> CantidadGanada { get; set; }
         public Nullable<int> Lugar { get; set; }
+        public Nullable<double> PrecioInicio { get; set; }
+        public Nullable<double> PrecioFin { get; set; }
+        public Nullable<bool> Finalizado { get; set; }
     }
 }

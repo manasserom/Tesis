@@ -1,45 +1,50 @@
 ﻿@model IEnumerable<WebApplication3.Models.Wallet>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Wallets";
 }
 
-<h2>Index</h2>
+<div class=" container">
+    <div class="col-md-6"><h2>Wallets</h2></div>
+    <div class="col-md-push-4 col-md-2 " style="text-align: right;  ">
+        <br />
+        <a href="~/Wallet/Create" class="btn btn-success" style="vertical-align: sub;">Cargar Wallet</a>
+    </div>
+</div>
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Semilla)
+            </th>
+            <th></th>
+        </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Semilla)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoDeWallet.TipoWallet)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Semilla)
+                </td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Semilla)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoDeWallet.TipoWallet)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Nombre }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Nombre }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Nombre })
-        </td>
-    </tr>
-}
+                <td>
+                    <a href="~/Wallet/Edit/@item.Nombre"><i class="glyphicon glyphicon-pencil" style="color:#000000 "></i></a> |
+                    <a href="~/Wallet/Delete/@item.Nombre"><i class="glyphicon glyphicon-trash" style="color:#000000 "></i></a>
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

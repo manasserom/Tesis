@@ -337,6 +337,9 @@
     <Compile Include="Models\vwCriptosDWB.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\vwInformeTenencia.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\vwInversionDetalle.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

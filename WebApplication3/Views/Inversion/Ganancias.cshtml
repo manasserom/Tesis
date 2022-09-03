@@ -49,16 +49,27 @@
 
         @foreach (var item in Model)
         {
-            if (DateTime.Now.Date >= item.FechaFin)
+            if (item.Finalizado.GetValueOrDefault(false))
             {
-                Estado = "Vencido";
-                EstadoClase = "alert alert-danger";
+                Estado = "Finalizado";
+                EstadoClase = "alert alert-warning";
+
             }
             else
             {
-                Estado = "Vigente";
-                EstadoClase = "alert alert-success";
 
+
+                if (DateTime.Now.Date >= item.FechaFin)
+                {
+                    Estado = "Vencido";
+                    EstadoClase = "alert alert-danger";
+                }
+                else
+                {
+                    Estado = "Vigente";
+                    EstadoClase = "alert alert-success";
+
+                }
             }
 
             //Armado de formato de moneda

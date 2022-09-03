@@ -88,10 +88,13 @@ namespace WebApplication3.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Nombre,Nacional,Centralizado,Url")] Exchange exchange)
+        public async Task<ActionResult> Edit([Bind(Include = "Nombre,Nacional,Centralizado,Url")] Exchange exchange, string NombreAnterior)
         {
             if (ModelState.IsValid)
             {
+                //Editar a la tenencia
+                //NuevaTenencia tenencia = db.NuevaTenencia.Where(t => t.Exchange == NombreAnterior).First();
+                //db.Entry(tenencia).State = EntityState.Modified;
                 db.Entry(exchange).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -120,6 +123,8 @@ namespace WebApplication3.Controllers
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             Exchange exchange = await db.Exchange.FindAsync(id);
+            NuevaTenencia tenencia = db.NuevaTenencia.Where(t => t.Exchange == exchange.Nombre).First();
+            db.NuevaTenencia.Remove(tenencia);
             db.Exchange.Remove(exchange);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

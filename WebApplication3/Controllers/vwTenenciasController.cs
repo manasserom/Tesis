@@ -18,7 +18,7 @@ namespace WebApplication3.Controllers
         // GET: vwTenencias
         public async Task<ActionResult> Index()
         {
-            return View(await db.vwTenencia.ToListAsync());
+            return View(await db.vwInformeTenencia.ToListAsync());
         }
 
         // GET: vwTenencias/Details/5

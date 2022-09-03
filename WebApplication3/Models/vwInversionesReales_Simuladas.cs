@@ -33,5 +33,6 @@ namespace WebApplication3.Models
         public string Ticker { get; set; }
         public string LugarNombre { get; set; }
         public double CapitalActual { get; set; }
+        public Nullable<bool> Finalizado { get; set; }
     }
 }

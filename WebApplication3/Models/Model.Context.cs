@@ -64,6 +64,7 @@ namespace WebApplication3.Models
         public virtual DbSet<vwTenenciaWI> vwTenenciaWI { get; set; }
         public virtual DbSet<vwCapital_LugarSeparadoWI> vwCapital_LugarSeparadoWI { get; set; }
         public virtual DbSet<vwInversionDetalle> vwInversionDetalle { get; set; }
+        public virtual DbSet<vwInformeTenencia> vwInformeTenencia { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
