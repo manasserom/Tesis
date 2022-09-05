@@ -1,75 +1,68 @@
 ﻿@model WebApplication3.Models.Criptomoneda
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar";
 }
-
-<h2>Edit</h2>
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Criptomoneda</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Nombre)
-        @*@Html.HiddenFor(model => model.TipoCriptomoneda)*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ticker, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ticker, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ticker, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <br />
+    <div class="" style="align-content: center; justify-content: center; align-items: center; display: flex;">
+        <div class="panel panel-warning " style="width: fit-content;">
+            <div class="panel-heading"><h4>Editar Criptomoneda</h4></div>
+            <div class="panel-body text-center" style="padding-right: 30px; padding-left: 30px;">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="Nombre" class="col-md-4" style="text-align:left;">Nombre</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @onfocus = "this.blur()" } })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Ticker" class="col-md-4" style="text-align:left;">Ticker</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Ticker, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Ticker, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Tipo" class="col-md-4" style="text-align:left;">Tipo</label>
+                        <div class="col-md-8">
+                            @Html.DropDownList("Tipo", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Precio" class="col-md-4" style="text-align:left;">Precio</label>
+                        <div class="col-md-8">
+                            <input type="text" name="Precio" id="Precio" value="@(Model.Precio)" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Capitalizacion" class="col-md-4" style="text-align:left;">Capitalizacion</label>
+                        <div class="col-md-8">
+                            <input type="text" name="Capitalizacion" id="Capitalizacion" value="@(Model.Capitalizacion)" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.Capitalizacion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Precio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" name="Precio" id="Precio" value="" class="form-control" />
-                @*@Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control", Type="number" } })*@
-                @*@Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tipo, "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Tipo", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Logo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Logo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Capitalizacion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Capitalizacion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Capitalizacion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                    <div class="form-group">
+                        <div class="pull-right" style="padding-right: 15px;">
+                            <a href="~/Criptomoneda/Index" class="btn btn-default">Cancelar</a>
+                            <input type="submit" value="Editar" class="btn btn-warning" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

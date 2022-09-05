@@ -67,7 +67,7 @@
         </div>
         <div class="panel-body collapse" id="collapseExample">
             <div class="col-md-3">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading"><strong>Tipo de Criptomoneda</strong></div>
                     <div class="panel-body">
 
@@ -95,7 +95,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading"><strong>Criptomoneda</strong></div>
                     <div class="panel-body" style="max-height: 120px;overflow-y:scroll;">
                         @foreach (Capital_Cripto_ResumenWI inv in Inversiones.ToList())
@@ -121,7 +121,7 @@
                 </div>
                 </div>
             <div class="col-md-3">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading"><strong>Lugar</strong></div>
                     <div class="panel-body" style="max-height: 120px;overflow-y:scroll;">
                         @foreach (vwTenenciaWI inv in tenencia_lugares.ToList())
@@ -218,69 +218,75 @@
     <div class="col-md-3"><p>Simuladas: @Model.Where(t => t.TipoInversion == "Simulada").Count()</p></div>
     <div class="col-md-3"><button class="btn btn-success" onclick="window.location.href = '/InversionTemporal/Create'">Agregar Inversión simulada</button></div>
 </div>
-
-<table class="table table-responsive">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoInversion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Criptomoneda)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Lugar)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Instrumento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CapitalActual)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        string defaultClass = (item.TipoInversion == "Simulada" ? "" : "bg-default");
-        string Capital = (item.PrecioFin.GetValueOrDefault(0) * item.CantidadGanada.GetValueOrDefault(item.CantidadInvertida)).ToString("C");
-
-        <tr class="@defaultClass">
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoInversion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Criptomoneda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LugarNombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Instrumento)
-            </td>
-            <td>
-                @if (item.PrecioFin.HasValue)
-                {
-                    @Capital
-                }
-                else
-                {
-                    @(item.CapitalActual.ToString("C"))
-                }
-
-            </td>
-
-            <td>
-                @if (item.TipoInversion == "Simulada")
-                {
-                    @*<input type="button" name="name" class="button" value="Eliminar"
-                onclick="$.ajax({ url: '/InversionTemporal/Delete',  data: { id: @item.IdInversion }})" />*@
-                    @*<input type="button" name="name" class="button" value="Editar"
-                onclick="$.ajax({ url: '/InversionTemporal/Edit', data: { id: @item.IdInversion }})" />*@
-                    <button class="btn btn-warning" onclick="window.location.href = '/InversionTemporal/Edit/@item.IdInversion'">Editar</button>
-                    <button class="btn btn-danger" onclick="window.location.href = '/InversionTemporal/Delete/@item.IdInversion'">Eliminar</button>
-                }
-            </td>
+<div class="table-responsive">
+    <table class="table table-responsive">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoInversion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Criptomoneda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lugar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Instrumento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CapitalActual)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            string defaultClass = (item.TipoInversion == "Simulada" ? "" : "bg-default");
+            string Capital = !item.PrecioFin.HasValue ?
+                (item.PrecioFin.GetValueOrDefault(0) * item.CantidadGanada.GetValueOrDefault(item.CantidadInvertida)).ToString("C")
+                : (item.PrecioInicio.Value * item.CantidadInvertida).ToString("C");
+
+            <tr class="@defaultClass">
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoInversion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Criptomoneda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LugarNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Instrumento)
+                </td>
+                <td>
+                    @if (item.PrecioFin.HasValue)
+                    {
+                        @Capital
+                    }
+                    else
+                    {
+                        @(item.CapitalActual.ToString("C"))
+                    }
+
+                </td>
+
+                <td>
+                    @if (item.TipoInversion == "Simulada")
+                    {
+                        @*<input type="button" name="name" class="button" value="Eliminar"
+                            onclick="$.ajax({ url: '/InversionTemporal/Delete',  data: { id: @item.IdInversion }})" />*@
+                        @*<input type="button" name="name" class="button" value="Editar"
+                            onclick="$.ajax({ url: '/InversionTemporal/Edit', data: { id: @item.IdInversion }})" />*@
+                        @*<button class="btn btn-warning" onclick="window.location.href = '/InversionTemporal/Edit/@item.IdInversion'">Editar</button>
+                            <button class="btn btn-danger" onclick="window.location.href = '/InversionTemporal/Delete/@item.IdInversion'">Eliminar</button>*@
+                        <a href="/InversionTemporal/Edit/@item.IdInversion" class="btn btn-warning btn-sm" style="margin-top: 0px; margin-bottom: 0px;">Editar</a>
+                        <a href="/InversionTemporal/Delete/@item.IdInversion" class="btn btn-danger btn-sm" style="margin-top: 0px; margin-bottom: 0px; ">Eliminar</a>
+
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,64 +1,64 @@
 ﻿@model WebApplication3.Models.Criptomoneda
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar";
 }
 
-<h2>Delete</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="" style="align-content: center; justify-content: center; align-items: center; display: flex;">
+        <div class="panel panel-danger " style="width: fit-content;">
+            <div class="panel-heading"><h4>Eliminar Criptomoneda</h4></div>
+            <div class="panel-body text-center" style="padding-right: 30px; padding-left: 30px;">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="Nombre" class="col-md-4" style="text-align:left;">Nombre</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @Disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Ticker" class="col-md-4" style="text-align:left;">Ticker</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Ticker, new { htmlAttributes = new { @class = "form-control", @Disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Ticker, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Tipo" class="col-md-4" style="text-align:left;">Tipo</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Tipo, new { htmlAttributes = new { @class = "form-control", @Disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Precio" class="col-md-4" style="text-align:left;">Precio</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control", @Disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Capitalizacion" class="col-md-4" style="text-align:left;">Capitalizacion</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Capitalizacion, new { htmlAttributes = new { @class = "form-control", @Disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Capitalizacion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Criptomoneda</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Ticker)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ticker)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Logo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Logo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Capitalizacion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Capitalizacion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoCriptomoneda.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TipoCriptomoneda.Nombre)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                    <div class="form-group">
+                        <div class="pull-right" style="padding-right: 15px;">
+                            <a href="~/Instrumento/Index" class="btn btn-default">Cancelar</a>
+                            <input type="submit" value="Eliminar" class="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    }
-</div>
+    </div>
+
+}

@@ -1,84 +1,83 @@
 ﻿@model IEnumerable<WebApplication3.Models.Criptomoneda>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Criptomonedas";
 }
 
-<h2>Index</h2>
-<input type="button" name="name" class=" btn button" value="Eliminar2"
-       onclick="$.ajax({ url: '/Criptomoneda/ActualizarCriptos'})" />
-@*<button class=" btn btn-success" onclick="Actualizar()">Actualizar </button>*@
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ticker)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Precio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Logo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Capitalizacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoCriptomoneda.Nombre)
-        </th>
-        <th></th>
-    </tr>
+<div class=" container-fluid">
+    <div class="col-md-6 col-sm-12"><h2>Criptomonedas y Tokens</h2></div>
+    <div class="col-md-6  col-sm-12" style="text-align: right;  ">
+        <a href="~/Criptomoneda/Create" class="btn btn-success" style="margin: 20px 0px 0px 10px;">Cargar Inversión</a>
+        <input type="button" name="name" class=" btn btn-info" value="Actualizar"
+               onclick="$.ajax({ url: '/Criptomoneda/ActualizarCriptos'})" 
+               style="margin: 20px 0px 0px 10px;"/>
 
-    @foreach (var item in Model)
-    {
+    </div>
+</div>
+
+<div class="table-responsive">
+    <br />
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ticker)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Logo)
-            </td>
-            <td>
-                $ @(item.Capitalizacion.Value.ToString("n"))
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoCriptomoneda.Nombre)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Nombre }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Nombre }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Nombre })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticker)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Logo)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Capitalizacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoCriptomoneda.Nombre)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
-@*<script>
-    function Actualizar() {
-        $.ajax({
-            type: 'GET',
-            url: 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false',
-            dataType: 'json'
-        }).done((data) => {
-            for (let item of data) {
-                let AuxNombre = '' + item.name + '';
-                $.ajax({
-                    url: '/Criptomoneda/Actualizar', data: {
-                        Ticker: item.symbol, Nombre: AuxNombre, Precio: item.current_price, Capitalizacion: item.market_cap }
-                });
-            }
-        });
-    }
-</script>*@
+        @foreach (var item in Model.OrderByDescending(t=>t.Capitalizacion))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @(item.Ticker.ToUpper())
+                    @*@Html.DisplayFor(modelItem => item.Ticker)*@
+                </td>
+                <td>
+                    @(item.Precio.ToString("C"))
+                    @*@Html.DisplayFor(modelItem => item.Precio)*@
+                </td>
+
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Logo)
+                    </td>*@
+                <td>
+                    @(item.Capitalizacion.Value.ToString("C"))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoCriptomoneda.Nombre)
+                </td>
+                <td>
+                    <a href="~/Criptomoneda/Edit/@item.Nombre"><i class="glyphicon glyphicon-pencil" style="color:#000000 "></i></a> |
+                    @*<a href="~/Criptomoneda/Details/@item.Nombre"><i class="glyphicon glyphicon-list" style="color:#000000 "></i></a>*@ 
+                        <a href="~/Criptomoneda/Delete/@item.Nombre"><i class="glyphicon glyphicon-trash" style="color:#000000 "></i></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<script>
+    //Actualizar precio de las criptomonedas al cargar
+    //window.onload = function () {
+    //    $.ajax({ url: '/Criptomoneda/ActualizarCriptos' });
+    //}
+</script>

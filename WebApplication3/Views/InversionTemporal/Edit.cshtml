@@ -1,121 +1,127 @@
 ﻿@model WebApplication3.Models.InversionTemporal
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "What If";
 }
-
-<h2>Edit</h2>
 
 
 @using (Html.BeginForm())
 {
+    string AuxFechaFin = Model.FechaFin.HasValue ? Model.FechaFin.Value.ToString("yyyy-MM-dd") : "";
+    string AuxCantidadInvertida = "" + Model.CantidadInvertida;
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>InversionTemporal</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IdInversion)
+    <br />
+    <div class="" style="align-content: center; justify-content: center; align-items: center; display: flex;">
+        <div class="panel panel-warning " style="width: fit-content;">
+            <div class="panel-heading"><h4>Editar Inversión</h4></div>
+            <div class="panel-body text-center" style="padding-right: 30px; padding-left: 30px;">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.IdInversion)
+                    @Html.HiddenFor(model => model.Criptomoneda)
+                    @Html.HiddenFor(model => model.CriptomonedaGanada)
+                    @Html.HiddenFor(model => model.Lugar)
+                    @Html.HiddenFor(model => model.Instrumento)
+                    @Html.HiddenFor(model => model.PrecioInicio)
+                    @Html.HiddenFor(model => model.PrecioFin)
+                    @Html.HiddenFor(model => model.FechaInicio)
+                    @Html.HiddenFor(model => model.Finalizado)
+                    @Html.HiddenFor(model => model.CriptomonedaGanada)
+                    @Html.HiddenFor(model => model.TasaEstimada)
+                    @Html.HiddenFor(model => model.TasaReal)
+                    @Html.HiddenFor(model => model.FechaFin)
+                    @*@Html.HiddenFor(model => model.NuevaTenencia)
+                        @Html.HiddenFor(model => model.Criptomoneda1)
+                        @Html.HiddenFor(model => model.IdInversion)*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Lugar1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Lugar1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Lugar1, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.Lugar, "Lugar", htmlAttributes: new { @class = "control-label col-md-4" })*@
+                        <label for="Lugar" class="col-md-4" style="text-align:left;">Lugar *</label>
+                        <div class="col-md-8">
+                            @Html.DropDownList("Lugar", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Lugar, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Instrumento, "Instrumento", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Instrumento", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Instrumento, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.Instrumento, "Instrumento", htmlAttributes: new { @class = "control-label col-md-4" })*@
+                        <label for="Instrumento" class="col-md-4" style="text-align:left;">Instrumento *</label>
+                        <div class="col-md-8">
+                            @Html.DropDownList("Instrumento", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Instrumento, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Criptomoneda, "Criptomoneda", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Criptomoneda", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Criptomoneda, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.Criptomoneda, "Criptomoneda", htmlAttributes: new { @class = "control-label col-md-4" })*@
+                        <label for="Criptomoneda" class="col-md-4" style="text-align:left;">Criptomoneda *</label>
+                        <div class="col-md-8">
+                            @Html.DropDownList("Criptomoneda", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Criptomoneda, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CriptomonedaGanada, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CriptomonedaGanada, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CriptomonedaGanada, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <!--<div class="form-group" id="DivCriptomonedaGanada" style="display:none;visibility:hidden;">-->
+                        @*@Html.LabelFor(model => model.CriptomonedaGanada, htmlAttributes: new { @class = "control-label col-md-4", @style = "style=overflow: auto;" })*@
+                        @*<label for="CriptomonedaGanada" class="col-md-4" style="text-align:left;">Criptomoneda Ganada *</label>
+                        <div class="col-md-8">
+                            @Html.DropDownList("CriptomonedaGanada", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CriptomonedaGanada, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TasaEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TasaEstimada, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TasaEstimada, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    @*<div class="form-group">
+                        <label for="TasaEstimada" class="col-md-4" style="text-align:left;">Tasa Estimada *</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.TasaEstimada, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TasaEstimada, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TasaReal, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TasaReal, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TasaReal, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    @*<div class="form-group">
+                        <label for="TasaReal" class="col-md-4" style="text-align:left;">Tasa Real</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.TasaReal, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TasaReal, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        <label for="FechaInicio" class="col-md-4" style="text-align:left;">Fecha de Inicio *</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control datepicker", @type = "date", @Value = Model.FechaInicio.ToString("yyyy-MM-dd") } })
+                            @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    @*<div class="form-group">
+                        <label for="FechaFin" class="col-md-4" style="text-align:left;">Fecha de Finalización</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control datepicker", @type = "date", @Value = AuxFechaFin } })
+                            @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CantidadInvertida, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CantidadInvertida, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CantidadInvertida, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CantidadGanada, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CantidadGanada, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CantidadGanada, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Lugar, "Lugar", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Lugar", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Lugar, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                    <div class="form-group">
+                        <label for="CantidadInvertida" class="col-md-4" style="text-align:left;">Cantidad Invertida *</label>
+                        <div class="col-md-8">
+                            @*<input type="text" name="CantidadInvertida" id="CantidadInvertida" value="@(AuxCantidadInvertida)" class="form-control" />*@
+                            @Html.EditorFor(model => model.CantidadInvertida, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CantidadInvertida, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="pull-right" style="padding-right: 15px;">
+                            <a href="~/InversionTemporal/Index" class="btn btn-default">Cancelar</a>
+                            <input type="submit" value="Cargar" class="btn btn-warning" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+                                    
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -303,6 +303,13 @@ namespace WebApplication3.Controllers
         {
             if (ModelState.IsValid)
             {
+                inversionTemporal.CriptomonedaGanada = inversionTemporal.Criptomoneda;
+                inversionTemporal.PrecioInicio = db.Criptomoneda.Find(inversionTemporal.Criptomoneda).Precio;
+                inversionTemporal.PrecioFin = 0;
+                inversionTemporal.Finalizado = false;
+                inversionTemporal.TasaEstimada = 0;
+                inversionTemporal.TasaReal = 0;
+                //inversionTemporal.ToString = false;
                 db.InversionTemporal.Add(inversionTemporal);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -310,7 +317,7 @@ namespace WebApplication3.Controllers
 
             ViewBag.Criptomoneda = new SelectList(db.Criptomoneda, "Nombre", "Ticker", inversionTemporal.Criptomoneda);
             ViewBag.Instrumento = new SelectList(db.Instrumento, "Nombre", "Nombre", inversionTemporal.Instrumento);
-            ViewBag.Lugar = new SelectList(db.NuevaTenencia, "idTenencia", "Exchange", inversionTemporal.Lugar);
+            ViewBag.Lugar = new SelectList(db.vwTenencia, "idTenencia", "Lugar", inversionTemporal.Lugar);
             return View(inversionTemporal);
         }
 
@@ -328,7 +335,7 @@ namespace WebApplication3.Controllers
             }
             ViewBag.Criptomoneda = new SelectList(db.Criptomoneda, "Nombre", "Ticker", inversionTemporal.Criptomoneda);
             ViewBag.Instrumento = new SelectList(db.Instrumento, "Nombre", "Nombre", inversionTemporal.Instrumento);
-            ViewBag.Lugar = new SelectList(db.NuevaTenencia, "idTenencia", "Exchange", inversionTemporal.Lugar);
+            ViewBag.Lugar = new SelectList(db.vwTenencia, "idTenencia", "Lugar", inversionTemporal.Lugar);
             return View(inversionTemporal);
         }
 
@@ -347,7 +354,7 @@ namespace WebApplication3.Controllers
             }
             ViewBag.Criptomoneda = new SelectList(db.Criptomoneda, "Nombre", "Ticker", inversionTemporal.Criptomoneda);
             ViewBag.Instrumento = new SelectList(db.Instrumento, "Nombre", "Nombre", inversionTemporal.Instrumento);
-            ViewBag.Lugar = new SelectList(db.NuevaTenencia, "idTenencia", "Exchange", inversionTemporal.Lugar);
+            ViewBag.Lugar = new SelectList(db.vwTenencia, "idTenencia", "Lugar", inversionTemporal.Lugar);
             return View(inversionTemporal);
         }
 
