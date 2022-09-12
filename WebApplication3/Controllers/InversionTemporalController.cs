@@ -253,6 +253,7 @@ namespace WebApplication3.Controllers
             //Capital segun el Lugar
             string ListaLugarData = "";
             string ListaLugarCate = "";
+            CapLugar = CapLugar.OrderBy(t => t.Capital);
             foreach (vwCapital_LugarSeparadoWI capital in CapLugar)
             {
                 ListaLugarData = ListaLugarData + capital.Lugar + ",";

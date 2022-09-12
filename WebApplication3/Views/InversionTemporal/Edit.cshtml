@@ -36,7 +36,7 @@
 
                     <div class="form-group">
                         @*@Html.LabelFor(model => model.Lugar, "Lugar", htmlAttributes: new { @class = "control-label col-md-4" })*@
-                        <label for="Lugar" class="col-md-4" style="text-align:left;">Lugar *</label>
+                        <label for="Lugar" class="col-md-4" style="text-align:left;">Lugar</label>
                         <div class="col-md-8">
                             @Html.DropDownList("Lugar", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Lugar, "", new { @class = "text-danger" })
@@ -45,7 +45,7 @@
 
                     <div class="form-group">
                         @*@Html.LabelFor(model => model.Instrumento, "Instrumento", htmlAttributes: new { @class = "control-label col-md-4" })*@
-                        <label for="Instrumento" class="col-md-4" style="text-align:left;">Instrumento *</label>
+                        <label for="Instrumento" class="col-md-4" style="text-align:left;">Instrumento</label>
                         <div class="col-md-8">
                             @Html.DropDownList("Instrumento", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Instrumento, "", new { @class = "text-danger" })
@@ -54,7 +54,7 @@
 
                     <div class="form-group">
                         @*@Html.LabelFor(model => model.Criptomoneda, "Criptomoneda", htmlAttributes: new { @class = "control-label col-md-4" })*@
-                        <label for="Criptomoneda" class="col-md-4" style="text-align:left;">Criptomoneda *</label>
+                        <label for="Criptomoneda" class="col-md-4" style="text-align:left;">Criptomoneda</label>
                         <div class="col-md-8">
                             @Html.DropDownList("Criptomoneda", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Criptomoneda, "", new { @class = "text-danger" })
@@ -87,7 +87,7 @@
                     </div>*@
 
                     <div class="form-group">
-                        <label for="FechaInicio" class="col-md-4" style="text-align:left;">Fecha de Inicio *</label>
+                        <label for="FechaInicio" class="col-md-4" style="text-align:left;">Fecha de Inicio</label>
                         <div class="col-md-8">
                             @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control datepicker", @type = "date", @Value = Model.FechaInicio.ToString("yyyy-MM-dd") } })
                             @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })

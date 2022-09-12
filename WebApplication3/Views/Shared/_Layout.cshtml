@@ -8,6 +8,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" type="text/css" href="~/Content/estilos/Estilos.css" media="screen" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/fonts/Logo.png" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 </head>
@@ -20,6 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                @*<img src="~/fonts/LogoNavbar.png" style="height:30px;">*@
                 @Html.ActionLink("Version 3.5", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">

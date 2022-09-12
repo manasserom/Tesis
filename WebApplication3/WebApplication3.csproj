@@ -381,6 +381,8 @@
     <Content Include="Content\estilos\Estilos.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\Logo.png" />
+    <Content Include="fonts\LogoNavbar.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

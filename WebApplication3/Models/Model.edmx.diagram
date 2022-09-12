@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9ed86354418c46daa4d4a2007b138fd6" Name="Diagram1" ZoomLevel="94">
+      <Diagram DiagramId="9ed86354418c46daa4d4a2007b138fd6" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="Tesis_Inv2Model.Criptomoneda" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Tesis_Inv2Model.Exchange" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Tesis_Inv2Model.Instrumento" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />

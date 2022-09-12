@@ -42,7 +42,7 @@ namespace WebApplication3.Controllers
             IEnumerable<Capital_Cripto_Resumen> CapCrip = db.Capital_Cripto_Resumen.OrderBy(t => t.CapitalTotal).ToList();
             foreach(Capital_Cripto_Resumen capital in CapCrip)
             {
-                ListaCripData = ListaCripData + capital.Ticker + ",";
+                ListaCripData = ListaCripData + capital.Ticker.ToUpper() + ",";
                 ListaCripCate = ListaCripCate +  (int)(capital.CapitalTotal.Value) + ",";
             }
             ListaCripData = ListaCripData.Substring(0, ListaCripData.Length - 1);
