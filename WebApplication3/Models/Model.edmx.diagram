@@ -25,7 +25,6 @@
         <AssociationConnector Association="Tesis_Inv2Model.FK_Inversion_Criptomoneda" ManuallyRouted="false" />
         <AssociationConnector Association="Tesis_Inv2Model.FK_NuevaTenencia_Exchange" ManuallyRouted="false" />
         <AssociationConnector Association="Tesis_Inv2Model.FK_Inversion_Instrumento" ManuallyRouted="false" />
-        <AssociationConnector Association="Tesis_Inv2Model.FK_Inversion_NuevaTenencia" ManuallyRouted="false" />
         <AssociationConnector Association="Tesis_Inv2Model.FK_NuevaTenencia_Wallet" ManuallyRouted="false" />
         <AssociationConnector Association="Tesis_Inv2Model.FK_Wallet_TipoDeWallet" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Tesis_Inv2Model.Inversion_Cripto_Instru" Width="1.5" PointX="0.75" PointY="12.75" />
@@ -54,6 +53,7 @@
         <EntityTypeShape EntityType="Tesis_Inv2Model.vwCapital_LugarSeparadoWI" Width="1.5" PointX="18.375" PointY="3.75" />
         <EntityTypeShape EntityType="Tesis_Inv2Model.vwInversionDetalle" Width="1.5" PointX="3.375" PointY="18.75" />
         <EntityTypeShape EntityType="Tesis_Inv2Model.vwInformeTenencia" Width="1.5" PointX="18.375" PointY="6.75" />
+        <AssociationConnector Association="Tesis_Inv2Model.FK_Inversion_NuevaTenencia" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

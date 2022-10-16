@@ -53,7 +53,7 @@
 
         @foreach (var item in Model)
         {
-            if (item.Finalizado.GetValueOrDefault(false))
+            if (item.Finalizado)
             {
                 Estado = "Finalizado";
                 EstadoClase = "alert alert-warning";

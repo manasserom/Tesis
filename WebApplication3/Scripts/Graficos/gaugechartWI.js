@@ -7,7 +7,7 @@
 
         var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-            ['Disponibilidad', parseInt(Bloq)],
+            ['Bloqueado', parseInt(Bloq)],
             //['Centralización', parseInt(Disp)],
         ]);
 

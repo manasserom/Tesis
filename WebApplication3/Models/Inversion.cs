@@ -25,10 +25,9 @@ namespace WebApplication3.Models
         public double CantidadInvertida { get; set; }
         public Nullable<double> CantidadGanada { get; set; }
         public Nullable<int> Lugar { get; set; }
-        public string Lugar1 { get; set; }
-        public Nullable<double> PrecioInicio { get; set; }
+        public double PrecioInicio { get; set; }
         public Nullable<double> PrecioFin { get; set; }
-        public Nullable<bool> Finalizado { get; set; }
+        public bool Finalizado { get; set; }
     
         public virtual Criptomoneda Criptomoneda1 { get; set; }
         public virtual Instrumento Instrumento1 { get; set; }

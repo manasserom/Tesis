@@ -17,8 +17,8 @@ namespace WebApplication3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NuevaTenencia()
         {
-            this.Inversion = new HashSet<Inversion>();
             this.InversionTemporal = new HashSet<InversionTemporal>();
+            this.Inversion = new HashSet<Inversion>();
         }
     
         public int idTenencia { get; set; }
@@ -26,10 +26,10 @@ namespace WebApplication3.Models
         public string Wallet { get; set; }
     
         public virtual Exchange Exchange1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inversion> Inversion { get; set; }
         public virtual Wallet Wallet1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InversionTemporal> InversionTemporal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inversion> Inversion { get; set; }
     }
 }

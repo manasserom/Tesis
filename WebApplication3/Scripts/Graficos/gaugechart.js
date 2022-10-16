@@ -7,15 +7,15 @@
 
         var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-            ['Disponibilidad', parseInt(Bloq)],
-            ['Centralización', parseInt(Disp)],
+            [' Bloqueado ', parseInt(Bloq)],
+            [' Centralizado ', parseInt(Disp)],
         ]);
 
-        var options = {
-            width: '100%', height: 200,
-          redFrom: 90, redTo: 100,
-          yellowFrom:75, yellowTo: 90,
-          minorTicks: 5
+          var options = {
+              width: '100%', height: 200,
+              redFrom: 90, redTo: 100,
+              yellowFrom:75, yellowTo: 90,
+              minorTicks: 5
         };
 
         var chart = new google.visualization.Gauge(document.getElementById('chart_div'));

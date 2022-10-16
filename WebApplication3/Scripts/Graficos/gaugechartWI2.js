@@ -8,7 +8,7 @@
         var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
             //['Disponibilidad', parseInt(Bloq)],
-            ['Centralización', parseInt(Disp)],
+            ['Centralizado', parseInt(Disp)],
         ]);
 
         var options = {

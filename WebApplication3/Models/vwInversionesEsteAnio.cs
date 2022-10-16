@@ -15,7 +15,6 @@ namespace WebApplication3.Models
     public partial class vwInversionesEsteAnio
     {
         public int IdInversion { get; set; }
-        public string Lugar1 { get; set; }
         public string Instrumento { get; set; }
         public string Criptomoneda { get; set; }
         public string CriptomonedaGanada { get; set; }
@@ -26,5 +25,6 @@ namespace WebApplication3.Models
         public double CantidadInvertida { get; set; }
         public Nullable<double> CantidadGanada { get; set; }
         public Nullable<int> Lugar { get; set; }
+        public Nullable<int> Expr1 { get; set; }
     }
 }
