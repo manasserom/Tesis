@@ -58,7 +58,6 @@
             <PropertyRef Name="IdInversion" />
           </Key>
           <Property Name="IdInversion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Lugar1" Type="varchar" MaxLength="50" />
           <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
@@ -578,7 +577,6 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwInversionesReales_Simuladas
             <PropertyRef Name="CapitalActual" />
           </Key>
           <Property Name="IdInversion" Type="int" Nullable="false" />
-          <Property Name="Lugar1" Type="varchar" MaxLength="50" />
           <Property Name="Instrumento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Criptomoneda" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CriptomonedaGanada" Type="varchar" MaxLength="50" Nullable="false" />
@@ -1131,7 +1129,6 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
           <EntitySet Name="vwInversionesReales_Simuladas" EntityType="Self.vwInversionesReales_Simuladas" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwInversionesReales_Simuladas].[IdInversion] AS [IdInversion], 
-    [vwInversionesReales_Simuladas].[Lugar1] AS [Lugar1], 
     [vwInversionesReales_Simuladas].[Instrumento] AS [Instrumento], 
     [vwInversionesReales_Simuladas].[Criptomoneda] AS [Criptomoneda], 
     [vwInversionesReales_Simuladas].[CriptomonedaGanada] AS [CriptomonedaGanada], 
@@ -1792,7 +1789,6 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
             <PropertyRef Name="IdInversion" />
           </Key>
           <Property Name="IdInversion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Lugar1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CriptomonedaGanada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -2001,7 +1997,6 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
             <PropertyRef Name="CapitalActual" />
           </Key>
           <Property Name="IdInversion" Type="Int32" Nullable="false" />
-          <Property Name="Lugar1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Instrumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Criptomoneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CriptomonedaGanada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -2457,7 +2452,6 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
                 <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
                 <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
                 <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
-                <ScalarProperty Name="Lugar1" ColumnName="Lugar1" />
                 <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2599,7 +2593,6 @@ advertencia 6002: La tabla o vista 'Tesis_Inv2.dbo.vwTenenciaWI' no tiene defini
                 <ScalarProperty Name="CriptomonedaGanada" ColumnName="CriptomonedaGanada" />
                 <ScalarProperty Name="Criptomoneda" ColumnName="Criptomoneda" />
                 <ScalarProperty Name="Instrumento" ColumnName="Instrumento" />
-                <ScalarProperty Name="Lugar1" ColumnName="Lugar1" />
                 <ScalarProperty Name="IdInversion" ColumnName="IdInversion" />
               </MappingFragment>
             </EntityTypeMapping>

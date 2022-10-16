@@ -37,7 +37,7 @@
                 <h3>Capital segun el tipo</h3>
                 <div id="donutchart" style="width: 100%; height: auto;"></div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 col-sm-12">
                 <h3>Capital por criptomoneda</h3>
                 @*<div id="piechart" style="width: 100%; height: auto;"></div>*@
                 <div id="columnchart" style="width: 100%; height: auto;"></div>
@@ -65,7 +65,7 @@
                 Filtros <span class="glyphicon glyphicon-triangle-bottom"></span>
             </a>
         </div>
-        <div class="panel-body collapse" id="collapseExample">
+        <div class="panel-body collapse" id="collapseExample" expanded="true">
             <div class="col-md-3">
                 <div class="panel panel-primary">
                     <div class="panel-heading"><strong>Tipo de Criptomoneda</strong></div>
@@ -74,22 +74,22 @@
                         @foreach (TipoCriptomoneda s in tipoCriptomoneda)
                         {
                             bool bandera = false; string Oculto = "";
-                            if (s.Nombre == "Aaux") { Oculto = "visibility: hidden;height: 0px;width: 0px;"; }
-                            <p style="display: inline; @Oculto">
-                                @if (s.Nombre != "Aaux")
-                                {@s.Nombre}
-                            </p>
+                            if (s.Nombre == "Aaux") { Oculto = "visibility: hidden;height: 0px;width: 0px;display: none;"; }
                             if (InversionesB != null) { foreach (string c in tipoCriptomonedaB) { if (c == (s.Nombre)) { bandera = true; } } }
                             if (s.Nombre == "Aaux") { bandera = false; }
                             if (bandera)
                             {
-                                @Html.CheckBox("TipoCripto", htmlAttributes: new { @class = "", @Value = (s.Nombre), @checked = "checked" });<br />
+                                @Html.CheckBox("TipoCripto", htmlAttributes: new { @class = "", @Value = (s.Nombre), @checked = "checked" });
                             }
                             else
                             {
                                 @Html.CheckBox("TipoCripto", false, htmlAttributes: new { @class = "", @Value = (s.Nombre), @Style = Oculto }); if (s.Nombre != "Aaux")
-                                { <br />}
+                                { }
                             }
+                            <p style="display: inline; @Oculto">
+                                @if (s.Nombre != "Aaux")
+                                {@s.Nombre <br />}
+                            </p>
                         }
                     </div>
                 </div>
@@ -101,21 +101,22 @@
                         @foreach (Capital_Cripto_ResumenWI inv in Inversiones.ToList())
                         {
                             bool bandera = false; string Oculto = "";
-                            if (inv.Ticker == "Aaux") { Oculto = "visibility: hidden;height: 0px;width: 0px;"; }
-                            <p style="display: inline; @Oculto">
-                                @if (inv.Ticker != "Aaux")
-                                {@inv.Ticker.ToUpper()}
-                            </p>
+                            if (inv.Ticker == "Aaux") { Oculto = "visibility: hidden;height: 0px;width: 0px;display: none;"; }
                             if (InversionesB != null) { foreach (string c in InversionesB) { if (c == inv.Ticker) { bandera = true; } } }
                             if (bandera)
                             {
-                                @Html.CheckBox("TickerCripto", htmlAttributes: new { @class = "", @Value = (inv.Ticker), @checked = "checked" });<br />
+                                @Html.CheckBox("TickerCripto", htmlAttributes: new { @class = "", @Value = (inv.Ticker), @checked = "checked" });
                             }
                             else
                             {
                                 @Html.CheckBox("TickerCripto", false, htmlAttributes: new { @class = "", @Value = (inv.Ticker), @Style = Oculto }); if (inv.Ticker != "Aaux")
-                                { <br />}
+                                { }
                             }
+                            <p style="display: inline; @Oculto">
+                                @if (inv.Ticker != "Aaux")
+                                {@inv.Ticker.ToUpper() <br />}
+                            </p>
+
                         }
                     </div>
                 </div>
@@ -127,21 +128,22 @@
                         @foreach (vwTenenciaWI inv in tenencia_lugares.ToList())
                         {
                             bool bandera = false; string Oculto = "";
-                            if (inv.Lugar == "Aaux") { Oculto = "visibility: hidden;height: 0px;width: 0px;"; }
-                            <p style="display: inline; @Oculto">
-                                @if (inv.Lugar != "Aaux")
-                                {@inv.Lugar}
-                            </p>
+                            if (inv.Lugar == "Aaux") { Oculto = "visibility: hidden;height: 0px;width: 0px;display: none;"; }
                             if (NomLugar != null) { foreach (string c in NomLugar) { if (c == inv.Lugar) { bandera = true; } } }
                             if (bandera)
                             {
-                                @Html.CheckBox("Lugar", htmlAttributes: new { @class = "", @Value = (inv.Lugar), @checked = "checked" });<br />
+                                @Html.CheckBox("Lugar", htmlAttributes: new { @class = "", @Value = (inv.Lugar), @checked = "checked" });
                             }
                             else
                             {
                                 @Html.CheckBox("Lugar", false, htmlAttributes: new { @class = "", @Value = (inv.Lugar), @Style = Oculto }); if (inv.Lugar.ToString() != "Aaux")
-                                {<br />}
+                                {}
                             }
+                            <p style="display: inline; @Oculto">
+                                @if (inv.Lugar != "Aaux")
+                                {@inv.Lugar<br />}
+                            </p>
+
                         }
                     </div>
                 </div>
@@ -158,7 +160,7 @@
             </div>*@
             <div class="col-md-2">
                 <input type="submit" name="name" class="btn btn-info btn-block" value="Filtrar" />
-                <a href="~/InversionTemporal/Index/" class="btn btn-danger btn-block">Elminar Filtros</a>
+                <a href="~/InversionTemporal/Index/" class="btn btn-danger btn-block">Limpiar Filtros</a>
 
             </div>
 
@@ -216,7 +218,8 @@
     <div class="col-md-3"><p>Inversiones:  @Model.Count()</p></div>
     <div class="col-md-3"><p>Reales: @Model.Where(t => t.TipoInversion == "Real").Count()</p></div>
     <div class="col-md-3"><p>Simuladas: @Model.Where(t => t.TipoInversion == "Simulada").Count()</p></div>
-    <div class="col-md-3"><button class="btn btn-success" onclick="window.location.href = '/InversionTemporal/Create'">Agregar Inversión simulada</button></div>
+    <div class="col-md-3"><button class="btn btn-success" style="margin-bottom: 10px;"
+                                  onclick="window.location.href = '/InversionTemporal/Create'">Agregar Inversión simulada</button></div>
 </div>
 <div class="table-responsive">
     <table class="table table-responsive">

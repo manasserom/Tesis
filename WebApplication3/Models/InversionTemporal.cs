@@ -15,7 +15,6 @@ namespace WebApplication3.Models
     public partial class InversionTemporal
     {
         public int IdInversion { get; set; }
-        public string Lugar1 { get; set; }
         public string Instrumento { get; set; }
         public string Criptomoneda { get; set; }
         public string CriptomonedaGanada { get; set; }
