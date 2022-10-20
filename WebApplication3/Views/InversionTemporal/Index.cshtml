@@ -130,6 +130,10 @@
                             bool bandera = false; string Oculto = "";
                             if (inv.Lugar == "Aaux") { Oculto = "visibility: hidden;height: 0px;width: 0px;display: none;"; }
                             if (NomLugar != null) { foreach (string c in NomLugar) { if (c == inv.Lugar) { bandera = true; } } }
+
+                            //bool bandera = false; string Oculto = "";
+                            //if (inv.Lugar == "Aaux") { Oculto = "visibility: hidden;height: 0px;width: 0px;display: none;"; }
+                            //if (NomLugar != null) { foreach (string c in NomLugar) { if (c == inv.Lugar) { bandera = true; } } }
                             if (bandera)
                             {
                                 @Html.CheckBox("Lugar", htmlAttributes: new { @class = "", @Value = (inv.Lugar), @checked = "checked" });
@@ -137,7 +141,7 @@
                             else
                             {
                                 @Html.CheckBox("Lugar", false, htmlAttributes: new { @class = "", @Value = (inv.Lugar), @Style = Oculto }); if (inv.Lugar.ToString() != "Aaux")
-                                {}
+                                { }
                             }
                             <p style="display: inline; @Oculto">
                                 @if (inv.Lugar != "Aaux")

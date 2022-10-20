@@ -49,7 +49,7 @@
 
         @foreach (var item in Model)
         {
-            if (item.Finalizado.GetValueOrDefault(false))
+            if (item.Finalizado)
             {
                 Estado = "Finalizado";
                 EstadoClase = "alert alert-warning";
@@ -73,11 +73,11 @@
             }
 
             //Armado de formato de moneda
-            Capital = (item.PrecioInicio.GetValueOrDefault(0) * item.CantidadInvertida).ToString("C");
+            Capital = (item.PrecioInicio * item.CantidadInvertida).ToString("C");
             CapitalObtenido = (item.PrecioFin.GetValueOrDefault(0) * (item.CantidadInvertida + item.CantidadGanada.GetValueOrDefault(0))).ToString("C");
             //Capital = Capital.ToString("C");
             //Calculo de Resultados
-            double ResultadoInicial = item.CantidadInvertida * item.PrecioInicio.GetValueOrDefault(item.Criptomoneda1.Precio);
+            double ResultadoInicial = item.CantidadInvertida * item.PrecioInicio;
             double ResultadoFinal = (item.CantidadInvertida + item.CantidadGanada.GetValueOrDefault(0)) * item.PrecioFin.GetValueOrDefault(item.Criptomoneda1.Precio);
             double Resultado = ResultadoFinal - ResultadoInicial;
             if (Resultado > 0)

@@ -78,7 +78,8 @@
 
             <tr class="">
                 <td>
-                    @Html.DisplayFor(modelItem => item.Criptomoneda1.Ticker)
+                    @*@Html.DisplayFor(modelItem => item.Criptomoneda1.Ticker)*@
+                    @(item.Criptomoneda1.Ticker.ToUpper())
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Instrumento1.Nombre)

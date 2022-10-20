@@ -100,7 +100,7 @@ namespace WebApplication3.Controllers
             ViewBag.FiltroTickerB = TickerCripto;
             
             IEnumerable<vwTenenciaWI> vwTenenciaWI = db.vwTenenciaWI.OrderBy(t => t.Lugar).ToList();
-            vwTenenciaWI auxLugar = new vwTenenciaWI { Lugar = "Aaux" };
+            vwTenenciaWI auxLugar = new vwTenenciaWI { Lugar = "Aaux" , Criptomoneda ="Bitcoin", Instrumento = "Holding", FechaInicio= Convert.ToDateTime("2019-06-08") };
             IEnumerable<vwTenenciaWI> vwTenenciasAux = new List<vwTenenciaWI>();
             IEnumerable<string> vwTenAux = new List<string>();
             vwTenAux = vwTenAux.Append(vwTenenciaWI.First().Lugar);
@@ -128,7 +128,11 @@ namespace WebApplication3.Controllers
                 //}
                 vwTenenciasAux = vwTenenciasAux.ToList().Append(auxLugar);
             ViewBag.FiltroLugar = vwTenenciasAux;
-            ViewBag.FiltroLugarB = Lugar;
+            if (Lugar == null) {
+                ViewBag.FiltroLugarB = Lugar; } else {
+                ViewBag.FiltroLugarB = Lugar.Reverse(); }
+
+            //ViewBag.FiltroLugarB = Lugar.Reverse();
 
             //Capital segun el tipo
             string ListaCapData = "";
