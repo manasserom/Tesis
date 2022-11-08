@@ -21,7 +21,7 @@
     @Html.HiddenFor(model => model.PrecioInicio)
     @Html.HiddenFor(model => model.PrecioFin)
     @Html.HiddenFor(model => model.CantidadInvertida)
-    @Html.HiddenFor(model => model.FechaInicio)
+    @*@Html.HiddenFor(model => model.FechaInicio)*@
     @Html.HiddenFor(model => model.Finalizado)
 <br />  
     <div class="" style="align-content: center; justify-content: center; align-items: center; display: flex;">
@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <div class="col-md-4">
                         <strong>Capital Invertido:</strong>
-                        <input type="text" name="name" class="form-control" disabled value="$ @(Model.CantidadInvertida * Model.Criptomoneda1.Precio)" />
+                        <input type="text" name="CapitalInvertido" id="CapitalInvertido" class="form-control" disabled value="$ @(Model.CantidadInvertida * Model.Criptomoneda1.Precio)" />
                     </div>
                     <div class="col-md-4">
                         <strong>Cantidad Invertida:</strong>
@@ -74,6 +74,7 @@
                                 @Value = Model.FechaInicio.ToString("yyyy-MM-dd")
                             }
                         })
+                    @*<input type="date" name="FechaInicio"  id="FechaInicio" value="@Model.FechaInicio.ToString("yyyy-MM-dd")" />*@
                         @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-4 has-success">
@@ -143,8 +144,8 @@
 
         const date1 = new Date(InputfechaInicial.value);
         const date2 = new Date(InputfechaFinal.value);
-
-        document.getElementById("DuracionInversion").value = difference(date1, date2) + " Dias";
+        var dias = difference(date1, date2);
+        document.getElementById("DuracionInversion").value = dias + " Dias";
     };
     function ActializarTasaReal() {
         //Dias

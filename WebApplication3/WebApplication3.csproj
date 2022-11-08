@@ -397,6 +397,8 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\ascryp-logo  blanco%282%29.png" />
+    <Content Include="Images\ascryp-low-resolution-logo-color-on-transparent-background %281%29.png" />
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>

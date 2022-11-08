@@ -23,7 +23,7 @@ namespace WebApplication3.Controllers
             IEnumerable<Capital_Cripto_ResumenWI> CapCrip = db.Capital_Cripto_ResumenWI.OrderBy(t => t.CapitalTotal).ToList();
             IEnumerable<Inversion_Cripto_InstruWI> Disponibilidad = db.Inversion_Cripto_InstruWI.ToList();
             IEnumerable<vwInversion_tenenciaWI> Centralizacion = db.vwInversion_tenenciaWI.ToList();
-            IEnumerable<vwCapital_LugarSeparadoWI> CapLugar = db.vwCapital_LugarSeparadoWI.OrderBy(t => t.Capital).ToList();
+            IEnumerable<vwCapital_LugarSeparadoWI> CapLugar = db.vwCapital_LugarSeparadoWI.OrderByDescending(t => t.Capital).ToList();
             IEnumerable<int> AuxLugar = new List<int>();
             
             //Filtro
@@ -100,7 +100,7 @@ namespace WebApplication3.Controllers
             ViewBag.FiltroTickerB = TickerCripto;
             
             IEnumerable<vwTenenciaWI> vwTenenciaWI = db.vwTenenciaWI.OrderBy(t => t.Lugar).ToList();
-            vwTenenciaWI auxLugar = new vwTenenciaWI { Lugar = "Aaux" , Criptomoneda ="Bitcoin", Instrumento = "Holding", FechaInicio= Convert.ToDateTime("2019-06-08") };
+            //vwTenenciaWI auxLugar = new vwTenenciaWI { Lugar = "Aaux" , Criptomoneda ="Bitcoin", Instrumento = "Holding", FechaInicio= Convert.ToDateTime("2019-06-08") };
             IEnumerable<vwTenenciaWI> vwTenenciasAux = new List<vwTenenciaWI>();
             IEnumerable<string> vwTenAux = new List<string>();
             vwTenAux = vwTenAux.Append(vwTenenciaWI.First().Lugar);
@@ -126,7 +126,7 @@ namespace WebApplication3.Controllers
                 //    else
                 //        vwTenenciasAux = vwTenenciasAux.Append(a);
                 //}
-                vwTenenciasAux = vwTenenciasAux.ToList().Append(auxLugar);
+                //vwTenenciasAux = vwTenenciasAux.ToList().Append(auxLugar);
             ViewBag.FiltroLugar = vwTenenciasAux;
             if (Lugar == null) {
                 ViewBag.FiltroLugarB = Lugar; } else {

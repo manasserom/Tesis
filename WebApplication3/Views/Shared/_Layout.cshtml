@@ -8,7 +8,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" type="text/css" href="~/Content/estilos/Estilos.css" media="screen" />
-    <link rel="shortcut icon" type="image/x-icon" href="~/fonts/Logo.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Images/ascryp-logo  blanco(2).png" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 </head>
@@ -21,8 +21,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @*<img src="~/fonts/LogoNavbar.png" style="height:30px;">*@
-                @Html.ActionLink("Version 3.5", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a href="#" class="navbar-brand" style="padding-top: 0px;padding-bottom: 0px;">
+                    <img src="~/Images/ascryp-low-resolution-logo-color-on-transparent-background (1).png" 
+                         class="" style="height: 100%; padding-bottom: 0px; padding-top: 0px; border-radius: .5rem;">
+                </a>
+                
+                @*@Html.ActionLink("Version 3.5", "Index", "Home",s new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
