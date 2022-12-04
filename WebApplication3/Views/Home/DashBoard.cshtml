@@ -21,6 +21,13 @@
 
 <div class="container-fluid">
     <div class="row">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>          
+            <strong>Repositorio de GitHub:</strong> <a href="https://github.com/manasserom/Tesis" target="_blank">https://github.com/manasserom/Tesis</a> <br />
+            <strong>Repositorio de Google Drive:</strong> <a href="https://drive.google.com/drive/folders/17kFrhjat9osy-5-lNpOOBdz_cY93NbFb?usp=sharing" target="_blank">https://drive.google.com/manasserom/Tesis</a>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-4">
             <h3>Capital segun el tipo</h3>
             <div id="donutchart" style="width: 100%; height: auto;"></div>
@@ -64,20 +71,20 @@
 </div>
 
 @*Inicio de Inputs para obtener los valroes*@
-<input type="hidden" id="donutchartData" value="@donutchartData" />
-<input type="hidden" id="donutchartCate" value="@donutchartCate" />
-<input type="hidden" id="piechartData" value="@piechartData" />
-<input type="hidden" id="piechartCate" value="@piechartCate" />
-<input type="hidden" id="gaugechartDataBloq" value="@gaugechartDataBloq" />
-<input type="hidden" id="gaugechartDataDisp" value="@gaugechartDataDisp" />
-<input type="hidden" id="calendarDay" value="@calendarDay" />
-<input type="hidden" id="calendarMont" value="@calendarMont" />
-<input type="hidden" id="calendarYear" value="@calendarYear" />
-<input type="hidden" id="tablechartCripto" value="@tablechartCripto" />
-<input type="hidden" id="tablechartCapital" value="@tablechartCapital" />
-<input type="hidden" id="tablechartTipo" value="@tablechartTipo" />
-<input type="hidden" id="ListaLugarData" value="@ListaLugarData" />
-<input type="hidden" id="ListaLugarCate" value="@ListaLugarCate" />
+<input type="hidden" id="donutchartData"        value="@donutchartData" />
+<input type="hidden" id="donutchartCate"        value="@donutchartCate" />
+<input type="hidden" id="piechartData"          value="@piechartData" />
+<input type="hidden" id="piechartCate"          value="@piechartCate" />
+<input type="hidden" id="gaugechartDataBloq"    value="@gaugechartDataBloq" />
+<input type="hidden" id="gaugechartDataDisp"    value="@gaugechartDataDisp" />
+<input type="hidden" id="calendarDay"           value="@calendarDay" />
+<input type="hidden" id="calendarMont"          value="@calendarMont" />
+<input type="hidden" id="calendarYear"          value="@calendarYear" />
+<input type="hidden" id="tablechartCripto"      value="@tablechartCripto" />
+<input type="hidden" id="tablechartCapital"     value="@tablechartCapital" />
+<input type="hidden" id="tablechartTipo"        value="@tablechartTipo" />
+<input type="hidden" id="ListaLugarData"        value="@ListaLugarData" />
+<input type="hidden" id="ListaLugarCate"        value="@ListaLugarCate" />
 
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

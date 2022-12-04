@@ -93,7 +93,10 @@ namespace WebApplication3.Controllers
             ViewBag.FiltroTipo = tipoCriptomoneda.OrderBy(t => t.Nombre).ToList();
             ViewBag.FiltroTipoB = TipoCripto;
 
-            IEnumerable<Capital_Cripto_ResumenWI> Capital_Cripto_ResumenWI = db.Capital_Cripto_ResumenWI.ToList();
+            IEnumerable<Capital_Cripto_ResumenWI> Capital_Cripto_ResumenWI = db.Capital_Cripto_ResumenWI
+                .Where(p => p.Ticker != null).GroupBy(p => p.Ticker)
+    .Select(grp => grp.FirstOrDefault());
+
             Capital_Cripto_ResumenWI auxCripto = new Capital_Cripto_ResumenWI { Ticker = "Aaux", CapitalTotal= 0, Tipo= "Estable" };
             Capital_Cripto_ResumenWI = Capital_Cripto_ResumenWI.ToList().Append(auxCripto);
             ViewBag.FiltroTicker = Capital_Cripto_ResumenWI.OrderBy(t => t.Ticker).ToList();
@@ -179,11 +182,28 @@ namespace WebApplication3.Controllers
             string ListaCripData = "";
             string ListaCripCate = "";
             //IEnumerable<Capital_Cripto_ResumenWI> CapCrip = db.Capital_Cripto_ResumenWI.OrderBy(t => t.CapitalTotal).ToList();
-            foreach (Capital_Cripto_ResumenWI capital in CapCrip)
+            //IEnumerable<Capital_Cripto_ResumenWI> CapCripfiltrado;            
+            //foreach(Capital_Cripto_ResumenWI cpf in CapCrip)
+            //{
+            //    if(CapCripfiltrado.Where(t=> t.Ticker.Contains())
+            //}
+            var resultCapCrip = from item in CapCrip
+                         group item by item.Ticker into g
+                        select new Capital_Cripto_ResumenWI()
+                        {
+                            Ticker = g.Key,
+                            CapitalTotal = g.Sum(x => x.CapitalTotal)
+                        };
+            foreach(var r in resultCapCrip.OrderBy(t => t.CapitalTotal))
             {
-                ListaCripData = ListaCripData + capital.Ticker.ToUpper() + ",";
-                ListaCripCate = ListaCripCate + (int)(capital.CapitalTotal.Value) + ",";
+                ListaCripData = ListaCripData + r.Ticker.ToUpper() + ",";
+                ListaCripCate = ListaCripCate + (int)(r.CapitalTotal.Value) + ",";
             }
+            //foreach (Capital_Cripto_ResumenWI capital in CapCrip)
+            //{
+            //    ListaCripData = ListaCripData + capital.Ticker.ToUpper() + ",";
+            //    ListaCripCate = ListaCripCate + (int)(capital.CapitalTotal.Value) + ",";
+            //}
             ListaCripData = ListaCripData.Substring(0, ListaCripData.Length - 1);
             ListaCripCate = ListaCripCate.Substring(0, ListaCripCate.Length - 1);
             ViewBag.ListaCripDataWI = ListaCripData;
@@ -269,8 +289,12 @@ namespace WebApplication3.Controllers
             ViewBag.ListaLugarCate = ListaLugarCate;
 
 
-
-
+            double capitalTotal = 0;
+            foreach(Capital_Cripto_ResumenWI c in CapCrip)
+            {
+                capitalTotal += c.CapitalTotal.Value;
+            }
+            ViewBag.CapitalTotal = capitalTotal;
             return View( db.vwInversionesReales_Simuladas.ToList());
         }
 

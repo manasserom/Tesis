@@ -72,10 +72,13 @@ class Calendar {
         //let borrarAnio = [2022, 2022, 2021, 2022];//remplazar poe el listado de Anios
         let VencimientosDia = " " + document.getElementById('calendarDay').getAttribute('value');
         let VencimientosMes = " " + document.getElementById('calendarMont').getAttribute('value');
+        let VencimientosYear = " " + document.getElementById('calendarYear').getAttribute('value');
         var cd = VencimientosDia.split(",");
         var cm = VencimientosMes.split(",");
+        var cy = VencimientosYear.split(",");
         let bandera = false;
-        let borrarAnio = [2022, 2022, 2021, 2022];//remplazar poe el listado de Anios
+        //let borrarAnio = [2022, 2022, 2021, 2022];//remplazar poe el listado de Anios
+        let borrarAnio = cy;//remplazar poe el listado de Anios
         if (this.cells === null) {
             console.error('No fue posible generar las fechas del calendario.');
             return;
@@ -105,7 +108,16 @@ class Calendar {
                     bandera = true;
 
                 }
+
             }
+            //fecha actual
+            //var fecha = new Date();
+            //if (fecha.getDate() == this.cells[i].date.date())
+            //    templateCells += `
+            //    <span class="grid__cell grid__cell--gd ${disabledClass}" data-cell-id="${i}" style="background-color: #gggggg;">
+            //        ${this.cells[i].date.date()}
+            //    </span>
+            //`;
             if (bandera == false) {
                 templateCells += `
                 <span class="grid__cell grid__cell--gd ${disabledClass}" data-cell-id="${i}"">

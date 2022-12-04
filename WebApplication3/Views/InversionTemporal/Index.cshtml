@@ -18,6 +18,10 @@
     IEnumerable<string> tipoCriptomonedaB = ViewBag.FiltroTipoB;
     IEnumerable<string> NomLugar = ViewBag.FiltroLugarB;
     IEnumerable<string> InversionesB = ViewBag.FiltroTickerB;
+    double capitalTotal = ViewBag.CapitalTotal;
+    //foreach (vwInversionesReales_Simuladas c in Model.ToList()) {
+    //    capitalTotal += c.CapitalActual;
+    //}
     //bool repetido = false;
     //vwCapital_LugarSeparado[] auxCapital = tenencia_lugares.ToArray();
     //for(int i = 1; i<tenencia_lugares.Count();i++)
@@ -223,8 +227,9 @@
 
 <div class="row">
     <div class="col-md-3"><p>Inversiones:  @Model.Count()</p></div>
-    <div class="col-md-3"><p>Reales: @Model.Where(t => t.TipoInversion == "Real").Count()</p></div>
-    <div class="col-md-3"><p>Simuladas: @Model.Where(t => t.TipoInversion == "Simulada").Count()</p></div>
+    <div class="col-md-2"><p>Reales: @Model.Where(t => t.TipoInversion == "Real").Count()</p></div>
+    <div class="col-md-2"><p>Simuladas: @Model.Where(t => t.TipoInversion == "Simulada").Count()</p></div>
+    <div class="col-md-2"><p>Capital: @capitalTotal.ToString("C")</p></div>
     <div class="col-md-3"><button class="btn btn-success" style="margin-bottom: 10px;"
                                   onclick="window.location.href = '/InversionTemporal/Create'">Agregar Inversión simulada</button></div>
 </div>
